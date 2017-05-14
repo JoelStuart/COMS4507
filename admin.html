@@ -18,8 +18,10 @@
 </head>
 
 <body>
+
+	<script src="js/bignumber.min.js"></script>
     <script src="js/web3.min.js"></script>
-  <script src="js/admin.js"></script>
+    <script src="js/admin.js?2"></script>
   <div class="container">
 	<p><abbr title="Frequenty Asked Questions">FAQ</abbr> </p>
   </div>
@@ -30,6 +32,15 @@
   
   <p>A timetable is necessary to ensure the election progresses in a timely manner. Everyone has the rights to nominate themselves and vote </p>
   
-  
+	<div>
+		<button id=button1, onclick="createBallot()">Create Ballot</button>
+	</div>
+	<div>
+	Add Address Vote: <textarea id="address" rows="1"></textarea>
+	<button id=button2, onclick="giveVote()">Give right to Vote</button>
+	</div>
+	<div>
+		<button id=button3, onclick="getWinner()">Get winner</button>
+	</div>
 </body>
 </html>
