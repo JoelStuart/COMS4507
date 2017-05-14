@@ -62,7 +62,7 @@
 	}
 
 
-    
+    /*
     function claimrefund() {
 
       web3.personal.unlockAccount(addr, password);
@@ -106,6 +106,6 @@
         }
 
 
-    }
+    }*/
 
     
