@@ -3,48 +3,32 @@
 
 ## Getting Started
 
-Run Meteor with Metamask chrome extension for local github client. Compile .sol files with Remix (Online Solidity Compiler).
+Run webpage with Metamask chrome extension. Apache Web Server is needed to trigger Metamask injection into the page i.e. running directly from file will not function correctly.
+
+1. Copy files into Apache Root Directory
+2. Run Apache
+3. Enable Metamask
+4. Connect to localhost.
 
 
 ### Prerequisites
 
-*Meteor*
-*Metamask* Extension For Chrome (connecting to Etheruem Network)
-*Compile Solidity files online with Remix*
+*Metamask* Extension For Chrome (for connecting to Etheruem Network, i.e. injecting a Web3 Provider into the page)
+
+
+Test locally with Apache Web Server
 
 
 ### Installing
+To compile sol files, compile with Remix (Online Solidity Compiler) and copy Web3 JS code into page.
 
-
-
-## Running the tests
-
-Explain how to run the automated tests for this system
-
-### Break down into end to end tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-### And coding style tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
 
 ## Deployment
 
-Add additional notes about how to deploy this on a live system
+Simply deploy all files to a hosting domain as with any website.
 
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
 
-## Acknowledgments
-
-* 
+ 
