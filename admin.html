@@ -12,8 +12,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 
-</head>
-
 <body>
 
 	<script src="js/bignumber.min.js"></script>
@@ -23,9 +21,9 @@
 	<p><abbr title="Frequenty Asked Questions">FAQ</abbr> </p>
   </div>
   <div class="jumbotron">
-    <h2 id="title;" style="color:blue;">Login to Ethereum</h2>
+    <h2 id="title;" style="color:blue;">Administration Page</h2>
   </div> 
-
+ <fieldset>
 		<button id=button1, onclick="createBallot()">Create Ballot</button>
 	</div>
 	<div>
@@ -35,16 +33,21 @@
 	
 	 <p id="eligible_area">
      <p>List of eligible voters:</p>
-     <textarea id="addresses" name="list" cols="40" rows="5"></textarea>
-    </p>
-	
+     <textarea id="addresses" name="list" cols="30" rows="5"></textarea></p>
 	<div>
 		<button id=button3, onclick="getWinner()">Get winner</button>
 	</div>
 	<div>
 		<button id=button4, onclick="showWinner()">Show winner</button>
 	</div>
-	
+  </fieldset>  <br>
+  <fliedset>
+  What are you voting for?<br>
+   <input type="radio" name="option A" />Option A: <br>
+   <input type="radio" name="option B" />Option B: <br>
+   <input type="radio" name="option C" />Option C: <br>
+  <button id=button4, onclick=>Set questions</button>
+  </fieldset>
 
 </body>
 </html>
