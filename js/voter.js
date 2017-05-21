@@ -39,6 +39,7 @@
 
 
 	function button(){
+		console.log("Vote 5");
 		var account = web3.eth.accounts[0];
 		var accountInterval = setInterval(function() {
 		  if (web3.eth.accounts[0] !== account) {
@@ -46,7 +47,7 @@
 		  }
 		}, 100);
 		
-		var _vote = 1;
+		var _vote = 5;
 		var ballotContract = web3.eth.contract([{"constant":false,"inputs":[{"name":"to","type":"address"}],"name":"delegate","outputs":[],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"winningProposal","outputs":[{"name":"winningProposal","type":"uint8"}],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"voter","type":"address"}],"name":"giveRightToVote","outputs":[],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"proposal","type":"uint8"}],"name":"vote","outputs":[],"payable":false,"type":"function"},{"inputs":[{"name":"_numProposals","type":"uint8"}],"payable":false,"type":"constructor"}]);
 		contractObj = ballotContract.at("0x4CB49AF25CeFC6E8B97Fe51AE3dCcaEb9Bc6A6b3");
 		var ballot = contractObj.vote(
@@ -60,7 +61,7 @@
 			if (typeof contract.address !== 'undefined') {
 				 console.log('Contract mined! address: ' + contract.address + ' transactionHash: ' + contract.transactionHash);
 			}
-		 })
+		 });
 	}
 
 
