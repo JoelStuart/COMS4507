@@ -9,24 +9,41 @@
   <meta name="author" content="SitePoint">
 
   <link rel="stylesheet" href="css/style.css">
+  <style>
+table, th, td {
+    border: 1px solid white;
+}
+</style>
 
 </head>
 
 <body>
 	<div>
-	<button id=button1, onclick="button()">Begin!</button>
+	<button id=button, onclick="button()">Begin!</button>
 	</div>
-	<ul id="progressbar">
-		<li>Register to Vote</li>
-		<li>Vote</li>
-		<li>Confirm</li>
-         </ul>
-	
-	
-	
 	<script src="js/bignumber.min.js"></script>
     <script src="js/web3.min.js"></script>
-    <script src="js/voter.js"></script>
-
+    <script src="js/voter.js?2"></script>
+    
+    <!-- progressbar -->
+    
+    <ul id="progressbar">
+            <li>Voting Codes</li>
+            <ul id="progressbar">
+            <li>Register to Vote</li>
+            <li>Vote</li>
+            <li>Confirm</li>
+         </ul>
+	
+        </ul>
+        
+        <!-- The Steps -->
+       <p>Choose a person to vote </p>
+       <p>
+       <input type="radio" name="option 1" />Option 1: <br>
+       <input type="radio" name="option 2" />Option 2: <br>
+       <input type="radio" name="option 3" />Option 3: <br>
+	</p>
+        
 </body>
 </html>
