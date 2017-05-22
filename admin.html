@@ -16,7 +16,7 @@
 
 	<script src="js/bignumber.min.js"></script>
     <script src="js/web3.min.js"></script>
-    <script src="js/admin.js"></script>
+    <script src="js/admin.js?5"></script>
   <div class="container">
 	<p><abbr title="Frequenty Asked Questions">FAQ</abbr> </p>
   </div>
@@ -24,22 +24,29 @@
     <h2 id="title;" style="color:blue;">Administration Page</h2>
   </div> 
  <fieldset>
-		<button id=button1, onclick="createBallot()">Create Ballot</button>
-	</div>
-	<div>
-	Add Address Vote: <textarea id="address" rows="1"></textarea>
-	<button id=button2, onclick="giveVote()">Give right to Vote</button>
+		<button id=createBallot, onclick="createBallot()">Create New Ballot</button>
 	</div>
 	
+	<div>
+	Contract Address: <textarea id="contactAddress" rows="1"></textarea>
+	<button id=updateAddress, onclick="updateAddr()">Update Contract Address</button>
+	<p id="contractStatusText"></p>
+	</div>
+	
+	
+	<div>
+	Add Address Vote: <textarea id="address" rows="1"></textarea>
+	<button id=giveVote, onclick="giveVote()">Give right to Vote</button>
+	<p id="giveErrorText"></p>
+	</div>
 	 <p id="eligible_area">
      <p>List of eligible voters:</p>
      <textarea id="addresses" name="list" cols="30" rows="5"></textarea></p>
 	<div>
-		<button id=button3, onclick="getWinner()">Get winner</button>
+		<button id=getWinner, onclick="getWinner()">Get winner</button>
+		<p id="winnerErrorText"></p>
 	</div>
-	<div>
-		<button id=button4, onclick="showWinner()">Show winner</button>
-	</div>
+
   </fieldset>  <br>
   <fliedset>
   What are you voting for?<br>

@@ -19,11 +19,18 @@ table, th, td {
 
 <body>
 	<div>
-	<button id=button1, onclick="button()">Begin!</button>
+	Contract Address: <textarea id="contractAddress" rows="1"></textarea>
+
+	<button id=updateAddress, onclick="updateAddr()">Update Contract Address</button>
+	<p id="contractStatusText"></p>
 	</div>
+	<div>
+	<button id=button1, onclick="vote()">Cast Vote!</button>
+	</div>
+	<p id="errorText"></p>
 	<script src="js/bignumber.min.js"></script>
     <script src="js/web3.min.js"></script>
-    <script src="js/voter.js?2"></script>
+    <script src="js/voter.js?4"></script>
     
     <!-- progressbar -->
     
