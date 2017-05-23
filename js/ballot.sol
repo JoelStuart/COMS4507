@@ -12,12 +12,15 @@ contract Ballot {
     mapping(address => Voter) public votersList;
     mapping (bytes32 => uint8) public votesForCandidates;
   
-  function Ballot(bytes32[] candidateNames, address[] voterAddresses) {
-      candidateList = candidateNames;
-      
-    for (uint j = 0; j < voterAddresses.length; j++) {
-        votersList[voterAddresses[j]] = Voter({weight: 1, voted: false});
-    }
+  function Ballot() {
+  }
+  
+  function addCandidate(bytes32 candidate) {
+      candidateList.push(candidate);
+  }
+  
+  function addVoter(address voter) {
+      votersList[voter] = Voter({weight: 1, voted: false});
   }
 
   function totalVotesFor(bytes32 candidate) returns (uint8) {
