@@ -9,6 +9,7 @@
 	window.addEventListener('load', function() {
 		var password = "";
 		var accounts_index;
+		getAddr();
 		
 		if (typeof web3 !== 'undefined') {
 			window.web3 = new Web3(web3.currentProvider);
@@ -27,7 +28,7 @@
 	function updateAddr(){
 		//var _contractAddress = document.getElementById('contractAddress').value;
 		//addr = _contractAddress;
-		getAddr();
+		//getAddr();
 		document.getElementById('contractAddress').value = addr;
 		var _para = document.getElementById('contractStatusText');
 		_para.innerHTML = "Contract Address Set.";
