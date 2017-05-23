@@ -17,7 +17,7 @@ session_start();
 	}
 	
 	$ret = $result->fetch_object()->addr;
-	echo $ret;
+	echo json_encode($ret);
     $dbO->disconnect();
 	
 

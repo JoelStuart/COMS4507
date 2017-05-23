@@ -1,7 +1,9 @@
 <?php
 
 
+session_start();
 
+if(isset($_GET['str'])) {
     $addr = $_GET['str'];
 
 	include('connectMySQL.php'); //make sure the path is correct.
@@ -20,5 +22,6 @@
 	
     $dbO->disconnect();
 	
+}
 
 ?>
