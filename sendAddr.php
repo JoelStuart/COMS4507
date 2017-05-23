@@ -1,10 +1,8 @@
 <?php
 
 
-session_start();
 
-if(isset($_REQUEST['str'])) {
-    $addr = $_REQUEST['str'];
+    $addr = $_GET['str'];
 
 	include('connectMySQL.php'); //make sure the path is correct.
 	$dbO = new MySQLDatabase(); //create a Database object
@@ -22,6 +20,5 @@ if(isset($_REQUEST['str'])) {
 	
     $dbO->disconnect();
 	
-}
 
 ?>
