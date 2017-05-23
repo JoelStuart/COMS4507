@@ -76,6 +76,18 @@
 	}
 
 
+	function getAddr(str) {
+	  var xhttp; 
+	  xhttp = new XMLHttpRequest();
+	  xhttp.onreadystatechange = function() {
+		if (this.readyState == 4 && this.status == 200) {
+			console.log(this.responseText);
+		}
+	  };
+	  xhttp.open("GET", "getAddr.php", true);
+	  xhttp.send();
+	}
+	
     /*
     function claimrefund() {
 

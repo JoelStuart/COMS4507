@@ -160,6 +160,21 @@ function getWinner(){
 
 }
 
+function sendAddr(str) {
+  var xhttp; 
+  xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+		
+		addr = this.responseText;
+		console.log(addr);
+    }
+  };
+  xhttp.open("GET", "sendAddr.php?q="+str, true);
+  xhttp.send();
+}
+
+
 function hex2S(hex) {
     var str = '';
     for (var i = 0; i < hex.length; i += 2) {
