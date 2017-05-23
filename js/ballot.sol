@@ -1,4 +1,4 @@
-pragma solidity ^0.4.11;
+pragma solidity ^0.4.6;
 // We have to specify what version of compiler this code will compile with
 
 contract Ballot {
@@ -8,18 +8,12 @@ contract Ballot {
         bool voted;
     }
 
-    struct Candidate {
-        bytes32 name;
-    }
-
-    Candidate[] public candidateList;
+    bytes32[] public candidateList;
     mapping(address => Voter) public votersList;
     mapping (bytes32 => uint8) public votesForCandidates;
   
   function Ballot(bytes32[] candidateNames, address[] voterAddresses) {
-      for (uint i = 0; i < candidateNames.length; i++) {
-          candidateList[i] = Candidate({name: candidateNames[i]});
-      }
+      candidateList = candidateNames;
       
     for (uint j = 0; j < voterAddresses.length; j++) {
         votersList[voterAddresses[j]] = Voter({weight: 1, voted: false});
@@ -40,7 +34,7 @@ contract Ballot {
 
   function validCandidate(bytes32 candidate) returns (bool) {
     for(uint i = 0; i < candidateList.length; i++) {
-      if (candidateList[i].name == candidate) {
+      if (candidateList[i] == candidate) {
         return true;
       }
     }
@@ -52,9 +46,9 @@ contract Ballot {
       bytes32 winner = "";
       
       for (uint i = 0; i < candidateList.length; i++) {
-          if (votesForCandidates[candidateList[i].name] > maxVotes) {
-              maxVotes = votesForCandidates[candidateList[i].name];
-              winner = candidateList[i].name;
+          if (votesForCandidates[candidateList[i]] > maxVotes) {
+              maxVotes = votesForCandidates[candidateList[i]];
+              winner = candidateList[i];
           }
       }
       
