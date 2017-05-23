@@ -170,7 +170,7 @@ function sendAddr(str) {
 		console.log(this.responseText);
     }
   };
-  xhttp.open("GET", "sendAddr.php?q="+str, true);
+  xhttp.open("GET", "sendAddr.php?str="+str, true);
   xhttp.send();
 }
 
