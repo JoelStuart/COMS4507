@@ -1,0 +1,72 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	
+	<title>Admin</title>
+	<meta name="description" content="The HTML5 Herald">
+	<meta name="author" content="SitePoint">
+	<link rel="stylesheet" href="css/style.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+	<script src="js/bignumber.min.js"></script>
+    <script src="js/web3.min.js"></script>
+    <script src="js/adminK.js?5"></script>
+  <div class="container">
+	<p><abbr title="Frequenty Asked Questions">FAQ</abbr> </p>
+  </div>
+  <div class="jumbotron">
+    <h2 id="title;" style="color:blue;">Administration Page</h2>
+  </div> 
+ <fieldset>
+		<button id=createBallot, onclick="createBallot()">Create New Ballot</button>
+	</div>
+	
+	<div>
+	Contract Address: <textarea id="contactAddress" rows="1"></textarea>
+	<button id=updateAddress, onclick="updateAddr()">Update Contract Address</button>
+	<p id="contractStatusText"></p>
+	</div>
+	
+		<div>
+	Candidate List: <textarea id="condidateList" rows="1"></textarea>
+	<button id=updateAddress, onclick="condidateList()">Update Voter Address</button>
+	<p id="voterAddrText"></p>
+	</div>
+	
+	
+	<div>
+	Voter Addresses: <textarea id="voterAddress" rows="1"></textarea>
+	<button id=updateAddress, onclick="voterAddr()">Update Voter Address</button>
+	<p id="voterAddrText"></p>
+	</div>
+	
+	<div>
+	Add Address Vote: <textarea id="address" rows="1"></textarea>
+	<button id=giveVote, onclick="giveVote()">Give right to Vote</button>
+	<p id="giveErrorText"></p>
+	</div>
+	 <p id="eligible_area">
+     <p>List of eligible voters:</p>
+     <textarea id="addresses" name="list" cols="30" rows="5"></textarea></p>
+	<div>
+		<button id=getWinner, onclick="getWinner()">Get winner</button>
+		<p id="winnerErrorText"></p>
+	</div>
+
+  </fieldset>  <br>
+  <fliedset>
+  What are you voting for?<br>
+   <input type="radio" name="option A" />Option A: <br>
+   <input type="radio" name="option B" />Option B: <br>
+   <input type="radio" name="option C" />Option C: <br>
+  <button id=button4, onclick=>Set questions</button>
+  </fieldset>
+</body>
+</html>
