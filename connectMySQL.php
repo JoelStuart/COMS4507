@@ -5,7 +5,7 @@ class MySQLDatabase
 
     function connect()
     {
-        $this->link = mysqli_connect('server-js.database.windows.net:3306', "stuuustuuu", "ComputerHorse1");
+        $this->link = mysqli_connect('server-js.database.windows.net:1433', "stuuustuuu", "ComputerHorse1");
         if (!$this->link) {
             die('Not connected : ' . mysqli_error());
         }
