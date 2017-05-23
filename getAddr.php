@@ -9,11 +9,11 @@ session_start();
 	
     $sql = "SELECT addr FROM var WHERE id = 0";
 	//var query = "INSERT INTO var (id, addr) VALUES(0, '".$addr."') ON DUPLICATE KEY UPDATE";
-	$result = sqlsrv_query($dbO, $sql);
+	$result = mysqli_query($dbO->link, $sql);
 	//	$result = mysqli_query($dbO->link, $sql)->fetch_object()->password;
     //$result = $conn->query($sql);
 	if (!$result){
-		die('Could not query:' . sqlsrv_error());
+		die('Could not query:' . mysql_error());
 	}
 	
 	
