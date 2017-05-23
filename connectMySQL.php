@@ -13,7 +13,7 @@ class MySQLDatabase
         if (!$db) {
             die ('Cannot use : ' . mysqli_error());
         }
-		echo('Connected to server');
+		//echo('Connected to server');
         return $this->link;
     }
 

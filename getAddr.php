@@ -16,8 +16,8 @@ session_start();
 		die('Could not query:' . mysql_error());
 	}
 	
-	
-	echo $result->fetch_object()->addr;
+	$ret = $result->fetch_object()->addr;
+	echo ret;
     $dbO->disconnect();
 	
 
