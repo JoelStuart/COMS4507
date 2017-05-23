@@ -25,8 +25,10 @@
 	/**Called from update contract addr button
 	*/
 	function updateAddr(){
-		var _contractAddress = document.getElementById('contractAddress').value;
-		addr = _contractAddress;
+		//var _contractAddress = document.getElementById('contractAddress').value;
+		//addr = _contractAddress;
+		getAddr();
+		document.getElementById('contractAddress').value = addr;
 		var _para = document.getElementById('contractStatusText');
 		_para.innerHTML = "Contract Address Set.";
 	}
@@ -76,12 +78,13 @@
 	}
 
 
-	function getAddr(str) {
+	function getAddr() {
 	  var xhttp; 
 	  xhttp = new XMLHttpRequest();
 	  xhttp.onreadystatechange = function() {
 		if (this.readyState == 4 && this.status == 200) {
-			console.log(this.responseText);
+				addr = this.responseText;
+				console.log(addr);
 		}
 	  };
 	  xhttp.open("GET", "getAddr.php", true);

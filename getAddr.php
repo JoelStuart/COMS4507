@@ -20,6 +20,5 @@ session_start();
 	echo $result->fetch_object()->addr;
     $dbO->disconnect();
 	
-}
 
 ?>

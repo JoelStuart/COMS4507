@@ -61,6 +61,7 @@ function updateAddr(){
 	addr = _contractAddress;
 	var _para = document.getElementById('contractStatusText');
 	_para.innerHTML = "Contract Address Set.";
+	sendAddr(addr);
 }
 
 /**Called from give vote button
@@ -165,9 +166,8 @@ function sendAddr(str) {
   xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
-		
-		addr = this.responseText;
-		console.log(addr);
+		//
+
     }
   };
   xhttp.open("GET", "sendAddr.php?q="+str, true);
