@@ -1,49 +1,49 @@
 <!doctype html>
-
-<html lang="en">
-<head>
-	<meta charset="utf-8">
-	<title>Voter</title>
-	<meta name="description" content="The HTML5 Herald">
-	<meta name="author" content="SitePoint">
-	<link rel="stylesheet" href="css/style.css">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-</head>
-
-<body>
-	<div>
-	Contract Address: <textarea id="contractAddress" rows="1"></textarea>
-
-	<button id=updateAddress, onclick="updateAddr()">Update Contract Address</button>
-	<p id="contractStatusText"></p>
-	</div>
-	<div>
-	<button id=button1, onclick="vote()">Cast Vote!</button>
-	</div>
-	<p id="errorText"></p>
-	<script src="js/bignumber.min.js"></script>
-    <script src="js/web3.min.js"></script>
-    <script src="js/voterK.js?5"></script>
-    
-    <!-- progressbar -->
-    
-    <ul id="progressbar">
-            <ul id="progressbar">
-            <li>Register to Vote</li>
-            <li>Vote</li>
+ 
+ <html lang="en">
+ <head>
+ 	<meta charset="utf-8">
+ 	<title>Voter</title>
+ 	<meta name="description" content="The HTML5 Herald">
+ 	<meta name="author" content="SitePoint">
+ 	<link rel="stylesheet" href="css/style.css">
+ 	<meta name="viewport" content="width=device-width, initial-scale=1">
+ 	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+ </head>
+ 
+ <body>
+ 	<div>
+ 	Contract Address: <textarea id="contractAddress" rows="1"></textarea>
+ 
+ 	<button id=updateAddress, onclick="updateAddr()">Update Contract Address</button>
+ 	<p id="contractStatusText"></p>
+ 	</div>
+ 	<div>
+ 	<button id=button1, onclick="vote()">Cast Vote!</button>
+ 	</div>
+ 	<p id="errorText"></p>
+ 	<script src="js/bignumber.min.js"></script>
+     <script src="js/web3.min.js"></script>
+     <script src="js/voterK.js?5"></script>
+     
+     <!-- progressbar -->
+     
+     <ul id="progressbar">
+             <ul id="progressbar">
+             <li>Register to Vote</li>
+             <li>Vote</li>
+          </ul>
+ 	
          </ul>
-	
-        </ul>
-
-	<p><abbr title="Frequenty Asked Questions">FAQ</abbr> </p>
-        
-	<!-- The Steps -->
-	<p>Choose a person to vote <br>
-		<input type="radio" name="option 1" />Option 1: <br>
-		<input type="radio" name="option 2" />Option 2: <br>
-		<input type="radio" name="option 3" />Option 3: <br>
-	</p>
-	<button id=button2, type=submit>Submit</button>
-</body>
-</html>
+ 
+ 	<p><abbr title="Frequenty Asked Questions">FAQ</abbr> </p>
+         
+ 	<!-- The Steps -->
+ 	<p>Choose a person to vote <br>
+ 		<input type="radio" name="option 1" />Option 1: <br>
+ 		<input type="radio" name="option 2" />Option 2: <br>
+ 		<input type="radio" name="option 3" />Option 3: <br>
+ 	</p>
+ 	<button id=button2, type=submit>Submit</button>
+ </body>
+ </html>
