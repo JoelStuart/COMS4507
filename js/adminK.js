@@ -167,7 +167,7 @@ function sendAddr(str) {
   xhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
 		console.log(str+" sent.");
-
+		console.log(this.responseText);
     }
   };
   xhttp.open("GET", "sendAddr.php?q="+str, true);
