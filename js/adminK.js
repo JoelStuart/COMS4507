@@ -145,7 +145,7 @@ function getWinner(){
 		//Call winning proposal
 		res = contractObj.getWinner.call({ from: account, gas: 4200000}, function(e,l){
 						if (!e){
-							console.log(parseInt(l));
+							console.log("Winning proposal is " + hex2S(l));
 							_error.innerHTML = "Winning proposal is " + hex2S(l);
 						}
 					 });
