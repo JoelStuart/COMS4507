@@ -12,7 +12,11 @@
  </head>
  
  <body>
- 	<div>
+ 	<script src="js/bignumber.min.js"></script>
+     <script src="js/web3.min.js"></script>
+     <script src="js/voterK.js"></script>
+
+	<div>
  	Contract Address: <textarea id="contractAddress" rows="1"></textarea>
  
  	<button id=updateAddress, onclick="updateAddr()">Update Contract Address</button>
@@ -22,10 +26,6 @@
  	<button id=button1, onclick="vote()">Cast Vote!</button>
  	</div>
  	<p id="errorText"></p>
- 	<script src="js/bignumber.min.js"></script>
-     <script src="js/web3.min.js"></script>
-     <script src="js/voterK.js"></script>
-     
      <!-- progressbar -->
      
      <ul id="progressbar">
@@ -45,5 +45,12 @@
  		<input type="radio" name="option 3" />Option 3: <br>
  	</p>
  	<button id=button2, type=submit>Submit</button>
+	
+	
+	<div>
+		<button id=getWinner, onclick="getWinner()">Get winner</button>
+		<p id="winnerErrorText"></p>
+	</div>
+
  </body>
  </html>

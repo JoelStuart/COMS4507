@@ -3,7 +3,11 @@
 
 ## Getting Started
 
-Run webpage with Metamask chrome extension. Apache Web Server is needed to trigger Metamask injection into the page i.e. running directly from file will not function correctly.
+
+Hosted live at: http://voting-ethereum.azurewebsites.net/.
+
+
+Run webpage with Metamask chrome extension. Apache Web Server is needed locally to trigger Metamask injection into the page i.e. running directly from file will not function correctly.
 
 1. Copy files into Apache Root Directory
 2. Run Apache
@@ -14,7 +18,6 @@ Run webpage with Metamask chrome extension. Apache Web Server is needed to trigg
 ### Prerequisites
 
 *Metamask* Extension For Chrome (for connecting to Etheruem Network, i.e. injecting a Web3 Provider into the page)
-
 
 Test locally with Apache Web Server
 

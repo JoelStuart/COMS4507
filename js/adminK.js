@@ -44,6 +44,7 @@ function createBallot(){
 	   }, function (e, contract){
 		   if (typeof contract.address !== 'undefined') {
 				 addr = contract.address;
+				 sendAddr(addr);
 				 contractInst = contract;
 				 document.getElementById('contactAddress').value = addr;
 				 var _para = document.getElementById('contractStatusText');
@@ -121,45 +122,7 @@ function giveVote(){
 
 }
 
-function getWinner(){
-	//If contract addr set
-	if (typeof addr !== 'undefined') {
-		//Set front end error text to empty
-		var _error = document.getElementById('winnerErrorText');
-		 _error.innerHTML = "";
-		 
-		//Keep user logged in
-		var account = web3.eth.accounts[0];
-		var accountInterval = setInterval(function() {
-		  if (web3.eth.accounts[0] !== account) {
-			account = web3.eth.accounts[0];
-		  }
-		}, 100); 
-		 
-		//Our contract ABI
-		var ballotContract = web3.eth.contract([{"constant":false,"inputs":[{"name":"candidate","type":"bytes32"}],"name":"totalVotesFor","outputs":[{"name":"","type":"uint8"}],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"candidate","type":"bytes32"}],"name":"validCandidate","outputs":[{"name":"","type":"bool"}],"payable":false,"type":"function"},{"constant":true,"inputs":[{"name":"","type":"address"}],"name":"votersList","outputs":[{"name":"weight","type":"uint256"},{"name":"voted","type":"bool"}],"payable":false,"type":"function"},{"constant":false,"inputs":[],"name":"getWinner","outputs":[{"name":"","type":"bytes32"}],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"candidate","type":"bytes32"}],"name":"vote","outputs":[],"payable":false,"type":"function"},{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"candidateList","outputs":[{"name":"","type":"bytes32"}],"payable":false,"type":"function"},{"constant":true,"inputs":[{"name":"","type":"bytes32"}],"name":"votesForCandidates","outputs":[{"name":"","type":"uint8"}],"payable":false,"type":"function"},{"inputs":[{"name":"candidateNames","type":"bytes32[]"},{"name":"voterAddresses","type":"address[]"}],"payable":false,"type":"constructor"}]);
 
-		//Point at our contract addr
-		contractObj = ballotContract.at(addr);
-		
-		
-		//Call winning proposal
-		res = contractObj.getWinner.call({ from: account, gas: 4200000}, function(e,l){
-						if (!e){
-							console.log("Winning proposal is " + hex2S(l));
-							_error.innerHTML = "Winning proposal is " + hex2S(l);
-						}
-					 });
-		
-		
-	} else {
-			var _error = document.getElementById('winnerErrorText');
-			 _error.innerHTML = "Contract address not set. Please set before continuing.";
-	}
-	//var ballot = ballotContract.giveRightToVote();
-	
-
-}
 
 function sendAddr(str) {
   var xhttp; 

@@ -34,39 +34,51 @@
 	<p id="contractStatusText"></p>
 	</div>
 	
-		<div>
-	Candidate List: <textarea id="condidateList" rows="1"></textarea>
-	<button id=updateAddress, onclick="condidateList()">Update Voter Address</button>
-	<p id="voterAddrText"></p>
+	<div>
+	Enter your question: <textarea id="questionArea" rows="1"></textarea>
+	<p id="questionErrorText"></p>
 	</div>
 	
 	
 	<div>
-	Voter Addresses: <textarea id="voterAddress" rows="1"></textarea>
-	<button id=updateAddress, onclick="voterAddr()">Update Voter Address</button>
-	<p id="voterAddrText"></p>
+	Enter time for registration: 
+	<div class="dropdown">
+		<button onclick="regDropdown()" class="dropbtn">Dropdown</button>
+		<div id="regDropdown" class="dropdown-content">
+			<a href="#">2 Minutes</a>
+			<a href="#">5 Minutes</a>
+			<a href="#">10 Minutes</a>
+		</div>
+	</div>
+	<p id="timeErrorText"></p>
 	</div>
 	
+	
 	<div>
-	Add Address Vote: <textarea id="address" rows="1"></textarea>
-	<button id=giveVote, onclick="giveVote()">Give right to Vote</button>
-	<p id="giveErrorText"></p>
+	Enter time for voting: 
+	<div class="dropdown">
+		<button onclick="voteDropdown()" class="dropbtn">Dropdown</button>
+		<div id="voteDropdown" class="dropdown-content">
+			<a href="#">2 Minutes</a>
+			<a href="#">5 Minutes</a>
+			<a href="#">10 Minutes</a>
+		</div>
 	</div>
-	 <p id="eligible_area">
-     <p>List of eligible voters:</p>
-     <textarea id="addresses" name="list" cols="30" rows="5"></textarea></p>
-	<div>
-		<button id=getWinner, onclick="getWinner()">Get winner</button>
-		<p id="winnerErrorText"></p>
+	<p id="timeErrorText"></p>
 	</div>
 
+	<div class="col-sm-4">
+				Select Voting Type:<br>
+				<!--Answer will be displayed in the voter page--> 
+				<select>
+					<option value="Option B">Basic</option>
+					<option value="Option C">Preferential</option>
+				</select>
+	</div>
+
+	<button id=startElection, onclick="StartElection()">Start Election</button>
+			
+
   </fieldset>  <br>
-  <fliedset>
-  What are you voting for?<br>
-   <input type="radio" name="option A" />Option A: <br>
-   <input type="radio" name="option B" />Option B: <br>
-   <input type="radio" name="option C" />Option C: <br>
-  <button id=button4, onclick=>Set questions</button>
-  </fieldset>
 </body>
 </html>
