@@ -8,6 +8,7 @@ contract BallotPreferential {
         bool voted;
     }
 
+    address public admin;
     bytes32[] public candidateList;
     mapping(address => Voter) public votersList;
     mapping (bytes32 => uint8) public votesForCandidates;
@@ -15,22 +16,27 @@ contract BallotPreferential {
     uint public totalVotes;
     bytes32[] private tmpCandidateList;
     bytes32[] private allWinners;
-    bytes32[] private winners;
     bytes32[] private losers;
+    mapping(address => uint8) public candidateSubmissionNumbers;
         //phase 0: registration. phase 1: voting. phase 2: post election
     uint8 private phase;
 
   function BallotPreferential() {
       totalVotes = 0;
       phase = 0;
+      admin = msg.sender;
   }
   
   function startVoting() {
-      phase = 1;
+      if (msg.sender == admin) {
+          phase = 1;
+      }
   }
   
   function finishVoting() {
-      phase = 2;
+      if (msg.sender == admin) {
+        phase = 2;
+      }
   }
   
   function getPhase() returns (uint8) {
@@ -39,7 +45,11 @@ contract BallotPreferential {
   
   function addCandidate(bytes32 candidate) {
       if (phase == 0) {
-        candidateList.push(candidate);
+          if (candidate == "") return;
+          if (validCandidate(candidate)) return;
+          if (candidateSubmissionNumbers[msg.sender] >= 5) return;
+          candidateList.push(candidate);
+          candidateSubmissionNumbers[msg.sender] += 1;
       }
   }
   
@@ -79,7 +89,7 @@ contract BallotPreferential {
   
   //Only use at the end of the election!! 
   function getWinner() returns (bytes32[]) {
-      if (phase == 2) {
+      if (phase == 2 && msg.sender == admin) {
         uint maxVotes = 0;
         bool goingToSecondPreference = false;
          if (totalVotes == 0) return candidateList;
@@ -138,7 +148,7 @@ contract BallotPreferential {
   }
   
   function addSecondPreferences(bytes32[] candidates, bool shouldDelete) {
-      if (phase == 2) {
+      if (phase == 2 && msg.sender == admin) {
         for (uint i = 0; i < candidates.length; i++) {
             for (uint j = 0; j < secondPreferences[candidates[i]].length; j++) {
                 if (validCandidate(secondPreferences[candidates[i]][j])) {
@@ -152,7 +162,7 @@ contract BallotPreferential {
   }
   
   function removeCandidates() {
-      if (phase == 2) {
+      if (phase == 2 && msg.sender == admin) {
         for (uint j = 0; j < losers.length; j++) {
             tmpCandidateList = new bytes32[](0);
             for (uint i = 0; i < candidateList.length; i++) {
