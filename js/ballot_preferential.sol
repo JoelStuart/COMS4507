@@ -18,7 +18,8 @@ contract BallotPreferential {
     bytes32[] private allWinners;
     bytes32[] private losers;
     mapping(address => uint8) public candidateSubmissionNumbers;
-        //phase 0: registration. phase 1: voting. phase 2: post election
+        //phase 0: registration. phase 1: voting. phase 2: calculating winner,
+        //phase 3: end of election
     uint8 private phase;
 
   function BallotPreferential() {
@@ -88,7 +89,7 @@ contract BallotPreferential {
   }
   
   //Only use at the end of the election!! 
-  function getWinner() returns (bytes32[]) {
+  function calculateWinner() returns (bytes32[]) {
       if (phase == 2 && msg.sender == admin) {
         uint maxVotes = 0;
         bool goingToSecondPreference = false;
@@ -111,6 +112,7 @@ contract BallotPreferential {
           goingToSecondPreference = true;
         } else {
             if (maxVotes > (totalVotes/2) || candidateList.length == 2 || candidateList.length == 1 || goingToSecondPreference) {
+                phase = 3;
                 return allWinners;
             }
             getLastCandidates();
@@ -118,6 +120,12 @@ contract BallotPreferential {
             addSecondPreferences(losers, true);
         }
       }
+      }
+  }
+  
+  function getWinners() returns (bytes32[]) {
+      if (phase == 3) {
+          return allWinners;
       }
   }
   
