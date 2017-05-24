@@ -15,69 +15,56 @@
 
 <body>
 	<script src="js/bignumber.min.js"></script>
-    <script src="js/web3.min.js"></script>
-    <script src="js/adminK.js"></script>
-  <div class="container">
-	<p><abbr title="Frequenty Asked Questions">FAQ</abbr> </p>
-  </div>
-  <div class="jumbotron">
-    <h2 id="title;" style="color:blue;">Administration Page</h2>
-  </div> 
- <fieldset>
-		<button id=createBallot, onclick="createBallot()">Create New Ballot</button>
-	</div>
+	<script src="js/web3.min.js"></script>
+	<script src="js/adminK.js?6"></script>
 	
-	<div>
-	Contract Address: <textarea id="contactAddress" rows="1"></textarea>
-	<button id=updateAddress, onclick="updateAddr()">Update Contract Address</button>
-	<p id="contractStatusText"></p>
-	</div>
-	
-	<div>
-	Enter your question: <textarea id="questionArea" rows="1"></textarea>
-	<p id="questionErrorText"></p>
-	</div>
-	
-	
-	<div>
-	Enter time for registration: 
-	<div class="dropdown">
-		<button onclick="regDropdown()" class="dropbtn">Dropdown</button>
-		<div id="regDropdown" class="dropdown-content">
-			<a href="#">2 Minutes</a>
-			<a href="#">5 Minutes</a>
-			<a href="#">10 Minutes</a>
-		</div>
-	</div>
-	<p id="timeErrorText"></p>
-	</div>
-	
-	
-	<div>
-	Enter time for voting: 
-	<div class="dropdown">
-		<button onclick="voteDropdown()" class="dropbtn">Dropdown</button>
-		<div id="voteDropdown" class="dropdown-content">
-			<a href="#">2 Minutes</a>
-			<a href="#">5 Minutes</a>
-			<a href="#">10 Minutes</a>
-		</div>
-	</div>
-	<p id="timeErrorText"></p>
-	</div>
-
-	<div class="col-sm-4">
-				Select Voting Type:<br>
-				<!--Answer will be displayed in the voter page--> 
+	<div class="jumbotron text-center">
+		<h2 id="title;" style="color:blue;">Administration Page</h2>
+	</div>  
+  
+	<div class="container">
+		<div class="row">	
+			<button id=createBallot, onclick="createBallot()">Create New Ballot</button>
+			<br>
+			<br>
+			<div>
+				Enter your question: <textarea id="enterQuestion" cols="28" rows="1"></textarea>
+				<p id="enterQuestion"></p>
+			</div>
+			<div>
+				Contract Address: <textarea id="contactAddress" cols="30" rows="1"></textarea>
+				<button id=updateAddress, onclick="updateAddr()">Update Contract Address</button>
+				<p id="contractStatusText"></p>
+			</div>
+			<div>
+				Enter time for registration: 
 				<select>
-					<option value="Option B">Basic</option>
-					<option value="Option C">Preferential</option>
+					<option value="2">2 minutes</option>
+					<option value="5">5 minutes</option>
+					<option value="10">10 minutes</option>
 				</select>
+				<p id="enterRegisterTime"></p>
+			</div>
+			<div>
+				Enter time for registration: 
+				<select>
+					<option value="2">2 minutes</option>
+					<option value="5">5 minutes</option>
+					<option value="10">10 minutes</option>
+				</select>
+				<p id="enterVotingTime"></p>
+			</div>
+			<div>
+				<p>Select Voting Type:
+					<select>
+						<option value="basic">Basic</option>
+						<option value="preferential">Preferential</option>
+					</select></p>
+				<div>
+					<button id=startelection, onclick="">Start an election</button>
+				</div>
+			</div>		
+		</div>
 	</div>
-
-	<button id=startElection, onclick="StartElection()">Start Election</button>
-			
-
-  </fieldset>  <br>
 </body>
 </html>
