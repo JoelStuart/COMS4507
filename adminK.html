@@ -3,7 +3,6 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-	
 	<title>Admin</title>
 	<meta name="description" content="The HTML5 Herald">
 	<meta name="author" content="SitePoint">
@@ -16,57 +15,60 @@
 
 <body>
 	<script src="js/bignumber.min.js"></script>
-    <script src="js/web3.min.js"></script>
-    <script src="js/adminK.js"></script>
-  <div class="container">
-	<p><abbr title="Frequenty Asked Questions">FAQ</abbr> </p>
-  </div>
-  <div class="jumbotron">
-    <h2 id="title;" style="color:blue;">Administration Page</h2>
-  </div> 
- <fieldset>
-		<button id=createBallot, onclick="createBallot()">Create New Ballot</button>
-	</div>
+	<script src="js/web3.min.js"></script>
+	<script src="js/adminK.js"></script>
 	
-	<div>
-	Contract Address: <textarea id="contactAddress" rows="1"></textarea>
-	<button id=updateAddress, onclick="updateAddr()">Update Contract Address</button>
-	<p id="contractStatusText"></p>
-	</div>
+	<div class="jumbotron text-center">
+		<h2 id="title;" style="color:blue;">Administration Page</h2>
+	</div>  
+ 
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-4">
+				What is this election?<br>
+				<!--Answer will be displayed in the voter page--> 
+				<select>
+					<option value="option A">Option A</option>
+					<option value="Option B">Option B</option>
+					<option value="Option C">Option C</option>
+				</select>
+			</div>
+			<br>
+			<div class="col-sm-4">
+				<button id=createBallot, onclick="createBallot()">Create New Ballot</button>
+			
+			<div>
+				Contract Address: <textarea id="contactAddress" rows="1"></textarea>
+				<button id=updateAddress, onclick="updateAddr()">Update Contract Address</button>
+				<p id="contractStatusText"></p>
+				</div>
+			
+			<div>
+				Candidate List: <textarea id="condidateList" rows="1"></textarea>
+				<button id=updateAddress, onclick="condidateList()">Update Voter Address</button>
+				<p id="voterAddrText"></p>
+			</div>
+				<div>
+					Voter Addresses: <textarea id="voterAddress" rows="1"></textarea>
+					<button id=updateAddress, onclick="voterAddr()">Update Voter Address</button>
+					<p id="voterAddrText"></p>
+				</div>
 	
-		<div>
-	Candidate List: <textarea id="condidateList" rows="1"></textarea>
-	<button id=updateAddress, onclick="condidateList()">Update Voter Address</button>
-	<p id="voterAddrText"></p>
+				<div>
+					Add Address Vote: <textarea id="address" rows="1"></textarea>
+					<button id=giveVote, onclick="giveVote()">Give right to Vote</button>
+					<p id="giveErrorText"></p>
+				</div>
+				<p id="eligible_area">
+				<p>List of eligible voters:</p>
+				<textarea id="addresses" name="list" cols="30" rows="5"></textarea>
+				<div>
+					<button id=getWinner, onclick="getWinner()">Get winner</button>
+					<p id="winnerErrorText"></p>
+				</div>
+			</div>
+		</div>
 	</div>
-	
-	
-	<div>
-	Voter Addresses: <textarea id="voterAddress" rows="1"></textarea>
-	<button id=updateAddress, onclick="voterAddr()">Update Voter Address</button>
-	<p id="voterAddrText"></p>
-	</div>
-	
-	<div>
-	Add Address Vote: <textarea id="address" rows="1"></textarea>
-	<button id=giveVote, onclick="giveVote()">Give right to Vote</button>
-	<p id="giveErrorText"></p>
-	</div>
-	 <p id="eligible_area">
-     <p>List of eligible voters:</p>
-     <textarea id="addresses" name="list" cols="30" rows="5"></textarea></p>
-	<div>
-		<button id=getWinner, onclick="getWinner()">Get winner</button>
-		<p id="winnerErrorText"></p>
-	</div>
-
-  </fieldset>  <br>
-  <fliedset>
-  What are you voting for?<br>
-   <input type="radio" name="option A" />Option A: <br>
-   <input type="radio" name="option B" />Option B: <br>
-   <input type="radio" name="option C" />Option C: <br>
-  <button id=button4, onclick=>Set questions</button>
-  </fieldset>
-</body>
+ 
+ </body>
 </html>
