@@ -1,49 +1,50 @@
 <!doctype html>
  
- <html lang="en">
+<html lang="en">
  <head>
- 	<meta charset="utf-8">
- 	<title>Voter</title>
+  <meta charset="utf-8">
+  <title>Voter</title>
  	<meta name="description" content="The HTML5 Herald">
  	<meta name="author" content="SitePoint">
  	<link rel="stylesheet" href="css/style.css">
  	<meta name="viewport" content="width=device-width, initial-scale=1">
- 	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+ 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
  </head>
  
  <body>
+  <div class="jumbotron text-center">
+   <h2 id="title;" style="color:blue;">Voter Page</h2>
+  </div>  
+  <div class="container">
+		<div class="row">
+			<div class="col-sm-5">
+				Which election are you voting for?<br>
+				<!--Answer is loaded from admin's option--> 
+				<select>
+					<option value="option A">Option A</option>
+					<option value="Option B">Option B</option>
+					<option value="Option C">Option C</option>
+				</select>
+			</div>
+			<br>
+			<div class="col-sm-5">
+				<div>
+     Contract Address: <textarea id="contractAddress" rows="1"></textarea>
+     <button id=updateAddress, onclick="updateAddr()">Update Contract Address</button>
+     <p id="contractStatusText"></p>
+    </div>
  	<div>
- 	Contract Address: <textarea id="contractAddress" rows="1"></textarea>
- 
- 	<button id=updateAddress, onclick="updateAddr()">Update Contract Address</button>
- 	<p id="contractStatusText"></p>
+   <button id=button1, onclick="vote()">Cast Vote!</button>
  	</div>
- 	<div>
- 	<button id=button1, onclick="vote()">Cast Vote!</button>
- 	</div>
- 	<p id="errorText"></p>
- 	<script src="js/bignumber.min.js"></script>
-     <script src="js/web3.min.js"></script>
-     <script src="js/voterK.js"></script>
-     
-     <!-- progressbar -->
-     
-     <ul id="progressbar">
-             <ul id="progressbar">
-             <li>Register to Vote</li>
-             <li>Vote</li>
-          </ul>
- 	
-         </ul>
+    <p id="errorText"></p>
+    <script src="js/bignumber.min.js"></script>
+    <script src="js/web3.min.js"></script>
+    <script src="js/voterK.js"></script>
+     			</div>
+		</div>
+	</div>
  
- 	<p><abbr title="Frequenty Asked Questions">FAQ</abbr> </p>
-         
- 	<!-- The Steps -->
- 	<p>Choose a person to vote <br>
- 		<input type="radio" name="option 1" />Option 1: <br>
- 		<input type="radio" name="option 2" />Option 2: <br>
- 		<input type="radio" name="option 3" />Option 3: <br>
- 	</p>
- 	<button id=button2, type=submit>Submit</button>
  </body>
  </html>
