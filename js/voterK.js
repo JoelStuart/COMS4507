@@ -6,6 +6,13 @@
 	var addr;
 	var contractObj;
 	
+	
+	jQuery(document).ready(function(){
+        jQuery('#hideshow').on('click', function(event) {        
+             jQuery('#content').toggle('show');
+        });
+    })
+	
 	window.addEventListener('load', function() {
 		var password = "";
 		var accounts_index;
