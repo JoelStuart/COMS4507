@@ -14,7 +14,8 @@ contract Ballot {
     mapping(address => uint8) public candidateSubmissionNumbers;
     mapping (bytes32 => uint8) public votesForCandidates;
     bytes32[] private winners;
-    //phase 0: registration. phase 1: voting. phase 2: post election
+    //phase 0: registration. phase 1: voting. phase 2: calculate winner
+    //phase 3: end of election
     uint8 private phase;
   
   function Ballot() {
@@ -77,7 +78,7 @@ contract Ballot {
     return false;
   }
   
-  function getWinner() returns (bytes32[]) {
+  function calculateWinner() returns (bytes32[]) {
       if (phase == 2 && msg.sender == admin) {
         uint maxVotes = 0;
         for (uint i = 0; i < candidateList.length; i++) {
@@ -89,7 +90,14 @@ contract Ballot {
                 winners.push(candidateList[i]);
             }
         }
+        phase = 3;
         return winners;
       } 
+  }
+  
+  function getWinner() returns (bytes32[]) {
+      if (phase == 3) {
+          return winners;
+      }
   }
 }
