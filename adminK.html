@@ -28,34 +28,35 @@
 				What is this election?<br>
 				<!--Answer will be displayed in the voter page--> 
 				<select>
-					<option value="option A">Option A</option>
-					<option value="Option B">Option B</option>
-					<option value="Option C">Option C</option>
+					<option value="option A">Person A</option>
+					<option value="Option B">Person B</option>
+					<option value="Option C">Person C</option>
 				</select>
 			</div>
 			<br>
-			<div class="col-sm-4">
+			<div class="col-sm-7">
 				<button id=createBallot, onclick="createBallot()">Create New Ballot</button>
-			
+			<br>
+            <br>
 			<div>
-				Contract Address: <textarea id="contactAddress" rows="1"></textarea>
+				Contract Address: <textarea id="contactAddress" cols="29" rows="1"></textarea>
 				<button id=updateAddress, onclick="updateAddr()">Update Contract Address</button>
 				<p id="contractStatusText"></p>
 				</div>
 			
 			<div>
-				Candidate List: <textarea id="condidateList" rows="1"></textarea>
+				Candidate List: <textarea id="condidateList" cols="32" rows="1"></textarea>
 				<button id=updateAddress, onclick="condidateList()">Update Voter Address</button>
 				<p id="voterAddrText"></p>
 			</div>
 				<div>
-					Voter Addresses: <textarea id="voterAddress" rows="1"></textarea>
+					Voter Addresses: <textarea id="voterAddress" cols="30" rows="1"></textarea>
 					<button id=updateAddress, onclick="voterAddr()">Update Voter Address</button>
 					<p id="voterAddrText"></p>
 				</div>
 	
 				<div>
-					Add Address Vote: <textarea id="address" rows="1"></textarea>
+					Add Address Vote: <textarea id="address" cols="29" rows="1"></textarea>
 					<button id=giveVote, onclick="giveVote()">Give right to Vote</button>
 					<p id="giveErrorText"></p>
 				</div>
