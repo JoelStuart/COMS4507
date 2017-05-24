@@ -9,52 +9,67 @@
  	<link rel="stylesheet" href="css/style.css">
  	<meta name="viewport" content="width=device-width, initial-scale=1">
  	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
  </head>
  
  <body>
- 	<script src="js/bignumber.min.js"></script>
-     <script src="js/web3.min.js"></script>
-     <script src="js/voterK.js"></script>
+	 <script src="js/bignumber.min.js"></script>
+	 <script src="js/web3.min.js"></script>
+	 <script src="js/adminK.js?6"></script>
 	
-	<input type='button' id='hideshow' value='hide/show'>
-	<div id = content> 
-	<div>
- 	Contract Address: <textarea id="contractAddress" rows="1"></textarea>
- 
- 	<button id=updateAddress, onclick="updateAddr()">Update Contract Address</button>
- 	<p id="contractStatusText"></p>
- 	</div>
- 	<div>
- 	<button id=button1, onclick="vote()">Cast Vote!</button>
- 	</div>
- 	<p id="errorText"></p>
-     <!-- progressbar -->
-     
-     <ul id="progressbar">
-             <ul id="progressbar">
-             <li>Register to Vote</li>
-             <li>Vote</li>
-          </ul>
- 	
-         </ul>
- 
- 	<p><abbr title="Frequenty Asked Questions">FAQ</abbr> </p>
-         
- 	<!-- The Steps -->
- 	<p>Choose a person to vote <br>
- 		<input type="radio" name="option 1" />Option 1: <br>
- 		<input type="radio" name="option 2" />Option 2: <br>
- 		<input type="radio" name="option 3" />Option 3: <br>
- 	</p>
- 	<button id=button2, type=submit>Submit</button>
-	
-	
-	<div>
-		<button id=getWinner, onclick="getWinner()">Get winner</button>
-		<p id="winnerErrorText"></p>
-	</div>
-	</div>
+	<div class="jumbotron text-center">
+		<h2 id="title;" style="color:blue;">Voter Page</h2>
+	</div>  
+  
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-8">
+			<p>Election: </p>
+			<p>Register </p>
+			<p>Submit a Candidate</p>
+			<div>
+				<p>Enter a candidate to appear on the ballot: <textarea id="candidate" cols="30" rows="1"></textarea></p>
+				<button id=submitcandidate, onclick="()">Submit Candidate</button>
+				<p id="candidateText"></p>
+			</div>
+			</div>
+			<div class="col-sm-4">
+				<div class="timer"><p>Time to vote begins: 1:00</p></div>
+			</div>
+		</div>
+	 </div>
+<br>
+	 <div class="container">
+		<div class="row">
+			 <div class="col-sm-8">
+				 <p>Election: </p>
+				 <p>Vote </p>
+			 </div>
+			<div class="col-sm-4">
+				<div class="timer"><p>Time to vote begins: 1:00</p></div>
+			</div>			
+		 </div>
+		 <div class="row">
+			 <div class="col-sm-6">
+				 Select an option: 
+				<select>
+					<option value="1">Candidate 1</option>
+					<option value="2">Candidate 2</option>
+					<option value="3">Candidate 3</option>
+				</select>
+				<p id="Choose options"></p>
+			 </div>
+			  <div class="col-sm-6">
+				   Select first or second preference: 
+				  <button id=button4, onclick=>Confirm</button>
+				<p id="Choose options"></p>
+			 </div>
+		 </div>
+	 </div>
+	  <div class="container">
+			  <p>Election: </p>
+			  <p>The winnder is: </p>
+	 </div>
  </body>
  </html>
