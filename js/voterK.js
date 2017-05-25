@@ -7,6 +7,7 @@
 	var contractObj;
 	var state;
 	var time;
+	var candidates;
 	
 	
 
@@ -194,6 +195,19 @@ function addVoter(){
 	  xhttp.send();
 	}
 	
+	function getCandidateList() {
+	  var xhttp; 
+	  xhttp = new XMLHttpRequest();
+	  xhttp.onreadystatechange = function() {
+		if (this.readyState == 4 && this.status == 200) {
+				candidates = this.responseText;
+				////Process candidate object if needed
+				console.log(candidates);
+		}
+	  };
+	  xhttp.open("GET", "getCandidates.php", true);
+	  xhttp.send();
+	}
 	
 	function getState() {
 	  var xhttp; 
