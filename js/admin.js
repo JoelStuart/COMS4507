@@ -132,7 +132,6 @@ function endPhase1() {
 	displayDuringElection();
 	startVoting();
 	getCandidateList();
-	sendCandidateList(candidateList);
 	state = 2;
 	sendState(state);
 	setTimeout(endPhase2, voteTime*60000 + 10000);
@@ -553,7 +552,7 @@ function getWinner(){
 
 }
 
-function sendAjax(str, mode){
+function sendAjax(str, type){
   var xhttp; 
   xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function() {
@@ -562,7 +561,7 @@ function sendAjax(str, mode){
 		console.log(this.responseText);
     }
   };
-  switch(mode){
+  switch(type){
 	  case "addr":
 		xhttp.open("GET", "sendAddr.php?str="+str, true);
 		break;
