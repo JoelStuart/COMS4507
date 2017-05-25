@@ -414,7 +414,7 @@ function getCandidateList(){
 			//Call winning proposal
 			res = contractObj.getCandidateList.call({ from: account, gas: 4200000}, function(e,l){
 							if (!e){
-								candidateList = hex2S(l);
+								candidateList = (hex2S(l)).split(",");
 								console.log("Candidate list is " + l );
 								//sendState(state);
 							}
@@ -431,7 +431,7 @@ function getCandidateList(){
 			//Call winning proposal
 			res = contractObj.getCandidateList.call({ from: account, gas: 4200000}, function(e,l){
 							if (!e){
-								candidateList = hex2S(l);
+								candidateList = (hex2S(l)).split(",");
 								console.log("Candidate list is " + l );
 								//sendState(state);
 							}
