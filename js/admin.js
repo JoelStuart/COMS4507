@@ -169,9 +169,10 @@ function sendParamsToServer() {
 	//sendMode(mode);
 	//sendRegTime(regTimeDate);
 	//sendVoteTime(voteTimeDate);
+		state = 1;
 	sendBatch();
 	//sendAddr(addr);
-	state = 1;
+
 	//sendState(state);
 }
 
