@@ -16,6 +16,19 @@
 		var password = "";
 		var accounts_index;
 		getAddr();
+		getState();
+		
+		if (state == 0) {
+			displayPreRegistration();
+		} else if (state == 1) {
+			displayRegistration();
+			runTimer();
+		} else if (state == 2) {
+			displayVoting();
+			runTimer();
+		} else {
+			displayPostElection();
+		}
 		
 		if (typeof web3 !== 'undefined') {
 			window.web3 = new Web3(web3.currentProvider);
@@ -28,6 +41,50 @@
 		}
 
 })
+
+function displayPreRegistration() {
+	var div = document.getElementById("phase0-div");
+		div.style.display = "block";
+	div = document.getElementById("phase1-div");
+		div.style.display = "none";
+	div = document.getElementById("phase2-div");
+		div.style.display = "none";
+	div = document.getElementById("phase3-div");
+		div.style.display = "none";
+}
+
+function displayRegistration() {
+	var div = document.getElementById("phase0-div");
+		div.style.display = "none";
+	div = document.getElementById("phase1-div");
+		div.style.display = "block";
+	div = document.getElementById("phase2-div");
+		div.style.display = "none";
+	div = document.getElementById("phase3-div");
+		div.style.display = "none";
+}
+
+function displayVoting() {
+	var div = document.getElementById("phase0-div");
+		div.style.display = "none";
+	div = document.getElementById("phase1-div");
+		div.style.display = "none";
+	div = document.getElementById("phase2-div");
+		div.style.display = "block";
+	div = document.getElementById("phase3-div");
+		div.style.display = "none";
+}
+
+function displayPostElection() {
+	var div = document.getElementById("phase0-div");
+		div.style.display = "none";
+	div = document.getElementById("phase1-div");
+		div.style.display = "none";
+	div = document.getElementById("phase2-div");
+		div.style.display = "none";
+	div = document.getElementById("phase3-div");
+		div.style.display = "block";
+}
 
 	/**Called from update contract addr button
 	*/
@@ -209,7 +266,7 @@ function addVoter(){
 	  xhttp.send();
 	}
 	
-	function getState() {
+   function getState() {
 	  var xhttp; 
 	  xhttp = new XMLHttpRequest();
 	  xhttp.onreadystatechange = function() {
@@ -262,6 +319,47 @@ function getWinner(){
 	
 
 }
+
+function runTimer() {
+
+var countDownDate = 0;
+
+if (phase == 1) {
+	//get registration time
+} else if (phase == 2) {
+	//get voting time
+}
+
+// Update the count down every 1 second
+var x = setInterval(function() {
+
+  // Get todays date and time
+  var now = new Date().getTime();
+
+  // Find the distance between now an the count down date
+  var distance = countDownDate - now;
+
+  // Time calculations for days, hours, minutes and seconds
+  var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+  var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+  var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+  // Display the result in the element with id="demo"
+  document.getElementById("timer-display").innerHTML = days + "d " + hours + "h "
+  + minutes + "m " + seconds + "s ";
+
+  // If the count down is finished, write some text 
+  if (distance < 0) {
+    clearInterval(x);
+    document.getElementById("timer-display").innerHTML = "EXPIRED";
+  }
+}, 1000);
+
+}
+
+
+
 	
 function hideshow()
 {
