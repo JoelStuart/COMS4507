@@ -99,6 +99,10 @@ function createBallot(){
 					 //sendAddr(addr);
 					 sendParamsToServer();
 					 contractInst = contract;
+					 console.log("about to set timeout");
+					setTimeout(endPhase1, regTimeDate*60000); 
+				} else {
+					console.log("...help");
 				}
 			
 		 });
@@ -116,13 +120,14 @@ function createBallot(){
 					 addr = contract.address;
 					 //sendAddr(addr);
 					 sendParamsToServer();
-					 contractInst = contract;
+					 contractInst = contract;	
+					 console.log("about to set timeout");
+					 setTimeout(endPhase1, regTimeDate*60000); 
 				}
 			
 		 });
 	}
-	console.log("about to set timeout");
-	setTimeout(endPhase1, regTimeDate*60000); 
+
 }
 
 function endPhase1() {
