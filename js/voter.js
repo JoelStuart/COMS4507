@@ -403,6 +403,7 @@ function getCandidateList(){
 			res = contractObj.getCandidateList.call({ from: account, gas: 4200000}, function(e,l){
 							if (!e){
 								//state = hex2S(l);
+								candidateList = [];
 								candidateList = hex2SArray(l);
 								console.log("Candidate list is " + candidateList);
 								//sendState(state);
@@ -551,24 +552,26 @@ function getCandidateList(){
 
 
 function runTimer() {
-var countDownDate = 0;
+var countDownDate = "";
 
-while (countDownDate == 0) {
+while (countDownDate == "") {
 	if (state == 1) {
 		countDownDate = getRegTime();
+		console.log("got countdown time");
 	} else if (state == 2) {
 		countDownDate = getVoteTime();
 	}
 }
-console.log("got countdown time");
+console.log("got countdown time2");
 // Update the count down every 1 second
 var x = setInterval(function() {
   // Get todays date and time
   var now = new Date().getTime();
   console.log(now);
   // Find the distance between now an the count down date
-  var distance = countDownDate - now;
-   console.log(countDownDate);
+  var end = new Date(countDownTime).getTime();
+  var distance = end - now;
+   console.log(end);
    console.log(distance);
   // Time calculations for days, hours, minutes and seconds
   var days = Math.floor(distance / (1000 * 60 * 60 * 24));
@@ -600,6 +603,7 @@ function hex2S(str1) {
 
 
 function hex2SArray(str1) {
+	newList = [];
 	var hex1 = str1.toString();
 	var hexArray = hex1.split(",");
 	for (var j = 0; i < hexArray.length; j++) {
@@ -607,8 +611,8 @@ function hex2SArray(str1) {
     	for (var i = 0; i < hexArray[j].length; i += 2) {
         	var v = parseInt(hexArray[j].substr(i, 2), 16);
         	if (v) str += String.fromCharCode(v);
-        	hexArray[j] = str;
+        	newList.push(str);
     	}
     }
-    return hexArray;
+    return newList;
 }  

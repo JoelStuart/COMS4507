@@ -178,8 +178,8 @@ function sendParamsToServer() {
 	//give 10s buffer between registration end and voting start
 	voteTimeDateTmp.setSeconds(voteTimeDateTmp.getSeconds() + 10);
 	
-	regTime = regTimeDateTmp.getTime();
-	voteTime = voteTimeDateTmp.getTime();
+	regTime = regTimeDateTmp;
+	voteTime = voteTimeDateTmp;
 	//sendQuestion(question);
 	//sendMode(mode);
 	//sendRegTime(regTimeDate);
