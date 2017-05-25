@@ -17,6 +17,7 @@ var candidateList;
 
 
 window.addEventListener('load', function() {
+	state=0;
 	if (typeof web3 !== 'undefined') {
 		window.web3 = new Web3(web3.currentProvider);
 		console.log("Connected to MetaMask vK");
@@ -28,13 +29,7 @@ window.addEventListener('load', function() {
 	
 	
 	getStateFromServer();
-	if (state == 0) {
-		displayPreElection();
-	} else if (state == 1 || state == 2) {
-		displayDuringElection();
-	} else if (state == 3) {
-		displayPostElection();
-	}
+
 
 })
 
@@ -327,6 +322,14 @@ function getStateFromServer() {
 					} else {
 						console.log(state);
 					}*/
+					
+				if (state == 0) {
+		displayPreElection();
+	} else if (state == 1 || state == 2) {
+		displayDuringElection();
+	} else if (state == 3) {
+		displayPostElection();
+	}
 		}
 	  };
 	  xhttp.open("GET", "getState.php", true);
