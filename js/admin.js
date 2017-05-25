@@ -121,6 +121,7 @@ function createBallot(){
 			
 		 });
 	}
+	console.log("about to set timeout");
 	setTimeout(endPhase1, regTimeDate*60000); 
 }
 
@@ -162,6 +163,9 @@ function storeParams() {
 }
 
 function sendParamsToServer() {
+     state = 1;
+     console.log("increased state");
+     console.log(state);
 	var regTimeDateTmp = new Date();
 	var voteTimeDateTmp = new Date();
 	regTimeDateTmp.setMinutes(regTimeDateTmp.getMinutes() + regTimeDate);
@@ -171,7 +175,6 @@ function sendParamsToServer() {
 	
 	regTime = regTimeDateTmp.getTime();
 	voteTime = voteTimeDateTmp.getTime();
-		state = 1;
 	//sendQuestion(question);
 	//sendMode(mode);
 	//sendRegTime(regTimeDate);
