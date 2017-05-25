@@ -11,6 +11,7 @@
 	var candidateList;
 	var mode;
 	var winner;
+	var question;
 
 	
 	
@@ -21,18 +22,9 @@
 		var accounts_index;
 		getAddr();
 		getState();
+		displayPreRegistration();
 		
-		if (state == 0) {
-			displayPreRegistration();
-		} else if (state == 1) {
-			displayRegistration();
-			runTimer();
-		} else if (state == 2) {
-			displayVoting();
-			runTimer();
-		} else {
-			displayPostElection();
-		}
+		//frontStateUpdate();
 		
 		if (typeof web3 !== 'undefined') {
 			window.web3 = new Web3(web3.currentProvider);
@@ -45,6 +37,21 @@
 		}
 
 })
+
+function frontStateUpdate(){
+	if (state == 0) {
+			displayPreRegistration();
+		} else if (state == 1) {
+			displayRegistration();
+			runTimer();
+		} else if (state == 2) {
+			displayVoting();
+			runTimer();
+		} else {
+			displayPostElection();
+		}
+}
+
 
 function displayPreRegistration() {
 	var div = document.getElementById("phase0-div");
@@ -69,6 +76,7 @@ function displayRegistration() {
 }
 
 function displayVoting() {
+	getQuestion();
 	var div = document.getElementById("phase0-div");
 		div.style.display = "none";
 	div = document.getElementById("phase1-div");
@@ -380,7 +388,7 @@ function getCandidateList(){
 		if (this.readyState == 4 && this.status == 200) {
 				regTime = this.responseText;
 				////Process time object if needed
-				console.log(time);
+				console.log(regTime);
 		}
 	  };
 	  xhttp.open("GET", "getVoteTime.php", true);
@@ -394,7 +402,7 @@ function getCandidateList(){
 		if (this.readyState == 4 && this.status == 200) {
 				voteTime = this.responseText;
 				////Process time object if needed
-				console.log(time);
+				console.log(voteTime);
 		}
 	  };
 	  xhttp.open("GET", "getVoteTime.php", true);
@@ -410,11 +418,10 @@ function getCandidateList(){
 				//Process state object if needed
 				if (!state){
 					console.log("State not yet set.");
-					console.log(this.responseText);
-					state = 0;
 				} else {
 					console.log(state);
 				}
+				frontStateUpdate();
 		}
 	  };
 	  xhttp.open("GET", "getState.php", true);
@@ -449,17 +456,18 @@ function getCandidateList(){
 	  xhttp.send();
 	}
 	
-	function getMode() {
+	function getQuestion() {
 	  var xhttp; 
 	  xhttp = new XMLHttpRequest();
 	  xhttp.onreadystatechange = function() {
 		if (this.readyState == 4 && this.status == 200) {
-				mode = this.responseText;
+				question = this.responseText;
+				document.getElementById('question').innerHTML = "Election: "+question;
 				//Process state object if needed
-				console.log(state);
+				//console.log(state);
 		}
 	  };
-	  xhttp.open("GET", "getMode.php", true);
+	  xhttp.open("GET", "getQuestion.php", true);
 	  xhttp.send();
 	}
 	

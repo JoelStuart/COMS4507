@@ -11,7 +11,7 @@ if(isset($_GET['str'])) {
 	
     //$sql = "SELECT password FROM signup WHERE username = '".$username."'";
 	echo $addr;
-	$sql = "INSERT INTO var (id, addr) VALUES(2, '$addr') ON DUPLICATE KEY UPDATE id=2, addr='$addr'";
+	$sql = "INSERT INTO var (id, addr) VALUES(3, '$addr') ON DUPLICATE KEY UPDATE id=3, addr='$addr'";
 	$result = mysqli_query($dbO->link, $sql);
 	//	$result = mysqli_query($dbO->link, $sql)->fetch_object()->password;
     //$result = $conn->query($sql);
