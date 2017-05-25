@@ -552,7 +552,7 @@ function getCandidateList(){
 
 
 function runTimer() {
-countDownDate = 0;
+var countDownDate;
 
 while (countDownDate == undefined) {
 	if (state == 1) {
@@ -572,7 +572,7 @@ var x = setInterval(function() {
   console.log("NOW");
   console.log(now);
   // Find the distance between now an the count down date
-  var end = countDownTime;
+  var end = countDownDate;
   var distance = end - now;
     console.log("END");
    console.log(end);
