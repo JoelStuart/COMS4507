@@ -126,7 +126,7 @@ function evalDisplayMode(){
 function populateDropdown(){
 
 	var options = "";
-	var dummyData = ['Joel - Cool vibes','Joel - Great hair','Not Joel - Pretty shit bloke','Not Joel - Looks like a squashed mango'];
+	var dummyData = ['Joel - Cool vibes','Joel - Great hair','Not Joel - Pretty bad bloke','Not Joel - Looks like a squashed mango'];
 	var length = dummyData.length;
 	for(var i=0; i< length; i++){
        options += '<option value ="' + dummyData[i] + '">'+dummyData[i]+'</option>';
