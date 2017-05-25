@@ -553,10 +553,11 @@ function getCandidateList(){
 function runTimer() {
 var countDownDate = 0;
 
-if (state == 1) {
+while (countDownDate == 0) {if (state == 1) {
 	countDownDate = parseInt(getRegTime());
-} else if (state == 2) {
-	countDownDate = parseInt(getVoteTime());
+	} else if (state == 2) {
+		countDownDate = parseInt(getVoteTime());
+	}
 }
 console.log("got countdown time");
 // Update the count down every 1 second

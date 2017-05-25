@@ -155,10 +155,6 @@ function storeParams() {
 	var voteTimeOptions = document.getElementById('vote-times');
 	voteTimeDate = voteTimeOptions.options[voteTimeOptions.selectedIndex].value;
 	
-		
-	regTimeDate = regTimeDate + 1;
-	voteTimeDate = voteTimeDate + 1;
-	
 	var btn = document.getElementById("startelection-button"); 
 	btn.disabled = true;
 	
