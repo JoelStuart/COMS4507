@@ -484,9 +484,9 @@ function getCandidateList(){
 				console.log(batch);
 				var t = JSON.parse(batch);
 				addr = t['addr'];
-				regTime = t['regTime'];
-				voteTime = t['voteTime'];
-				state = t['state'];
+				regTime = parseInt(t['regTime']);
+				voteTime = parseInt(t['voteTime']);
+				state = parseInt(t['state']);
 				mode = t['mode'];
 				question = t['question'];
 				console.log(addr);
