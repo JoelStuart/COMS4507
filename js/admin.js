@@ -169,10 +169,9 @@ function sendParamsToServer() {
 	//sendMode(mode);
 	//sendRegTime(regTimeDate);
 	//sendVoteTime(voteTimeDate);
-		state = 1;
 	sendBatch();
 	//sendAddr(addr);
-
+	state = 1;
 	//sendState(state);
 }
 
@@ -324,7 +323,7 @@ function getStateFromServer() {
 						console.log(state);
 					}*/
 					
-				if (state == 0) {
+	if (state == 0) {
 		displayPreElection();
 	} else if (state == 1 || state == 2) {
 		displayDuringElection();
@@ -414,7 +413,7 @@ function getCandidateList(){
 			//Call winning proposal
 			res = contractObj.getCandidateList.call({ from: account, gas: 4200000}, function(e,l){
 							if (!e){
-								candidateList = (hex2S(l)).split(",");
+								candidateList = hex2S(l);
 								console.log("Candidate list is " + l );
 								//sendState(state);
 							}
@@ -431,7 +430,7 @@ function getCandidateList(){
 			//Call winning proposal
 			res = contractObj.getCandidateList.call({ from: account, gas: 4200000}, function(e,l){
 							if (!e){
-								candidateList = (hex2S(l)).split(",");
+								candidateList = hex2S(l);
 								console.log("Candidate list is " + l );
 								//sendState(state);
 							}
