@@ -124,7 +124,7 @@ function createBallot(){
 			
 		 });
 	}
-	setTimeout(endPhase1, regTime*60000); 
+	setTimeout(endPhase1, regTimeDate*60000); 
 }
 
 function endPhase1() {
@@ -133,7 +133,7 @@ function endPhase1() {
 	getCandidateList();
 	state = 2;
 	sendState(state);
-	setTimeout(endPhase2, voteTime*60000 + 10000);
+	setTimeout(endPhase2, voteTimeDate*60000 + 10000);
 }
 
 function endPhase2() {
@@ -153,22 +153,22 @@ function storeParams() {
 	console.log(mode);
 	
 	var regTimeOptions = document.getElementById('reg-times');
-	regTime = regTimeOptions.options[regTimeOptions.selectedIndex].value;
+	regTimeDate = regTimeOptions.options[regTimeOptions.selectedIndex].value;
 	
 	var voteTimeOptions = document.getElementById('vote-times');
-	voteTime = voteTimeOptions.options[voteTimeOptions.selectedIndex].value;
+	voteTimeDate = voteTimeOptions.options[voteTimeOptions.selectedIndex].value;
 }
 
 function sendParamsToServer() {
 	var regTimeDateTmp = new Date();
 	var voteTimeDateTmp = new Date();
-	regTimeDateTmp.setMinutes(regTimeDateTmp.getMinutes() + regTime);
-	voteTimeDateTmp.setMinutes(voteTimeDateTmp.getMinutes() + regTime + voteTime);
+	regTimeDateTmp.setMinutes(regTimeDateTmp.getMinutes() + regTimeDate);
+	voteTimeDateTmp.setMinutes(voteTimeDateTmp.getMinutes() + regTimeDate + voteTimeDate);
 	//give 10s buffer between registration end and voting start
 	voteTimeDateTmp.setSeconds(voteTimeDateTmp.getSeconds() + 10);
 	
-	regTimeDate = regTimeDateTmp.getTime();
-	voteTimeDate = voteTimeDateTmp.getTime();
+	regTime = regTimeDateTmp.getTime();
+	voteTime = voteTimeDateTmp.getTime();
 	
 	//sendQuestion(question);
 	//sendMode(mode);
