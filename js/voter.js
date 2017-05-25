@@ -408,7 +408,7 @@ function getCandidateList(){
 		if (this.readyState == 4 && this.status == 200) {
 				state = parseInt(this.responseText);
 				//Process state object if needed
-				if (!state){
+				if (!this.responseText){
 					console.log("State not yet set.");
 					state = 0;
 				} else {
