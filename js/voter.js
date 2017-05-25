@@ -5,7 +5,7 @@
 	var account;
 	var addr;
 	var contractObj;
-	var state = 0;
+	var state;
 	var regTime;
 	var voteTime;
 	var candidateList;
@@ -172,7 +172,10 @@ function displayPostElection() {
 
 /**Called to add candidate
 */
-function addCandidate(_candidate){
+function addCandidate(){
+	
+	var _candidate = document.getElementById('candidate').value;
+	console.log(_candidate);
 	//Ff contract addr set
 	if (typeof addr !== 'undefined') {
 		//Update front end text
