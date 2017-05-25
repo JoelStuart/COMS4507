@@ -267,59 +267,6 @@ function getPhase(){
 }
 
 
-function getCandidateList(){
-	//If contract addr set
-	if (typeof addr !== 'undefined') {
-		//Set front end error text to empty
-		var _error = document.getElementById('errorText');
-		 _error.innerHTML = "";
-		 
-		//Keep user logged in
-		var account = web3.eth.accounts[0];
-		var accountInterval = setInterval(function() {
-		  if (web3.eth.accounts[0] !== account) {
-			account = web3.eth.accounts[0];
-		  }
-		}, 100); 
-		 
-		if (mode === "basic"){
-			//Our contract ABI
-			var ballotContract = web3.eth.contract([{"constant":false,"inputs":[],"name":"startVoting","outputs":[],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"candidate","type":"bytes32"}],"name":"addCandidate","outputs":[],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"candidate","type":"bytes32"}],"name":"totalVotesFor","outputs":[{"name":"","type":"uint8"}],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"candidate","type":"bytes32"}],"name":"validCandidate","outputs":[{"name":"","type":"bool"}],"payable":false,"type":"function"},{"constant":true,"inputs":[{"name":"","type":"address"}],"name":"votersList","outputs":[{"name":"weight","type":"uint256"},{"name":"voted","type":"bool"}],"payable":false,"type":"function"},{"constant":true,"inputs":[{"name":"","type":"address"}],"name":"candidateSubmissionNumbers","outputs":[{"name":"","type":"uint8"}],"payable":false,"type":"function"},{"constant":false,"inputs":[],"name":"getWinner","outputs":[{"name":"","type":"bytes32[]"}],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"candidate","type":"bytes32"}],"name":"vote","outputs":[],"payable":false,"type":"function"},{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"candidateList","outputs":[{"name":"","type":"bytes32"}],"payable":false,"type":"function"},{"constant":true,"inputs":[{"name":"","type":"bytes32"}],"name":"votesForCandidates","outputs":[{"name":"","type":"uint8"}],"payable":false,"type":"function"},{"constant":false,"inputs":[],"name":"calculateWinner","outputs":[{"name":"","type":"bytes32[]"}],"payable":false,"type":"function"},{"constant":false,"inputs":[],"name":"getPhase","outputs":[{"name":"","type":"uint8"}],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"voter","type":"address"}],"name":"addVoter","outputs":[],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"admin","outputs":[{"name":"","type":"address"}],"payable":false,"type":"function"},{"constant":false,"inputs":[],"name":"finishVoting","outputs":[],"payable":false,"type":"function"},{"constant":false,"inputs":[],"name":"getCandidateList","outputs":[{"name":"","type":"bytes32[]"}],"payable":false,"type":"function"},{"inputs":[],"payable":false,"type":"constructor"}]);
-
-			//Point at our contract addr
-			contractObj = ballotContract.at(addr);
-			
-			//Call winning proposal
-			res = contractObj.getCandidateList.call({ from: account, gas: 4200000}, function(e,l){
-							if (!e){
-								//state = hex2S(l);
-								console.log("Candidate list is " + l );
-								//sendState(state);
-							}
-						 });
-			
-		}
-		if(mode === "pref"){
-			//Our contract ABI
-			var ballotContract =  web3.eth.contract([{"constant":true,"inputs":[],"name":"totalVotes","outputs":[{"name":"","type":"uint256"}],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"excludeList","type":"bytes32[]"},{"name":"candidateName","type":"bytes32"}],"name":"notIn","outputs":[{"name":"","type":"bool"}],"payable":false,"type":"function"},{"constant":false,"inputs":[],"name":"startVoting","outputs":[],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"candidate","type":"bytes32"}],"name":"addCandidate","outputs":[],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"candidate","type":"bytes32"}],"name":"totalVotesFor","outputs":[{"name":"","type":"uint8"}],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"candidate","type":"bytes32"}],"name":"validCandidate","outputs":[{"name":"","type":"bool"}],"payable":false,"type":"function"},{"constant":true,"inputs":[{"name":"","type":"address"}],"name":"votersList","outputs":[{"name":"weight","type":"uint256"},{"name":"voted","type":"bool"}],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"candidates","type":"bytes32[]"},{"name":"shouldDelete","type":"bool"}],"name":"addSecondPreferences","outputs":[],"payable":false,"type":"function"},{"constant":false,"inputs":[],"name":"getLastCandidates","outputs":[],"payable":false,"type":"function"},{"constant":true,"inputs":[{"name":"","type":"address"}],"name":"candidateSubmissionNumbers","outputs":[{"name":"","type":"uint8"}],"payable":false,"type":"function"},{"constant":true,"inputs":[{"name":"","type":"bytes32"},{"name":"","type":"uint256"}],"name":"secondPreferences","outputs":[{"name":"","type":"bytes32"}],"payable":false,"type":"function"},{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"candidateList","outputs":[{"name":"","type":"bytes32"}],"payable":false,"type":"function"},{"constant":true,"inputs":[{"name":"","type":"bytes32"}],"name":"votesForCandidates","outputs":[{"name":"","type":"uint8"}],"payable":false,"type":"function"},{"constant":false,"inputs":[],"name":"removeCandidates","outputs":[],"payable":false,"type":"function"},{"constant":false,"inputs":[],"name":"getWinners","outputs":[{"name":"","type":"bytes32[]"}],"payable":false,"type":"function"},{"constant":false,"inputs":[],"name":"calculateWinner","outputs":[{"name":"","type":"bytes32[]"}],"payable":false,"type":"function"},{"constant":false,"inputs":[],"name":"getPhase","outputs":[{"name":"","type":"uint8"}],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"firstPreference","type":"bytes32"},{"name":"secondPreference","type":"bytes32"}],"name":"vote","outputs":[],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"voter","type":"address"}],"name":"addVoter","outputs":[],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"admin","outputs":[{"name":"","type":"address"}],"payable":false,"type":"function"},{"constant":false,"inputs":[],"name":"finishVoting","outputs":[],"payable":false,"type":"function"},{"constant":false,"inputs":[],"name":"getCandidateList","outputs":[{"name":"","type":"bytes32[]"}],"payable":false,"type":"function"},{"inputs":[],"payable":false,"type":"constructor"}]);
-
-			//Point at our contract addr
-			contractObj = ballotContract.at(addr);
-			
-			//Call winning proposal
-			res = contractObj.getCandidateList.call({ from: account, gas: 4200000}, function(e,l){
-							if (!e){
-								//state = hex2S(l);
-								console.log("Candidate list is " + l );
-								//sendState(state);
-							}
-						 });
-		}
-	} else {
-			var _error = document.getElementById('errorText');
-			 _error.innerHTML = "Contract address not set.";
-	}
-}
 
 function calculateWinner(){
 	//If contract addr set
@@ -402,8 +349,8 @@ function getWinner(){
 			//Call winning proposal
 			res = contractObj.getWinner.call({ from: account, gas: 4200000}, function(e,l){
 							if (!e){
-								console.log("Winning proposal is " + hex2S(l));
-								_error.innerHTML = "Winning proposal is " + hex2S(l);
+								winner =  hex2S(l);
+								console.log("Winning proposal is " + winner);
 							}
 						 });
 		 } if (mode === "pref"){
@@ -417,7 +364,9 @@ function getWinner(){
 			//Call winning proposal
 			res = contractObj.getWinner.call({ from: account, gas: 4200000}, function(e,l){
 							if (!e){
-								console.log("Winning proposal is " + hex2S(l));
+								winner =  hex2S(l);
+								console.log("Winning proposal is " + winner);
+
 							}
 						 });
 		 }
@@ -465,19 +414,6 @@ function sendAjax(str, mode){
 	  default:
 		break;
   }
-  xhttp.send();
-}
-
-function sendCandidateList(list){
-  var xhttp; 
-  xhttp = new XMLHttpRequest();
-  xhttp.onreadystatechange = function() {
-    if (this.readyState == 4 && this.status == 200) {
-		console.log(list+" sent.");
-		console.log(this.responseText);
-    }
-  };
-	xhttp.open("GET", "sendCandidates.php?str="+list, true);
   xhttp.send();
 }
 
