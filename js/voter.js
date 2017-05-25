@@ -554,7 +554,7 @@ function getCandidateList(){
 function runTimer() {
 countDownDate = 0;
 
-while (countDownDate == undef) {
+while (countDownDate == undefined) {
 	if (state == 1) {
 		countDownDate = getRegTime();
 		console.log("got countdown time");
