@@ -41,6 +41,9 @@
 })
 
 function frontStateUpdate(){
+	document.getElementById('p1-question').innerHTML = "Election: "+question;
+	document.getElementById('p2-question').innerHTML = "Election: "+question;
+	document.getElementById('p3-question').innerHTML = "Election finished: "+question;
 	if (state == 0) {
 			displayPreRegistration();
 		} else if (state == 1) {
@@ -493,6 +496,7 @@ function getCandidateList(){
 				console.log(state);
 				console.log(mode);
 				frontStateUpdate();
+
 		}
 	  };
 	  xhttp.open("GET", "getBatch.php", true);
