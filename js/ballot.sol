@@ -33,6 +33,10 @@ contract Ballot {
       }
   }
   
+   function getCandidateList() returns (bytes32[]) {
+      return candidateList;
+  }
+  
   function startVoting() {
       if (msg.sender == admin) {
         phase = 1;
