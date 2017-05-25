@@ -20,9 +20,10 @@
 	window.addEventListener('load', function() {
 		var password = "";
 		var accounts_index;
-		getAddr();
-		getState();
-		getMode();
+		//getAddr();
+		//getState();
+		//getMode();
+		getBatch();
 		displayPreRegistration();
 		
 		//frontStateUpdate();
