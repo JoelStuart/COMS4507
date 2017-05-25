@@ -12,8 +12,7 @@
 	var mode;
 	var winner;
 	var question;
-
-	
+	var countDownDate;
 	
 
 	
@@ -385,6 +384,7 @@ function getCandidateList(){
 			res = contractObj.getCandidateList.call({ from: account, gas: 4200000}, function(e,l){
 							if (!e){
 								//state = hex2S(l);
+								candidateList = [];
 								candidateList = hex2SArray(l);
 								console.log("Candidate list is " + candidateList);
 								//sendState(state);
@@ -552,7 +552,7 @@ function getCandidateList(){
 
 
 function runTimer() {
-var countDownDate = "";
+countDownDate = "";
 
 while (countDownDate == "") {
 	if (state == 1) {
@@ -569,7 +569,7 @@ var x = setInterval(function() {
   var now = new Date().getTime();
   console.log(now);
   // Find the distance between now an the count down date
-  var end = new Date(countDownTime).getTime();
+  var end = new Date(countDownDate).getTime();
   var distance = end - now;
    console.log(end);
    console.log(distance);
@@ -603,9 +603,9 @@ function hex2S(str1) {
 
 
 function hex2SArray(str1) {
-	newList = [];
 	var hex1 = str1.toString();
 	var hexArray = hex1.split(",");
+	
 	for (var j = 0; i < hexArray.length; j++) {
     	var str = '';
     	for (var i = 0; i < hexArray[j].length; i += 2) {
