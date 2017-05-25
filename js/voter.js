@@ -385,7 +385,7 @@ function getCandidateList(){
 			res = contractObj.getCandidateList.call({ from: account, gas: 4200000}, function(e,l){
 							if (!e){
 								//state = hex2S(l);
-								candidateList = (hex2S(l)).split(",");
+								candidateList = hex2SArray(l);
 								console.log("Candidate list is " + candidateList);
 								//sendState(state);
 							}
@@ -403,7 +403,7 @@ function getCandidateList(){
 			res = contractObj.getCandidateList.call({ from: account, gas: 4200000}, function(e,l){
 							if (!e){
 								//state = hex2S(l);
-								candidateList = (hex2S(l)).split(",");
+								candidateList = hex2SArray(l);
 								console.log("Candidate list is " + candidateList);
 								//sendState(state);
 							}
@@ -588,8 +588,18 @@ var x = setInterval(function() {
 
 }
 
-
 function hex2S(str1) {
+	var hex = str1.toString();
+    var str = '';
+    for (var i = 0; i < hex.length; i += 2) {
+        var v = parseInt(hex.substr(i, 2), 16);
+        if (v) str += String.fromCharCode(v);
+    }
+    return str;
+} 
+
+
+function hex2SArray(str1) {
 	var hex1 = str1.toString();
 	var hexArray = hex1.split(",");
 	for (var j = 0; i < hexArray.length; j++) {
@@ -599,5 +609,6 @@ function hex2S(str1) {
         	if (v) str += String.fromCharCode(v);
         	hexArray[j] = str;
     	}
+    }
     return hexArray;
 }  
