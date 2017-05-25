@@ -447,24 +447,21 @@ function getWinner(){
 }
 
 function runTimer() {
-
 var countDownDate = 0;
 
-if (phase == 1) {
+if (state == 1) {
 	countDownDate = getRegTime()
-} else if (phase == 2) {
+} else if (state == 2) {
 	countDownDate = getVoteTime()
 }
 
 // Update the count down every 1 second
 var x = setInterval(function() {
-
   // Get todays date and time
   var now = new Date().getTime();
 
   // Find the distance between now an the count down date
   var distance = countDownDate - now;
-
   // Time calculations for days, hours, minutes and seconds
   var days = Math.floor(distance / (1000 * 60 * 60 * 24));
   var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
@@ -474,7 +471,6 @@ var x = setInterval(function() {
   // Display the result in the element with id="timer-display"
   document.getElementById("timer-display").innerHTML = days + "d " + hours + "h "
   + minutes + "m " + seconds + "s ";
-
   // If the count down is finished, write some text 
   if (distance < 0) {
     clearInterval(x);
@@ -489,13 +485,14 @@ var x = setInterval(function() {
 	
 function hideshow()
 {
-	var div = document.getElementById("C1");
+	var div = document.getElementById("phase1-div");
 	if (div.style.display !== "none") {
 		div.style.display = "none";
 	}
 	else {
 		div.style.display = "block";
 	}
+	runTimer();
  }
 	
 	
