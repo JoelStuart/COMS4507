@@ -85,7 +85,7 @@ function displayVoting() {
 	getCandidateList();
 	getQuestion();
 	evalDisplayMode();
-	//populateDropdown();
+	populateDropdown();
 	var div = document.getElementById("phase0-div");
 		div.style.display = "none";
 	div = document.getElementById("phase1-div");
@@ -558,14 +558,17 @@ if (state == 1) {
 } else if (state == 2) {
 	countDownDate = parseInt(getVoteTime());
 }
-
+console.log("got countdown time");
 // Update the count down every 1 second
 var x = setInterval(function() {
+console.log("starting"...);
   // Get todays date and time
   var now = new Date().getTime();
 
   // Find the distance between now an the count down date
   var distance = countDownDate - now;
+  console.log("DISTANCE:");
+  console.log(distance);
   // Time calculations for days, hours, minutes and seconds
   var days = Math.floor(distance / (1000 * 60 * 60 * 24));
   var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
