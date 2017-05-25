@@ -569,7 +569,7 @@ console.log("got countdown time2");
 // Update the count down every 1 second
 var x = setInterval(function() {
   // Get todays date and time
-  var now = new Date().getTime();
+  var now = new Date().UTC();
   console.log("COUNTDOWN");
   console.log(countDownDate);
   console.log("NOW");
