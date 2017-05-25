@@ -484,11 +484,11 @@ function getCandidateList(){
 				console.log(batch);
 				var t = JSON.parse(JSON.stringify(batch));
 				addr = t['addr'];
-				regTime = batch['regTime'];
-				voteTime = batch['voteTime'];
-				state = batch['state'];
-				mode = batch['mode'];
-				question = batch['question'];
+				regTime = t['regTime'];
+				voteTime = t['voteTime'];
+				state = t['state'];
+				mode = t['mode'];
+				question = t['question'];
 		}
 	  };
 	  xhttp.open("GET", "getMode.php", true);
