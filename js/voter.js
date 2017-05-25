@@ -442,6 +442,8 @@ function getCandidateList(){
 				regTime = this.responseText;
 				////Process time object if needed
 				console.log(regTime);
+				
+				
 		}
 	  };
 	  xhttp.open("GET", "getVoteTime.php", true);
@@ -556,12 +558,12 @@ var countDownDate = "";
 
 while (countDownDate == "") {
 	if (state == 1) {
-		countDownDate = getRegTime();
+		countDownDate = regTime;
 		console.log("got countdown time");
 	} else if (state == 2) {
-		countDownDate = getVoteTime();
+		countDownDate = voteTime;
 	}
-	setTimeout(function(){}, 500);
+	//setTimeout(function(){}, 500);
 }
 console.log("got countdown time2");
 // Update the count down every 1 second
@@ -573,10 +575,7 @@ var x = setInterval(function() {
   console.log("NOW");
   console.log(now);
   // Find the distance between now an the count down date
-  var end = parseInt(countDownDate);
-  var distance = end - now;
-    console.log("END");
-   console.log(end);
+  var distance = countDownDate - now;
      console.log("DISTANCE");
    console.log(distance);
   // Time calculations for days, hours, minutes and seconds
