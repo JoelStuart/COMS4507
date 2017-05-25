@@ -9,6 +9,7 @@
 	var regTime;
 	var voteTime;
 	var candidates;
+	var mode;
 	
 	
 
@@ -235,6 +236,20 @@ function addVoter(){
 		}
 	  };
 	  xhttp.open("GET", "getState.php", true);
+	  xhttp.send();
+	}
+	
+		function getMode() {
+	  var xhttp; 
+	  xhttp = new XMLHttpRequest();
+	  xhttp.onreadystatechange = function() {
+		if (this.readyState == 4 && this.status == 200) {
+				mode = this.responseText;
+				//Process state object if needed
+				console.log(state);
+		}
+	  };
+	  xhttp.open("GET", "getMode.php", true);
 	  xhttp.send();
 	}
 	

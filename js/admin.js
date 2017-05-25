@@ -8,6 +8,7 @@ var addr;
 var state;
 var regTime;
 var voteTime;
+var mode;
 
 
 window.addEventListener('load', function() {
@@ -239,6 +240,9 @@ function sendAjax(str, mode){
 	  case "state":
 	    xhttp.open("GET", "sendState.php?str="+str, true);
 		break;
+	  case "mode":
+	    xhttp.open("GET", "sendMode.php?str="+str, true);
+		break;
 	  default:
 		break;
   }
@@ -264,6 +268,10 @@ function sendAddr(str) {
 
 function sendVoteTime(str) {
 	sendAjax(str, "voteTime");
+}
+
+function sendMode(str) {
+	sendAjax(str, "mode");
 }
 
 function sendRegTime(str) {
