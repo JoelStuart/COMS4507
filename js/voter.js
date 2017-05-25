@@ -554,9 +554,9 @@ function runTimer() {
 var countDownDate = 0;
 
 if (state == 1) {
-	countDownDate = getRegTime();
+	countDownDate = parseInt(getRegTime());
 } else if (state == 2) {
-	countDownDate = getVoteTime();
+	countDownDate = parseInt(getVoteTime());
 }
 
 // Update the count down every 1 second
