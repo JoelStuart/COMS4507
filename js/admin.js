@@ -27,7 +27,7 @@ window.addEventListener('load', function() {
 	}
 	
 	
-	getStateFromServer()
+	getStateFromServer();
 	if (state == 0) {
 		displayPreElection();
 	} else if (state == 1 || state == 2) {
