@@ -77,6 +77,7 @@ function displayRegistration() {
 
 function displayVoting() {
 	getQuestion();
+	populateDropdown();
 	var div = document.getElementById("phase0-div");
 		div.style.display = "none";
 	div = document.getElementById("phase1-div");
@@ -97,6 +98,21 @@ function displayPostElection() {
 	div = document.getElementById("phase3-div");
 		div.style.display = "block";
 }
+
+
+function populateDropdown(){
+
+	var options = "";
+	var dummyData = ['Joel - Cool vibes','Joel - Great hair','Not Joel - Pretty shit bloke','Not Joel - Looks like a squashed mango'];
+	var length = dummyData.length;
+	for(var i=0; i< length; i++){
+       options += '<option value ="' + dummyData[i] + '">'+dummyData[i]+'</option>';
+    }
+	console.log(options);
+	 $("#dropdown").append(options);
+	
+}
+
 
 	/**Called from update contract addr button
 	*/
