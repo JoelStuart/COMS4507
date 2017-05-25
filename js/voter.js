@@ -572,8 +572,7 @@ var x = setInterval(function() {
   console.log("NOW");
   console.log(now);
   // Find the distance between now an the count down date
-  var datee = Date.parse(countDownDate);
-  var end = datee.getTime();
+  var end = Date.parse(countDownDate);
      console.log(end);
   var distance = end - now;
     console.log("END");
