@@ -552,9 +552,9 @@ function getCandidateList(){
 
 
 function runTimer() {
-countDownDate = "";
+countDownDate = 0;
 
-while (countDownDate == "") {
+while (countDownDate == undef) {
 	if (state == 1) {
 		countDownDate = getRegTime();
 		console.log("got countdown time");
@@ -572,8 +572,7 @@ var x = setInterval(function() {
   console.log("NOW");
   console.log(now);
   // Find the distance between now an the count down date
-  var end = Date.parse(countDownDate);
-     console.log(end);
+  var end = countDownTime;
   var distance = end - now;
     console.log("END");
    console.log(end);
