@@ -22,6 +22,7 @@
 		var accounts_index;
 		getAddr();
 		getState();
+		getMode();
 		displayPreRegistration();
 		
 		//frontStateUpdate();
