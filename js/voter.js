@@ -553,8 +553,9 @@ function getCandidateList(){
 function runTimer() {
 var countDownDate = 0;
 
-while (countDownDate == 0) {if (state == 1) {
-	countDownDate = parseInt(getRegTime());
+while (countDownDate == 0) {
+	if (state == 1) {
+		countDownDate = parseInt(getRegTime());
 	} else if (state == 2) {
 		countDownDate = parseInt(getVoteTime());
 	}
@@ -562,14 +563,13 @@ while (countDownDate == 0) {if (state == 1) {
 console.log("got countdown time");
 // Update the count down every 1 second
 var x = setInterval(function() {
-console.log("starting");
   // Get todays date and time
   var now = new Date().getTime();
-  console.log("X");
   console.log(now);
   // Find the distance between now an the count down date
   var distance = countDownDate - now;
-
+   console.log(countDownDate);
+   console.log(distance);
   // Time calculations for days, hours, minutes and seconds
   var days = Math.floor(distance / (1000 * 60 * 60 * 24));
   var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
