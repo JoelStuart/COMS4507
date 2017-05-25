@@ -418,34 +418,30 @@ function addVoter(){
 
 
 function runTimer() {
-
 var countDownDate = 0;
 
-if (phase == 1) {
-	//get registration time
-} else if (phase == 2) {
-	//get voting time
+if (state == 1) {
+	countDownDate = getRegTime()
+} else if (state == 2) {
+	countDownDate = getVoteTime()
 }
 
 // Update the count down every 1 second
 var x = setInterval(function() {
-
   // Get todays date and time
   var now = new Date().getTime();
 
   // Find the distance between now an the count down date
   var distance = countDownDate - now;
-
   // Time calculations for days, hours, minutes and seconds
   var days = Math.floor(distance / (1000 * 60 * 60 * 24));
   var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
   var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
   var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-  // Display the result in the element with id="demo"
+  // Display the result in the element with id="timer-display"
   document.getElementById("timer-display").innerHTML = days + "d " + hours + "h "
   + minutes + "m " + seconds + "s ";
-
   // If the count down is finished, write some text 
   if (distance < 0) {
     clearInterval(x);
@@ -456,7 +452,7 @@ var x = setInterval(function() {
 }
 
 
-	
+
 	
     /*
     function claimrefund() {
