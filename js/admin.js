@@ -129,7 +129,7 @@ function createBallot(){
 			
 		 });
 	}
-	sendParams();
+	sendParamsToServer();
 	setTimeout(endPhase1, regTime*60000); 
 }
 
