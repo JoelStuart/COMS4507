@@ -482,7 +482,7 @@ function getCandidateList(){
 				var batch = this.responseText;
 				//Process state object if needed
 				console.log(batch);
-				var t = JSON.parse(batch);
+				var t = JSON.parse(JSON.stringify(batch));
 				addr = t['addr'];
 				regTime = batch['regTime'];
 				voteTime = batch['voteTime'];

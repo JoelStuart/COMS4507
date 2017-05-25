@@ -31,7 +31,7 @@ session_start();
 	$ret = $result->fetch_object()->addr;
 	$batch->regTime = $ret;
 	
-	$sql = "SELECT addr FROM var WHERE id = 1";
+	$sql = "SELECT addr FROM var WHERE id = 2";
 	//var query = "INSERT INTO var (id, addr) VALUES(0, '".$addr."') ON DUPLICATE KEY UPDATE";
 	$result = mysqli_query($dbO->link, $sql);
 	//	$result = mysqli_query($dbO->link, $sql)->fetch_object()->password;
