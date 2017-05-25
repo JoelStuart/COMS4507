@@ -18,6 +18,8 @@ var candidateList;
 
 window.addEventListener('load', function() {
 	state=0;
+	var btn = document.getElementById("startelection-button"); 
+	btn.disabled = false;
 	if (typeof web3 !== 'undefined') {
 		window.web3 = new Web3(web3.currentProvider);
 		console.log("Connected to MetaMask vK");
@@ -152,6 +154,11 @@ function storeParams() {
 	
 	var voteTimeOptions = document.getElementById('vote-times');
 	voteTimeDate = voteTimeOptions.options[voteTimeOptions.selectedIndex].value;
+	
+	var btn = document.getElementById("startelection-button"); 
+	btn.disabled = true;
+	
+	document.getElementById('enterQuestion').value = "";
 }
 
 function sendParamsToServer() {
@@ -629,11 +636,12 @@ function sendWinner(str) {
 	sendAjax(str, "winner");
 }
 
-function hex2S(hex) {
+function hex2S(str1) {
+	var hex = str1.toString();
     var str = '';
     for (var i = 0; i < hex.length; i += 2) {
         var v = parseInt(hex.substr(i, 2), 16);
         if (v) str += String.fromCharCode(v);
     }
     return str;
-}  
+}   
