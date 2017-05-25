@@ -6,15 +6,18 @@ var contractObj;
 var res = -1;
 var addr;
 var state;
+var regTimeDate;
 var regTime;
 var voteTime;
+var voteTimeDate;
 var mode;
 var question;
-var winner;
+var winners;
+var candidateList;
 
 
 window.addEventListener('load', function() {
-		
+	state=0;
 	if (typeof web3 !== 'undefined') {
 		window.web3 = new Web3(web3.currentProvider);
 		console.log("Connected to MetaMask vK");
@@ -23,8 +26,52 @@ window.addEventListener('load', function() {
 		console.log("MetaMask not Connected");
 		//web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
 	}
+	
+	
+	getStateFromServer()
+	if (state == 0) {
+		displayPreElection();
+	} else if (state == 1 || state == 2) {
+		displayDuringElection();
+	} else if (state == 3) {
+		displayPostElection();
+	}
 
 })
+
+
+function displayPreElection() {
+	var div = document.getElementById("phase0-div");
+		div.style.display = "block";
+	div = document.getElementById("phase12-div");
+		div.style.display = "none";
+	div = document.getElementById("phase3-div");
+		div.style.display = "none";
+}
+
+function displayDuringElection() {
+	var div = document.getElementById("phase0-div");
+		div.style.display = "none";
+	div = document.getElementById("phase12-div");
+		div.style.display = "block";
+	div = document.getElementById("phase3-div");
+		div.style.display = "none";
+}
+
+function displayPostElection() {
+	var div = document.getElementById("phase0-div");
+		div.style.display = "none";
+	div = document.getElementById("phase12-div");
+		div.style.display = "none";
+	div = document.getElementById("phase3-div");
+		div.style.display = "block";
+}
+
+function startNew() {
+	state = 0;
+	sendState("0");
+	location.reload(true);
+}
 
 /**Creates a new ballot contract. Contract address is needed for all other transactions.
 *
@@ -36,6 +83,9 @@ function createBallot(){
 			account = web3.eth.accounts[0];
 		  }
 		}, 100);
+
+
+	storeParams();
 
 	//console.log(ballotContract);
 	if (mode ==="basic"){
@@ -79,7 +129,60 @@ function createBallot(){
 			
 		 });
 	}
+	sendParams();
+	setTimeout(endPhase1, regTime*60000); 
+}
 
+function endPhase1() {
+	displayDuringElection();
+	startVoting();
+	getCandidateList();
+	sendCandidateList(candidateList);
+	state = 2;
+	sendState(state);
+	setTimeout(endPhase2, voteTime*60000 + 10000);
+}
+
+function endPhase2() {
+	finishVoting();
+	state = 3;
+	sendState(state);
+	calculateWinner();
+	sendWinner(winners);
+	displayPostElection();
+}
+
+function storeParams() {
+	question = document.getElementById('enterQuestion').value;
+	
+	var voterType = document.getElementById('voting-type');
+	mode = voterType.options[voterType.selectedIndex].value;
+	
+	var regTimeOptions = document.getElementById('reg-times');
+	regTime = regTimeOptions.options[regTimeOptions.selectedIndex].value;
+	
+	var voteTimeOptions = document.getElementById('vote-times');
+	voteTime = voteTimeOptions.options[voteTimeOptions.selectedIndex].value;
+}
+
+function sendParamsToServer() {
+	var regTimeDateTmp = new Date();
+	var voteTimeDateTmp = new Date();
+	regTimeDateTmp.setMinutes(regTimeDateTmp.getMinutes() + regTime);
+	voteTimeDateTmp.setMinutes(voteTimeDateTmp.getMinutes() + regTime + voteTime);
+	//give 10s buffer between registration end and voting start
+	voteTimeDateTmp.setSeconds(voteTimeDateTmp.getSeconds() + 10);
+	
+	regTimeDate = regTimeDateTmp.getTime();
+	voteTimeDate = voteTimeDateTmp.getTime();
+	
+	sendQuestion(question);
+	sendMode(mode);
+	sendRegTime(regTimeDate);
+	sendVoteTime(voteTimeDate);
+	sendAddr(addr);
+	state = 1;
+	sendState(state);
 }
 
 /**Called from update contract addr button
@@ -214,6 +317,26 @@ function finishVoting(){
 	}
 }
 
+
+function getStateFromServer() {
+	  var xhttp; 
+	  xhttp = new XMLHttpRequest();
+	  xhttp.onreadystatechange = function() {
+		if (this.readyState == 4 && this.status == 200) {
+				state = this.responseText;
+				//Process state object if needed
+				if (!state){
+					console.log("State not yet set.");
+					state = 0;
+				} else {
+					console.log(addr);
+				}
+		}
+	  };
+	  xhttp.open("GET", "getState.php", true);
+	  xhttp.send();
+	}
+
 function getPhase(){
 	//If contract addr set
 	if (typeof addr !== 'undefined') {
@@ -266,7 +389,59 @@ function getPhase(){
 	}
 }
 
+function getCandidateList(){
+	//If contract addr set
+	if (typeof addr !== 'undefined') {
+		//Set front end error text to empty
+		var _error = document.getElementById('errorText');
+		 _error.innerHTML = "";
+		 
+		//Keep user logged in
+		var account = web3.eth.accounts[0];
+		var accountInterval = setInterval(function() {
+		  if (web3.eth.accounts[0] !== account) {
+			account = web3.eth.accounts[0];
+		  }
+		}, 100); 
+		 
+		if (mode === "basic"){
+			//Our contract ABI
+			var ballotContract = web3.eth.contract([{"constant":false,"inputs":[],"name":"startVoting","outputs":[],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"candidate","type":"bytes32"}],"name":"addCandidate","outputs":[],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"candidate","type":"bytes32"}],"name":"totalVotesFor","outputs":[{"name":"","type":"uint8"}],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"candidate","type":"bytes32"}],"name":"validCandidate","outputs":[{"name":"","type":"bool"}],"payable":false,"type":"function"},{"constant":true,"inputs":[{"name":"","type":"address"}],"name":"votersList","outputs":[{"name":"weight","type":"uint256"},{"name":"voted","type":"bool"}],"payable":false,"type":"function"},{"constant":true,"inputs":[{"name":"","type":"address"}],"name":"candidateSubmissionNumbers","outputs":[{"name":"","type":"uint8"}],"payable":false,"type":"function"},{"constant":false,"inputs":[],"name":"getWinner","outputs":[{"name":"","type":"bytes32[]"}],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"candidate","type":"bytes32"}],"name":"vote","outputs":[],"payable":false,"type":"function"},{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"candidateList","outputs":[{"name":"","type":"bytes32"}],"payable":false,"type":"function"},{"constant":true,"inputs":[{"name":"","type":"bytes32"}],"name":"votesForCandidates","outputs":[{"name":"","type":"uint8"}],"payable":false,"type":"function"},{"constant":false,"inputs":[],"name":"calculateWinner","outputs":[{"name":"","type":"bytes32[]"}],"payable":false,"type":"function"},{"constant":false,"inputs":[],"name":"getPhase","outputs":[{"name":"","type":"uint8"}],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"voter","type":"address"}],"name":"addVoter","outputs":[],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"admin","outputs":[{"name":"","type":"address"}],"payable":false,"type":"function"},{"constant":false,"inputs":[],"name":"finishVoting","outputs":[],"payable":false,"type":"function"},{"constant":false,"inputs":[],"name":"getCandidateList","outputs":[{"name":"","type":"bytes32[]"}],"payable":false,"type":"function"},{"inputs":[],"payable":false,"type":"constructor"}]);
 
+			//Point at our contract addr
+			contractObj = ballotContract.at(addr);
+			
+			//Call winning proposal
+			res = contractObj.getCandidateList.call({ from: account, gas: 4200000}, function(e,l){
+							if (!e){
+								candidateList = hex2S(l);
+								console.log("Candidate list is " + l );
+								//sendState(state);
+							}
+						 });
+			
+		}
+		if(mode === "pref"){
+			//Our contract ABI
+			var ballotContract =  web3.eth.contract([{"constant":true,"inputs":[],"name":"totalVotes","outputs":[{"name":"","type":"uint256"}],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"excludeList","type":"bytes32[]"},{"name":"candidateName","type":"bytes32"}],"name":"notIn","outputs":[{"name":"","type":"bool"}],"payable":false,"type":"function"},{"constant":false,"inputs":[],"name":"startVoting","outputs":[],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"candidate","type":"bytes32"}],"name":"addCandidate","outputs":[],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"candidate","type":"bytes32"}],"name":"totalVotesFor","outputs":[{"name":"","type":"uint8"}],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"candidate","type":"bytes32"}],"name":"validCandidate","outputs":[{"name":"","type":"bool"}],"payable":false,"type":"function"},{"constant":true,"inputs":[{"name":"","type":"address"}],"name":"votersList","outputs":[{"name":"weight","type":"uint256"},{"name":"voted","type":"bool"}],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"candidates","type":"bytes32[]"},{"name":"shouldDelete","type":"bool"}],"name":"addSecondPreferences","outputs":[],"payable":false,"type":"function"},{"constant":false,"inputs":[],"name":"getLastCandidates","outputs":[],"payable":false,"type":"function"},{"constant":true,"inputs":[{"name":"","type":"address"}],"name":"candidateSubmissionNumbers","outputs":[{"name":"","type":"uint8"}],"payable":false,"type":"function"},{"constant":true,"inputs":[{"name":"","type":"bytes32"},{"name":"","type":"uint256"}],"name":"secondPreferences","outputs":[{"name":"","type":"bytes32"}],"payable":false,"type":"function"},{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"candidateList","outputs":[{"name":"","type":"bytes32"}],"payable":false,"type":"function"},{"constant":true,"inputs":[{"name":"","type":"bytes32"}],"name":"votesForCandidates","outputs":[{"name":"","type":"uint8"}],"payable":false,"type":"function"},{"constant":false,"inputs":[],"name":"removeCandidates","outputs":[],"payable":false,"type":"function"},{"constant":false,"inputs":[],"name":"getWinners","outputs":[{"name":"","type":"bytes32[]"}],"payable":false,"type":"function"},{"constant":false,"inputs":[],"name":"calculateWinner","outputs":[{"name":"","type":"bytes32[]"}],"payable":false,"type":"function"},{"constant":false,"inputs":[],"name":"getPhase","outputs":[{"name":"","type":"uint8"}],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"firstPreference","type":"bytes32"},{"name":"secondPreference","type":"bytes32"}],"name":"vote","outputs":[],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"voter","type":"address"}],"name":"addVoter","outputs":[],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"admin","outputs":[{"name":"","type":"address"}],"payable":false,"type":"function"},{"constant":false,"inputs":[],"name":"finishVoting","outputs":[],"payable":false,"type":"function"},{"constant":false,"inputs":[],"name":"getCandidateList","outputs":[{"name":"","type":"bytes32[]"}],"payable":false,"type":"function"},{"inputs":[],"payable":false,"type":"constructor"}]);
+
+			//Point at our contract addr
+			contractObj = ballotContract.at(addr);
+			
+			//Call winning proposal
+			res = contractObj.getCandidateList.call({ from: account, gas: 4200000}, function(e,l){
+							if (!e){
+								candidateList = hex2S(l);
+								console.log("Candidate list is " + l );
+								//sendState(state);
+							}
+						 });
+		}
+	} else {
+			var _error = document.getElementById('errorText');
+			 _error.innerHTML = "Contract address not set.";
+	}
+}
 
 function calculateWinner(){
 	//If contract addr set
@@ -294,6 +469,7 @@ function calculateWinner(){
 			//Call winning proposal
 			res = contractObj.calculateWinner.call({ from: account, gas: 4200000}, function(e,l){
 							if (!e){
+							     winners = hex2s(l);
 								console.log("Calculating winner.");
 							}
 						 });
@@ -308,6 +484,7 @@ function calculateWinner(){
 			//Call winning proposal
 			res = contractObj.calculateWinner.call({ from: account, gas: 4200000}, function(e,l){
 							if (!e){
+								winners = hex2s(l);
 								console.log("Winning proposal is " + hex2S(l));
 							}
 						 });
@@ -349,8 +526,9 @@ function getWinner(){
 			//Call winning proposal
 			res = contractObj.getWinner.call({ from: account, gas: 4200000}, function(e,l){
 							if (!e){
-								winner =  hex2S(l);
-								console.log("Winning proposal is " + winner);
+								console.log("Winning proposal is " + hex2S(l));
+								_error.innerHTML = "Winning proposal is " + hex2S(l);
+								winners = hex2s(l);
 							}
 						 });
 		 } if (mode === "pref"){
@@ -366,7 +544,6 @@ function getWinner(){
 							if (!e){
 								winner =  hex2S(l);
 								console.log("Winning proposal is " + winner);
-
 							}
 						 });
 		 }

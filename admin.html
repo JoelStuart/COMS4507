@@ -23,7 +23,7 @@
 	</div>  
   
 	<div class="container">
-		<div class="row">	
+		<div id="phase0-div" class="row">	
 			<br>
 			<br>
 			<div>
@@ -32,27 +32,35 @@
 			</div>
 			<div>
 				Enter time for registration: 
-				<select>
+				<select id="reg-times">
 					<option value="2">2 minutes</option>
 					<option value="5">5 minutes</option>
 					<option value="10">10 minutes</option>
+					<option value="30">30 minutes</option>
+					<option value="60">1 hour</option>
+					<option value="120">2 hours</option>
+					<option value="1440">1 day</option>
 				</select>
 				<p id="enterRegisterTime"></p>
 			</div>
 			<div>
 				Enter time for voting: 
-				<select>
+				<select id="vote-times">
 					<option value="2">2 minutes</option>
 					<option value="5">5 minutes</option>
 					<option value="10">10 minutes</option>
+					<option value="30">30 minutes</option>
+					<option value="60">1 hour</option>
+					<option value="120">2 hours</option>
+					<option value="1440">1 day</option>
 				</select>
 				<p id="enterVotingTime"></p>
 			</div>
 			<div>
 				<p>Select Voting Type:
-					<select>
+					<select id="voting-type">
 						<option value="basic">Basic</option>
-						<option value="preferential">Preferential</option>
+						<option value="pref">Preferential</option>
 					</select></p>
 				<div>
 					<button id=startelection, onclick="createBallot()">Start an election</button>
@@ -61,12 +69,23 @@
 				<div>
 				<br>
 				<br>
-				<p>
-					Please note that you'll need to keep this page open in your browner for the duration of the election, otherwise it won't work!
-					If you want to participate in the election yourself, open the voting page in a new window. 
-					</p>
 				</div>
 			</div>		
+		</div>
+		<div id="phase12-div" class="row">
+			<h3>Election in progress!</h3>
+		</div>
+		<div id="phase3-div" class="row">
+			<h3>Election over</h3>
+			<br>
+			<button id="start-new-button", onclick="startNew()">Start New Election!</button>
+		</div>
+		<div>
+						<p>
+					Please note that if you started the election, you'll need to keep this page open in your browner for the duration of the election, otherwise it won't work!
+					If you want to participate in the election yourself, open the voting page in a new window. 
+					</p>
+		
 		</div>
 	</div>
 </body>
