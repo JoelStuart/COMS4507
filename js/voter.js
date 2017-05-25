@@ -41,6 +41,9 @@
 })
 
 function frontStateUpdate(){
+	document.getElementById('p1-question').innerHTML = "Election: "+question;
+	document.getElementById('p2-question').innerHTML = "Election: "+question;
+	document.getElementById('p3-question').innerHTML = "Election finished: "+question;
 	if (state == 0) {
 			displayPreRegistration();
 		} else if (state == 1) {
@@ -482,16 +485,21 @@ function getCandidateList(){
 				var batch = this.responseText;
 				//Process state object if needed
 				console.log(batch);
-				var t = JSON.parse(JSON.stringify(batch));
+				var t = JSON.parse(batch);
 				addr = t['addr'];
-				regTime = batch['regTime'];
-				voteTime = batch['voteTime'];
-				state = batch['state'];
-				mode = batch['mode'];
-				question = batch['question'];
+				regTime = parseInt(t['regTime']);
+				voteTime = parseInt(t['voteTime']);
+				state = parseInt(t['state']);
+				mode = t['mode'];
+				question = t['question'];
+				console.log(addr);
+				console.log(state);
+				console.log(mode);
+				frontStateUpdate();
+
 		}
 	  };
-	  xhttp.open("GET", "getMode.php", true);
+	  xhttp.open("GET", "getBatch.php", true);
 	  xhttp.send();
 	}
 	
