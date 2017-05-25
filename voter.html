@@ -25,32 +25,45 @@
 		<h2 id="title;" style="color:blue;">Voter Page</h2>
 	</div>  
   
-	<div id="C1" class="container">
+  	<div id="phase0-div" class="container">
+  		<p> No election has been started yet! If you would like to start an election, head back to the home page and 
+  				then to the "Start an Election" page </p>
+  	</div> 
+  
+	<div id="phase1-div" class="container">
 		<div class="row">
 			<div class="col-sm-8">
-			<p>Election: </p>
-			<p>Register </p>
-			<p>Submit a Candidate</p>
+			<p>Election: GET QUESTION <p>
+			<h3>Register </h3>
+			
+			<p> NEED INFO ABOUT HOW TO REGISTER FOR THE ELECTION </p>
+			<button id="register", onclick="register()">Register to Vote!</button>
+			<br>
+			<br>
+			<br>
+			
+			<h3>Submit a Candidate</h3>
 			<div>
-				<p>Enter a candidate to appear on the ballot: <textarea id="candidate" cols="30" rows="1"></textarea></p>
+				<p>Think you've got a good candidate for the election? Enter a candidate to appear on the ballot: <textarea id="candidate" cols="30" rows="1"></textarea></p>
 				<button id=submitcandidate, onclick="">Submit Candidate</button>
 				<p id="candidateText"></p>
 			</div>
 			</div>
 			<div class="col-sm-4">
-				<div class="timer"><p>Time to vote begins: 1:00</p></div>
+				<div class="timer"><p>Time left to vote:</p><p id="timer-display"></p></div>
 			</div>
 		</div>
 	 </div>
 <br>
-	 <div id="C2" class="container">
+	 <div id="phase2-div" class="container">
 		<div class="row">
 			 <div class="col-sm-8">
+			 	  <h3>Vote </h3>
 				 <p>Election: </p>
-				 <p>Vote </p>
+
 			 </div>
 			<div class="col-sm-4">
-				<div class="timer"><p>Time to vote begins: 1:00</p></div>
+				<div class="timer"><p>Time left to vote:</p><p id="timer-display"></p></div>
 			</div>			
 		 </div>
 		 <div class="row">
@@ -70,7 +83,7 @@
 			 </div>
 		 </div>
 	 </div>
-	  <div id="C3" class="container">
+	  <div id="phase3-div" class="container">
 			  <p>Election: </p>
 			  <p>The winner is: </p>
 	 </div>
