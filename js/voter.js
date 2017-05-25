@@ -552,15 +552,16 @@ function getCandidateList(){
 
 
 function runTimer() {
-var countDownDate;
+var countDownDate = 0;
 
-while (countDownDate == undefined) {
+while (countDownDate == 0) {
 	if (state == 1) {
 		countDownDate = getRegTime();
 		console.log("got countdown time");
 	} else if (state == 2) {
 		countDownDate = getVoteTime();
 	}
+	setTimeout(function(){}, 500);
 }
 console.log("got countdown time2");
 // Update the count down every 1 second
