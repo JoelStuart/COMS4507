@@ -48,6 +48,7 @@ function frontStateUpdate(){
 			displayVoting();
 			runTimer();
 		} else {
+			getWinner();
 			displayPostElection();
 		}
 }
@@ -493,8 +494,9 @@ function getCandidateList(){
 	  xhttp.onreadystatechange = function() {
 		if (this.readyState == 4 && this.status == 200) {
 				winner = this.responseText;
+				document.getElementById('winner').innerHTML = "The winner is: "+winner;
 				//Process state object if needed
-				console.log(winner);
+				//console.log(winner);
 		}
 	  };
 	  xhttp.open("GET", "getWinner.php", true);
@@ -507,7 +509,8 @@ function getCandidateList(){
 	  xhttp.onreadystatechange = function() {
 		if (this.readyState == 4 && this.status == 200) {
 				question = this.responseText;
-				document.getElementById('question').innerHTML = "Election: "+question;
+				document.getElementById('p2-question').innerHTML = "Election: "+question;
+				document.getElementById('p3-question').innerHTML = "Election finished: "+question;
 				//Process state object if needed
 				//console.log(state);
 		}
