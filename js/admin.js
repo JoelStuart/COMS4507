@@ -483,7 +483,7 @@ function calculateWinner(){
 			//Call winning proposal
 			res = contractObj.calculateWinner.call({ from: account, gas: 4200000}, function(e,l){
 							if (!e){
-							     winners = hex2s(l);
+							     winners = hex2S(l);
 								console.log("Calculating winner.");
 							}
 						 });
@@ -498,7 +498,7 @@ function calculateWinner(){
 			//Call winning proposal
 			res = contractObj.calculateWinner.call({ from: account, gas: 4200000}, function(e,l){
 							if (!e){
-								winners = hex2s(l);
+								winners = hex2S(l);
 								console.log("Winning proposal is " + hex2S(l));
 							}
 						 });
