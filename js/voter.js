@@ -482,7 +482,7 @@ function getCandidateList(){
 				var batch = this.responseText;
 				//Process state object if needed
 				console.log(batch);
-				var t = JSON.parse(JSON.stringify(batch));
+				var t = JSON.parse(batch);
 				addr = t['addr'];
 				regTime = t['regTime'];
 				voteTime = t['voteTime'];
@@ -491,7 +491,7 @@ function getCandidateList(){
 				question = t['question'];
 		}
 	  };
-	  xhttp.open("GET", "getMode.php", true);
+	  xhttp.open("GET", "getBatch.php", true);
 	  xhttp.send();
 	}
 	
