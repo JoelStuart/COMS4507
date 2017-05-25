@@ -461,13 +461,9 @@ function getCandidateList(){
 	  xhttp = new XMLHttpRequest();
 	  xhttp.onreadystatechange = function() {
 		if (this.readyState == 4 && this.status == 200) {
-				state = parseInt(this.responseText) || 0;
+				state = parseInt(this.responseText);
 				//Process state object if needed
-				if (!state){
-					console.log("State not yet set.");
-				} else {
-					console.log(state);
-				}
+				console.log(state);
 				frontStateUpdate();
 		}
 	  };
