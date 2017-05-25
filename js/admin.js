@@ -6,15 +6,18 @@ var contractObj;
 var res = -1;
 var addr;
 var state;
+var regTimeDate;
 var regTime;
 var voteTime;
+var voteTimeDate;
 var mode;
 var question;
-var winner;
+var winners;
+var candidateList;
 
 
 window.addEventListener('load', function() {
-		
+	state=0;
 	if (typeof web3 !== 'undefined') {
 		window.web3 = new Web3(web3.currentProvider);
 		console.log("Connected to MetaMask vK");
@@ -23,8 +26,52 @@ window.addEventListener('load', function() {
 		console.log("MetaMask not Connected");
 		//web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
 	}
+	
+	
+	getStateFromServer()
+	if (state == 0) {
+		displayPreElection();
+	} else if (state == 1 || state == 2) {
+		displayDuringElection();
+	} else if (state == 3) {
+		displayPostElection();
+	}
 
 })
+
+
+function displayPreElection() {
+	var div = document.getElementById("phase0-div");
+		div.style.display = "block";
+	div = document.getElementById("phase12-div");
+		div.style.display = "none";
+	div = document.getElementById("phase3-div");
+		div.style.display = "none";
+}
+
+function displayDuringElection() {
+	var div = document.getElementById("phase0-div");
+		div.style.display = "none";
+	div = document.getElementById("phase12-div");
+		div.style.display = "block";
+	div = document.getElementById("phase3-div");
+		div.style.display = "none";
+}
+
+function displayPostElection() {
+	var div = document.getElementById("phase0-div");
+		div.style.display = "none";
+	div = document.getElementById("phase12-div");
+		div.style.display = "none";
+	div = document.getElementById("phase3-div");
+		div.style.display = "block";
+}
+
+function startNew() {
+	state = 0;
+	sendState("0");
+	location.reload(true);
+}
 
 /**Creates a new ballot contract. Contract address is needed for all other transactions.
 *
@@ -36,6 +83,9 @@ function createBallot(){
 			account = web3.eth.accounts[0];
 		  }
 		}, 100);
+
+
+	storeParams();
 
 	//console.log(ballotContract);
 	if (mode ==="basic"){
@@ -79,7 +129,60 @@ function createBallot(){
 			
 		 });
 	}
+	sendParams();
+	setTimeout(endPhase1, regTime*60000); 
+}
 
+function endPhase1() {
+	displayDuringElection();
+	startVoting();
+	getCandidateList();
+	sendCandidateList(candidateList);
+	state = 2;
+	sendState(state);
+	setTimeout(endPhase2, voteTime*60000 + 10000);
+}
+
+function endPhase2() {
+	finishVoting();
+	state = 3;
+	sendState(state);
+	calculateWinner();
+	sendWinner(winners);
+	displayPostElection();
+}
+
+function storeParams() {
+	question = document.getElementById('enterQuestion').value;
+	
+	var voterType = document.getElementById('voting-type');
+	mode = voterType.options[voterType.selectedIndex].value;
+	
+	var regTimeOptions = document.getElementById('reg-times');
+	regTime = regTimeOptions.options[regTimeOptions.selectedIndex].value;
+	
+	var voteTimeOptions = document.getElementById('vote-times');
+	voteTime = voteTimeOptions.options[voteTimeOptions.selectedIndex].value;
+}
+
+function sendParamsToServer() {
+	var regTimeDateTmp = new Date();
+	var voteTimeDateTmp = new Date();
+	regTimeDateTmp.setMinutes(regTimeDateTmp.getMinutes() + regTime);
+	voteTimeDateTmp.setMinutes(voteTimeDateTmp.getMinutes() + regTime + voteTime);
+	//give 10s buffer between registration end and voting start
+	voteTimeDateTmp.setSeconds(voteTimeDateTmp.getSeconds() + 10);
+	
+	regTimeDate = regTimeDateTmp.getTime();
+	voteTimeDate = voteTimeDateTmp.getTime();
+	
+	sendQuestion(question);
+	sendMode(mode);
+	sendRegTime(regTimeDate);
+	sendVoteTime(voteTimeDate);
+	sendAddr(addr);
+	state = 1;
+	sendState(state);
 }
 
 /**Called from update contract addr button
@@ -214,6 +317,26 @@ function finishVoting(){
 	}
 }
 
+
+function getStateFromServer() {
+	  var xhttp; 
+	  xhttp = new XMLHttpRequest();
+	  xhttp.onreadystatechange = function() {
+		if (this.readyState == 4 && this.status == 200) {
+				state = this.responseText;
+				//Process state object if needed
+				if (!state){
+					console.log("State not yet set.");
+					state = 0;
+				} else {
+					console.log(addr);
+				}
+		}
+	  };
+	  xhttp.open("GET", "getState.php", true);
+	  xhttp.send();
+	}
+
 function getPhase(){
 	//If contract addr set
 	if (typeof addr !== 'undefined') {
@@ -292,7 +415,7 @@ function getCandidateList(){
 			//Call winning proposal
 			res = contractObj.getCandidateList.call({ from: account, gas: 4200000}, function(e,l){
 							if (!e){
-								//state = hex2S(l);
+								candidateList = hex2S(l);
 								console.log("Candidate list is " + l );
 								//sendState(state);
 							}
@@ -309,7 +432,7 @@ function getCandidateList(){
 			//Call winning proposal
 			res = contractObj.getCandidateList.call({ from: account, gas: 4200000}, function(e,l){
 							if (!e){
-								//state = hex2S(l);
+								candidateList = hex2S(l);
 								console.log("Candidate list is " + l );
 								//sendState(state);
 							}
@@ -347,6 +470,7 @@ function calculateWinner(){
 			//Call winning proposal
 			res = contractObj.calculateWinner.call({ from: account, gas: 4200000}, function(e,l){
 							if (!e){
+							     winners = hex2s(l);
 								console.log("Calculating winner.");
 							}
 						 });
@@ -361,6 +485,7 @@ function calculateWinner(){
 			//Call winning proposal
 			res = contractObj.calculateWinner.call({ from: account, gas: 4200000}, function(e,l){
 							if (!e){
+								winners = hex2s(l);
 								console.log("Winning proposal is " + hex2S(l));
 							}
 						 });
@@ -404,6 +529,7 @@ function getWinner(){
 							if (!e){
 								console.log("Winning proposal is " + hex2S(l));
 								_error.innerHTML = "Winning proposal is " + hex2S(l);
+								winners = hex2s(l);
 							}
 						 });
 		 } if (mode === "pref"){
@@ -418,6 +544,7 @@ function getWinner(){
 			res = contractObj.getWinner.call({ from: account, gas: 4200000}, function(e,l){
 							if (!e){
 								console.log("Winning proposal is " + hex2S(l));
+								winners = hex2s(l);
 							}
 						 });
 		 }
