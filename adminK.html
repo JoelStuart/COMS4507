@@ -19,22 +19,16 @@
 	<script src="js/adminK.js?6"></script>
 	
 	<div class="jumbotron text-center">
-		<h2 id="title;" style="color:blue;">Administration Page</h2>
+		<h2 id="title;" style="color:blue;">Start an election!</h2>
 	</div>  
   
 	<div class="container">
 		<div class="row">	
-			<button id=createBallot, onclick="createBallot()">Create New Ballot</button>
 			<br>
 			<br>
 			<div>
 				Enter your question: <textarea id="enterQuestion" cols="28" rows="1"></textarea>
 				<p id="enterQuestion"></p>
-			</div>
-			<div>
-				Contract Address: <textarea id="contactAddress" cols="30" rows="1"></textarea>
-				<button id=updateAddress, onclick="updateAddr()">Update Contract Address</button>
-				<p id="contractStatusText"></p>
 			</div>
 			<div>
 				Enter time for registration: 
@@ -61,7 +55,15 @@
 						<option value="preferential">Preferential</option>
 					</select></p>
 				<div>
-					<button id=startelection, onclick="">Start an election</button>
+					<button id=startelection, onclick="createBallot()">Start an election</button>
+				</div>
+				<div>
+				<br>
+				<br>
+				<p>
+					Please note that you'll need to keep this page open in your browner for the duration of the election, otherwise it won't work!
+					If you want to participate in the election yourself, open the voting page in a new window. 
+					</p>
 				</div>
 			</div>		
 		</div>

@@ -138,7 +138,7 @@
 	
 function hideshow()
 {
-	var div = document.getElementById("newpost");
+	var div = document.getElementById("C1");
 	if (div.style.display !== "none") {
 		div.style.display = "none";
 	}

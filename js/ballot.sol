@@ -8,30 +8,41 @@ contract Ballot {
         bool voted;
     }
 
+    address public admin;
     bytes32[] public candidateList;
     mapping(address => Voter) public votersList;
+    mapping(address => uint8) public candidateSubmissionNumbers;
     mapping (bytes32 => uint8) public votesForCandidates;
     bytes32[] private winners;
-    bytes32[] private allWinners;
-    //phase 0: registration. phase 1: voting. phase 2: post election
+    //phase 0: registration. phase 1: voting. phase 2: calculate winner
+    //phase 3: end of election
     uint8 private phase;
   
   function Ballot() {
       phase = 0;
+      admin = msg.sender;
   }
   
   function addCandidate(bytes32 candidate) {
       if (phase == 0) {
-        candidateList.push(candidate);
+          if (candidate == "") return;
+          if (validCandidate(candidate)) return;
+          if (candidateSubmissionNumbers[msg.sender] > 5) return;
+          candidateList.push(candidate);
+          candidateSubmissionNumbers[msg.sender] += 1;
       }
   }
   
   function startVoting() {
-      phase = 1;
+      if (msg.sender == admin) {
+        phase = 1;
+      }
   }
   
   function finishVoting() {
-      phase = 2;
+      if (msg.sender == admin) {
+        phase = 2;
+      }
   }
   
   function getPhase() returns (uint8) {
@@ -67,26 +78,26 @@ contract Ballot {
     return false;
   }
   
-  function getWinner() returns (bytes32[]) {
-      if (phase == 2) {
+  function calculateWinner() returns (bytes32[]) {
+      if (phase == 2 && msg.sender == admin) {
         uint maxVotes = 0;
         for (uint i = 0; i < candidateList.length; i++) {
             if (votesForCandidates[candidateList[i]] == maxVotes) {
-                allWinners.push(candidateList[i]);
+                winners.push(candidateList[i]);
             } else if (votesForCandidates[candidateList[i]] > maxVotes) {
-                allWinners = new bytes32[](0);
+                winners = new bytes32[](0);
                 maxVotes = votesForCandidates[candidateList[i]];
-                allWinners.push(candidateList[i]);
+                winners.push(candidateList[i]);
             }
         }
-      
-        for (uint j = 0; j < allWinners.length; j++) {
-            if (allWinners[j] != "") {
-                winners.push(allWinners[j]);
-            } 
-        }
-      
+        phase = 3;
         return winners;
       } 
+  }
+  
+  function getWinner() returns (bytes32[]) {
+      if (phase == 3) {
+          return winners;
+      }
   }
 }
