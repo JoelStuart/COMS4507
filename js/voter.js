@@ -492,6 +492,7 @@ function getCandidateList(){
 				console.log(addr);
 				console.log(state);
 				console.log(mode);
+				frontStateUpdate();
 		}
 	  };
 	  xhttp.open("GET", "getBatch.php", true);
