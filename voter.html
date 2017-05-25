@@ -35,7 +35,7 @@
 			<h3>Register </h3>
 			
 			<p> NEED INFO ABOUT HOW TO REGISTER FOR THE ELECTION </p>
-			<button id="register", onclick="register()">Register to Vote!</button>
+			<button id="register", onclick="addVoter()">Register to Vote!</button>
 			<br>
 			<br>
 			<br>
@@ -43,7 +43,7 @@
 			<h3>Submit a Candidate</h3>
 			<div>
 				<p>Think you've got a good candidate for the election? Enter a candidate to appear on the ballot: <textarea id="candidate" cols="30" rows="1"></textarea></p>
-				<button id=submitcandidate, onclick="">Submit Candidate</button>
+				<button id=submitcandidate, onclick="addCandidate()">Submit Candidate</button>
 				<p id="candidateText"></p>
 			</div>
 			</div>
@@ -57,7 +57,7 @@
 		<div class="row">
 			 <div class="col-sm-8">
 			 	  <h3>Vote </h3>
-				 <p>Election: </p>
+				 <p id=question>Election: </p>
 
 			 </div>
 			<div class="col-sm-4">
@@ -65,19 +65,25 @@
 			</div>			
 		 </div>
 		 <div class="row">
-			 <div class="col-sm-6">
+			 <div id=basic-vote-div class="col-sm-6">
 				 Select an option: 
-				<select>
-					<option value="1">Candidate 1</option>
-					<option value="2">Candidate 2</option>
-					<option value="3">Candidate 3</option>
+				<select id="dropdownB">
 				</select>
 				<p id="Choose options"></p>
 			 </div>
+			 <div id=pref-vote-div class="col-sm-6">
+				 Select preference one: 
+				<select id="dropdown1">
+				</select>
+				
+				 Select preference two 
+				<select id="dropdown2">
+				</select>
+				<p id="Choose options 1"></p>
+			 </div>
 			  <div class="col-sm-6">
-				   Select first or second preference: 
 				  <button id=button4, onclick=>Confirm</button>
-				<p id="Choose options"></p>
+				<p id="Choose options 2"></p>
 			 </div>
 		 </div>
 	 </div>

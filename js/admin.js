@@ -389,7 +389,6 @@ function getPhase(){
 	}
 }
 
-
 function getCandidateList(){
 	//If contract addr set
 	if (typeof addr !== 'undefined') {
@@ -543,8 +542,8 @@ function getWinner(){
 			//Call winning proposal
 			res = contractObj.getWinner.call({ from: account, gas: 4200000}, function(e,l){
 							if (!e){
-								console.log("Winning proposal is " + hex2S(l));
-								winners = hex2s(l);
+								winner =  hex2S(l);
+								console.log("Winning proposal is " + winner);
 							}
 						 });
 		 }
@@ -592,19 +591,6 @@ function sendAjax(str, mode){
 	  default:
 		break;
   }
-  xhttp.send();
-}
-
-function sendCandidateList(list){
-  var xhttp; 
-  xhttp = new XMLHttpRequest();
-  xhttp.onreadystatechange = function() {
-    if (this.readyState == 4 && this.status == 200) {
-		console.log(list+" sent.");
-		console.log(this.responseText);
-    }
-  };
-	xhttp.open("GET", "sendCandidates.php?str="+list, true);
   xhttp.send();
 }
 
