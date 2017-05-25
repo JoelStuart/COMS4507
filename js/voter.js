@@ -585,7 +585,8 @@ var x = setInterval(function() {
 }
 
 
-function hex2S(hex) {
+function hex2S(str1) {
+	var hex = str1.toString();
     var str = '';
     for (var i = 0; i < hex.length; i += 2) {
         var v = parseInt(hex.substr(i, 2), 16);
@@ -593,51 +594,3 @@ function hex2S(hex) {
     }
     return str;
 }  
-	
-    /*
-    function claimrefund() {
-
-      web3.personal.unlockAccount(addr, password);
-      var res = votingAddr.withdrawRefund.call({ from: web3.eth.accounts[accounts_index], gas: 4200000});
-
-      if(res) {
-        votingAddr.withdrawRefund.sendTransaction({from: web3.eth.accounts[accounts_index],gas: 4200000});
-      }
-      return false;
-    }
-
-    function unlockAccount() {
-       
-    }
-
-    // Vote submits their voting key.
-    function register() {
-
-        
-    }
-
-
-    // User votes yes or no!
-    function vote(choice) {
-
-	}
-
-
-   
-    function checkVoteCast() {
-
-        // Check if key has been submitted
-        if (anonymousvotingAddr.registered(addr)) {
-            document.getElementById('submitvotingkey').innerHTML = "Voting key has been accepted by Ethereum";
-            //Check if vote has already been cast (or if a commitment has been accepted)
-            if (anonymousvotingAddr.votecast(addr)) {
-                document.getElementById('do_vote').innerHTML = "Vote has been cast";
-            } else if (anonymousvotingAddr.commitment(addr) && state != 4) {
-                document.getElementById('vote').innerHTML = "You have comitted (but not revealed) your vote";
-            }
-        }
-
-
-    }*/
-
-    
