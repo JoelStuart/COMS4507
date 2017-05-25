@@ -164,14 +164,14 @@ function sendParamsToServer() {
 	
 	regTime = regTimeDateTmp.getTime();
 	voteTime = voteTimeDateTmp.getTime();
-	
+		state = 1;
 	//sendQuestion(question);
 	//sendMode(mode);
 	//sendRegTime(regTimeDate);
 	//sendVoteTime(voteTimeDate);
 	sendBatch();
 	//sendAddr(addr);
-	state = 1;
+
 	//sendState(state);
 }
 
