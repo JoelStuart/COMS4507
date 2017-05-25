@@ -472,6 +472,28 @@ function getCandidateList(){
 	  xhttp.send();
 	}
 	
+	
+	function getBatch() {
+	  var xhttp; 
+	  xhttp = new XMLHttpRequest();
+	  xhttp.onreadystatechange = function() {
+		if (this.readyState == 4 && this.status == 200) {
+				var batch = this.responseText;
+				//Process state object if needed
+				console.log(batch);
+				var t = JSON.parse(batch);
+				addr = t['addr'];
+				regTime = batch['regTime'];
+				voteTime = batch['voteTime'];
+				state = batch['state'];
+				mode = batch['mode'];
+				question = batch['question'];
+		}
+	  };
+	  xhttp.open("GET", "getMode.php", true);
+	  xhttp.send();
+	}
+	
 	function getMode() {
 	  var xhttp; 
 	  xhttp = new XMLHttpRequest();
