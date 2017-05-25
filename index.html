@@ -4,10 +4,13 @@
 <head>
 	<meta charset="utf-8">
 	<title>Index</title>
-	<meta name="description" content="The HTML5 Herald">
-	<meta name="author" content="SitePoint">
+ 	<meta name="description" content="Voter page">
+ 	<meta name="author" content="The Average Joes">
 	<link rel="stylesheet" href="css/style.css">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 
 <body>
@@ -15,16 +18,30 @@
 	<script src="js/web3.min.js"></script>
 	<script src="js/index.js?2"></script>
 	
+	
+	<div class="jumbotron text-center">
+		<h2 id="title;" style="color:blue;">INSERT NAME HERE</h2>
+		<h3>Brought to you by The Average Joes</h3>
+	</div>  
 	 
-	<div class="container">
-		<div class="row">
-			<p>Welcome Message/Website Info</p>
+	<div class="container2">
+		<div class="container2">
+			<p>Want to hold an election without having to trust a central authority? 
+			Want to have transparency, anonymity, and integrity in your election? 
+			Then this is the right place for you. </p><p>Welcome to our decentralised voting system, which uses blockchain technology to ensure a fair and transparent process.
+			Click on start election. 
+			There you can set the question, how long everyone has to register, and to vote. You can chose to do basic voting
+			i.e. pick one candidate out of a list, or preferential voting, i.e. pick a first and second preferences, and preferences are distributed until one candidate has the majority of votes.
+			This system uses ethereum (write about why that's great!) so you'll need to install metamask, get ethereum address etc. Instructions. 
+			
+			Happy Voting!
+			</p>
 		</div>
-		<div>
+		<div class="container2">
 			<button id=startelection, onclick="admin()">Start an election</button>
-			</div>
+		</div>
 		<br>
-		<div>
+		<div class="container2">
 			<button id=register, onclick="voter()">Register/Vote</button>
 		</div>
 	</div>
