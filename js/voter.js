@@ -451,9 +451,9 @@ function runTimer() {
 var countDownDate = 0;
 
 if (phase == 1) {
-	//get registration time
+	countDownDate = getRegTime()
 } else if (phase == 2) {
-	//get voting time
+	countDownDate = getVoteTime()
 }
 
 // Update the count down every 1 second
@@ -471,7 +471,7 @@ var x = setInterval(function() {
   var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
   var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-  // Display the result in the element with id="demo"
+  // Display the result in the element with id="timer-display"
   document.getElementById("timer-display").innerHTML = days + "d " + hours + "h "
   + minutes + "m " + seconds + "s ";
 
