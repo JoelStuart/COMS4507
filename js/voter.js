@@ -555,9 +555,9 @@ var countDownDate = 0;
 
 while (countDownDate == 0) {
 	if (state == 1) {
-		countDownDate = parseInt(getRegTime());
+		countDownDate = getRegTime();
 	} else if (state == 2) {
-		countDownDate = parseInt(getVoteTime());
+		countDownDate = getVoteTime();
 	}
 }
 console.log("got countdown time");
@@ -590,11 +590,14 @@ var x = setInterval(function() {
 
 
 function hex2S(str1) {
-	var hex = str1.toString();
-    var str = '';
-    for (var i = 0; i < hex.length; i += 2) {
-        var v = parseInt(hex.substr(i, 2), 16);
-        if (v) str += String.fromCharCode(v);
-    }
-    return str;
+	var hex1 = str1.toString();
+	var hexArray = hex1.split(",");
+	for (var j = 0; i < hexArray.length; j++) {
+    	var str = '';
+    	for (var i = 0; i < hexArray[j].length; i += 2) {
+        	var v = parseInt(hexArray[j].substr(i, 2), 16);
+        	if (v) str += String.fromCharCode(v);
+        	hexArray[j] = str;
+    	}
+    return hexArray;
 }  
