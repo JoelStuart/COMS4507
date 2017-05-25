@@ -100,11 +100,9 @@ function createBallot(){
 		   }, function (e, contract){
 			   if (typeof contract !== 'undefined' && typeof contract.address !== 'undefined') {
 					 addr = contract.address;
-					 sendAddr(addr);
+					 //sendAddr(addr);
+					 sendParamsToServer();
 					 contractInst = contract;
-					 document.getElementById('contactAddress').value = addr;
-					 var _para = document.getElementById('contractStatusText');
-					_para.innerHTML = "Contract Address Set.";
 				}
 			
 		 });
@@ -120,16 +118,14 @@ function createBallot(){
 		   }, function (e, contract){
 			   if (typeof contract !== 'undefined' && typeof contract.address !== 'undefined') {
 					 addr = contract.address;
-					 sendAddr(addr);
+					 //sendAddr(addr);
+					 sendParamsToServer();
 					 contractInst = contract;
-					 document.getElementById('contactAddress').value = addr;
-					 var _para = document.getElementById('contractStatusText');
-					_para.innerHTML = "Contract Address Set.";
 				}
 			
 		 });
 	}
-	sendParams();
+
 	setTimeout(endPhase1, regTime*60000); 
 }
 
@@ -176,13 +172,14 @@ function sendParamsToServer() {
 	regTimeDate = regTimeDateTmp.getTime();
 	voteTimeDate = voteTimeDateTmp.getTime();
 	
-	sendQuestion(question);
-	sendMode(mode);
-	sendRegTime(regTimeDate);
-	sendVoteTime(voteTimeDate);
-	sendAddr(addr);
+	//sendQuestion(question);
+	//sendMode(mode);
+	//sendRegTime(regTimeDate);
+	//sendVoteTime(voteTimeDate);
+	sendBatch();
+	//sendAddr(addr);
 	state = 1;
-	sendState(state);
+	//sendState(state);
 }
 
 /**Called from update contract addr button
@@ -329,7 +326,7 @@ function getStateFromServer() {
 					console.log("State not yet set.");
 					state = 0;
 				} else {
-					console.log(addr);
+					console.log(state);
 				}
 		}
 	  };
@@ -588,10 +585,17 @@ function sendAjax(str, mode){
 	  case "winner":
 	    xhttp.open("GET", "sendWinner.php?str="+str, true);
 		break;
+	  case "batch":
+	    xhttp.open("GET", "sendBatch.php?addr="+addr+"&regTime="+regTime+"&voteTime="+voteTime+"&state="+state+"&mode="+mode+"&question="+question, true);
+		break;
 	  default:
 		break;
   }
   xhttp.send();
+}
+
+function sendBatch() {
+	sendAjax("Batch", "batch");
 }
 
 function sendAddr(str) {
