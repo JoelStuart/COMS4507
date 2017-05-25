@@ -152,6 +152,7 @@ function storeParams() {
 	
 	var voterType = document.getElementById('voting-type');
 	mode = voterType.options[voterType.selectedIndex].value;
+	console.log(mode);
 	
 	var regTimeOptions = document.getElementById('reg-times');
 	regTime = regTimeOptions.options[regTimeOptions.selectedIndex].value;
