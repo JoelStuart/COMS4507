@@ -17,7 +17,6 @@ var candidateList;
 
 
 window.addEventListener('load', function() {
-	state=0;
 	if (typeof web3 !== 'undefined') {
 		window.web3 = new Web3(web3.currentProvider);
 		console.log("Connected to MetaMask vK");
