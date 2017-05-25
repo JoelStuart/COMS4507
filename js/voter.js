@@ -561,7 +561,7 @@ if (state == 1) {
 console.log("got countdown time");
 // Update the count down every 1 second
 var x = setInterval(function() {
-console.log("starting"...);
+console.log("starting");
   // Get todays date and time
   var now = new Date().getTime();
 
