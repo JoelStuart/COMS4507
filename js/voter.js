@@ -489,6 +489,9 @@ function getCandidateList(){
 				state = t['state'];
 				mode = t['mode'];
 				question = t['question'];
+				console.log(addr);
+				console.log(state);
+				console.log(mode);
 		}
 	  };
 	  xhttp.open("GET", "getBatch.php", true);
