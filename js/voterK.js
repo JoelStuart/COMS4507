@@ -7,11 +7,7 @@
 	var contractObj;
 	
 	
-	jQuery(document).ready(function(){
-        jQuery('#hideshow').on('click', function(event) {        
-             jQuery('#content').toggle('show');
-        });
-    })
+
 	
 	window.addEventListener('load', function() {
 		var password = "";
@@ -139,6 +135,18 @@
 	
 
 }
+	
+function hideshow()
+{
+	var div = document.getElementById("newpost");
+	if (div.style.display !== "none") {
+		div.style.display = "none";
+	}
+	else {
+		div.style.display = "block";
+	}
+ }
+	
 	
     /*
     function claimrefund() {

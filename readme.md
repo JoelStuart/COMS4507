@@ -3,7 +3,6 @@
 
 ## Getting Started
 
-
 Hosted live at: http://voting-ethereum.azurewebsites.net/.
 
 
