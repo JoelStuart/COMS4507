@@ -7,7 +7,7 @@ session_start();
 	$dbO = new MySQLDatabase(); //create a Database object
 	$dbO->connect();
 	
-    $sql = "SELECT c FROM candidates WHERE id = 1";
+    $sql = "SELECT addr FROM var WHERE id = 4";
 	//var query = "INSERT INTO var (id, addr) VALUES(0, '".$addr."') ON DUPLICATE KEY UPDATE";
 	$result = mysqli_query($dbO->link, $sql);
 	//	$result = mysqli_query($dbO->link, $sql)->fetch_object()->password;
@@ -16,10 +16,8 @@ session_start();
 		die('Could not query:' . mysql_error());
 	}
 	
-	$res = $result->fetch_object()->addr;
-	//$ret = unserialize(res);
-	//echo json_encode($ret);
-	echo($res);
+	$ret = $result->fetch_object()->addr;
+	echo $ret;
     $dbO->disconnect();
 	
 
