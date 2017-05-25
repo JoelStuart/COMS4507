@@ -178,10 +178,12 @@ function sendParamsToServer() {
 	//give 10s buffer between registration end and voting start
 	voteTimeDateTmp.setSeconds(voteTimeDateTmp.getSeconds() + 10);
 	
-	regTime = regTimeDateTmp.UTC();
+    regTime = Date.UTC(regTimeDateTmp.getUTCFullYear(), regTimeDateTmp.getUTCMonth(), regTimeDateTmp.getUTCDate(), regTimeDateTmp.getUTCHours(), regTimeDateTmp.getUTCMinutes(), regTimeDateTmp.getUTCSeconds(), regTimeDateTmp.getUTCMilliseconds());
+	
 	console.log("REG-TIME");
 	console.log(regTime);
-	voteTime = voteTimeDateTmp.UTC();
+    voteTime = Date.UTC(voteTimeDateTmp.getUTCFullYear(), voteTimeDateTmp.getUTCMonth(), voteTimeDateTmp.getUTCDate(), voteTimeDateTmp.getUTCHours(), voteTimeDateTmp.getUTCMinutes(), voteTimeDateTmp.getUTCSeconds(), voteTimeDateTmp.getUTCMilliseconds());
+
 	//sendQuestion(question);
 	//sendMode(mode);
 	//sendRegTime(regTimeDate);
