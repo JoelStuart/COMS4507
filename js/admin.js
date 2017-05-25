@@ -125,7 +125,6 @@ function createBallot(){
 			
 		 });
 	}
-
 	setTimeout(endPhase1, regTime*60000); 
 }
 
