@@ -77,6 +77,7 @@ function displayRegistration() {
 
 function displayVoting() {
 	getQuestion();
+	evalDisplayMode();
 	populateDropdown();
 	var div = document.getElementById("phase0-div");
 		div.style.display = "none";
@@ -100,6 +101,28 @@ function displayPostElection() {
 }
 
 
+function displayBasic(){
+	var div = document.getElementById("basic-vote-div");
+		div.style.display = "block";
+	div = document.getElementById("pref-vote-div");
+		div.style.display = "none";
+}
+
+function displayPref(){
+	var div = document.getElementById("basic-vote-div");
+		div.style.display = "none";
+	div = document.getElementById("pref-vote-div");
+		div.style.display = "block";
+}
+
+function evalDisplayMode(){
+	if (mode === "basic"){
+		displayBasic();
+	} else {
+		displayPref();
+	}
+}
+
 function populateDropdown(){
 
 	var options = "";
@@ -108,8 +131,10 @@ function populateDropdown(){
 	for(var i=0; i< length; i++){
        options += '<option value ="' + dummyData[i] + '">'+dummyData[i]+'</option>';
     }
-	console.log(options);
-	 $("#dropdown").append(options);
+
+	 $("#dropdownB").append(options);
+	 $("#dropdown1").append(options);
+	 $("#dropdown2").append(options);
 	
 }
 
@@ -142,14 +167,14 @@ function populateDropdown(){
 			  }
 			}, 100);
 			//Change me to change the vote (numeric value)
-			var _pref1 = "Stevo";
-			var _pref2 = "Laquesha";
+
 			if (mode === "basic"){
-				
+				var e = document.getElementById("dropdownB");
+				var _vote = e.options[e.selectedIndex].value;
 				var ballotContract =  web3.eth.contract([{"constant":false,"inputs":[],"name":"startVoting","outputs":[],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"candidate","type":"bytes32"}],"name":"addCandidate","outputs":[],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"candidate","type":"bytes32"}],"name":"totalVotesFor","outputs":[{"name":"","type":"uint8"}],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"candidate","type":"bytes32"}],"name":"validCandidate","outputs":[{"name":"","type":"bool"}],"payable":false,"type":"function"},{"constant":true,"inputs":[{"name":"","type":"address"}],"name":"votersList","outputs":[{"name":"weight","type":"uint256"},{"name":"voted","type":"bool"}],"payable":false,"type":"function"},{"constant":true,"inputs":[{"name":"","type":"address"}],"name":"candidateSubmissionNumbers","outputs":[{"name":"","type":"uint8"}],"payable":false,"type":"function"},{"constant":false,"inputs":[],"name":"getWinner","outputs":[{"name":"","type":"bytes32[]"}],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"candidate","type":"bytes32"}],"name":"vote","outputs":[],"payable":false,"type":"function"},{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"candidateList","outputs":[{"name":"","type":"bytes32"}],"payable":false,"type":"function"},{"constant":true,"inputs":[{"name":"","type":"bytes32"}],"name":"votesForCandidates","outputs":[{"name":"","type":"uint8"}],"payable":false,"type":"function"},{"constant":false,"inputs":[],"name":"calculateWinner","outputs":[{"name":"","type":"bytes32[]"}],"payable":false,"type":"function"},{"constant":false,"inputs":[],"name":"getPhase","outputs":[{"name":"","type":"uint8"}],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"voter","type":"address"}],"name":"addVoter","outputs":[],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"admin","outputs":[{"name":"","type":"address"}],"payable":false,"type":"function"},{"constant":false,"inputs":[],"name":"finishVoting","outputs":[],"payable":false,"type":"function"},{"constant":false,"inputs":[],"name":"getCandidateList","outputs":[{"name":"","type":"bytes32[]"}],"payable":false,"type":"function"},{"inputs":[],"payable":false,"type":"constructor"}]);
 				contractObj = ballotContract.at(addr);
 				var ballot = contractObj.vote(
-				   _pref1,
+				   _vote,
 				   {
 					 from: account, 
 					 data: '0x6060604052341561000c57fe5b5b6000600660006101000a81548160ff021916908360ff16021790555033600060006101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff1602179055505b5b610f8e8061007b6000396000f300606060405236156100e4576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff1680631ec6b60a146100e6578063230d6ed8146100f85780632f265cf71461011c578063392e66781461015a578063443019fe146101965780637b4cd5b4146101eb5780638e7ea5b21461023b578063a69beaba146102b0578063b13c744b146102d4578063c68130dc14610310578063ea35e8051461034e578063eced0280146103c3578063f4ab9adf146103ef578063f851a44014610425578063f909430314610477578063fdbc400614610489575bfe5b34156100ee57fe5b6100f66104fe565b005b341561010057fe5b61011a600480803560001916906020019091905050610574565b005b341561012457fe5b61013e6004808035600019169060200190919050506106b1565b604051808260ff1660ff16815260200191505060405180910390f35b341561016257fe5b61017c6004808035600019169060200190919050506106ff565b604051808215151515815260200191505060405180910390f35b341561019e57fe5b6101ca600480803573ffffffffffffffffffffffffffffffffffffffff16906020019091905050610765565b60405180838152602001821515151581526020019250505060405180910390f35b34156101f357fe5b61021f600480803573ffffffffffffffffffffffffffffffffffffffff16906020019091905050610796565b604051808260ff1660ff16815260200191505060405180910390f35b341561024357fe5b61024b6107b6565b604051808060200182810382528381815181526020019150805190602001906020028083836000831461029d575b80518252602083111561029d57602082019150602081019050602083039250610279565b5050509050019250505060405180910390f35b34156102b857fe5b6102d2600480803560001916906020019091905050610839565b005b34156102dc57fe5b6102f260048080359060200190919050506109be565b60405180826000191660001916815260200191505060405180910390f35b341561031857fe5b6103326004808035600019169060200190919050506109e3565b604051808260ff1660ff16815260200191505060405180910390f35b341561035657fe5b61035e610a03565b60405180806020018281038252838181518152602001915080519060200190602002808383600083146103b0575b8051825260208311156103b05760208201915060208101905060208303925061038c565b5050509050019250505060405180910390f35b34156103cb57fe5b6103d3610ced565b604051808260ff1660ff16815260200191505060405180910390f35b34156103f757fe5b610423600480803573ffffffffffffffffffffffffffffffffffffffff16906020019091905050610d05565b005b341561042d57fe5b610435610dab565b604051808273ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200191505060405180910390f35b341561047f57fe5b610487610dd1565b005b341561049157fe5b610499610e47565b60405180806020018281038252838181518152602001915080519060200190602002808383600083146104eb575b8051825260208311156104eb576020820191506020810190506020830392506104c7565b5050509050019250505060405180910390f35b600060009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff163373ffffffffffffffffffffffffffffffffffffffff161415610571576001600660006101000a81548160ff021916908360ff1602179055505b5b565b6000600660009054906101000a900460ff1660ff1614156106ad576000816000191614156105a1576106ae565b6105aa816106ff565b156105b4576106ae565b6005600360003373ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200190815260200160002060009054906101000a900460ff1660ff161115610611576106ae565b600180548060010182816106259190610eaa565b916000526020600020900160005b83909190915090600019169055506001600360003373ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200190815260200160002060008282829054906101000a900460ff160192506101000a81548160ff021916908360ff1602179055505b5b50565b6000600015156106c0836106ff565b151514156106ce5760006000fd5b60046000836000191660001916815260200190815260200160002060009054906101000a900460ff1690505b919050565b60006000600090505b60018054905081101561075a57826000191660018281548110151561072957fe5b906000526020600020900160005b505460001916141561074c576001915061075f565b5b8080600101915050610708565b600091505b50919050565b60026020528060005260406000206000915090508060000154908060010160009054906101000a900460ff16905082565b60036020528060005260406000206000915054906101000a900460ff1681565b6107be610ed6565b6003600660009054906101000a900460ff1660ff16141561083557600580548060200260200160405190810160405280929190818152602001828054801561082957602002820191906000526020600020905b81546000191681526020019060010190808311610811575b50505050509050610836565b5b90565b6001600660009054906101000a900460ff1660ff1614156109ba576001600260003373ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff168152602001908152602001600020600001541415806108f25750600260003373ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200190815260200160002060010160009054906101000a900460ff165b156108fc576109bb565b60001515610909826106ff565b151514156109175760006000fd5b600160046000836000191660001916815260200190815260200160002060008282829054906101000a900460ff160192506101000a81548160ff021916908360ff1602179055506001600260003373ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200190815260200160002060010160006101000a81548160ff0219169083151502179055505b5b50565b6001818154811015156109cd57fe5b906000526020600020900160005b915090505481565b60046020528060005260406000206000915054906101000a900460ff1681565b610a0b610ed6565b600060006002600660009054906101000a900460ff1660ff16148015610a7e5750600060009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff163373ffffffffffffffffffffffffffffffffffffffff16145b15610ce75760009150600090505b600180549050811015610c6f578160046000600184815481101515610aad57fe5b906000526020600020900160005b50546000191660001916815260200190815260200160002060009054906101000a900460ff1660ff161415610b3d5760058054806001018281610afe9190610eaa565b916000526020600020900160005b600184815481101515610b1b57fe5b906000526020600020900160005b505490919091509060001916905550610c61565b8160046000600184815481101515610b5157fe5b906000526020600020900160005b50546000191660001916815260200190815260200160002060009054906101000a900460ff1660ff161115610c60576000604051805910610b9d5750595b908082528060200260200182016040525b5060059080519060200190610bc4929190610eea565b5060046000600183815481101515610bd857fe5b906000526020600020900160005b50546000191660001916815260200190815260200160002060009054906101000a900460ff1660ff16915060058054806001018281610c259190610eaa565b916000526020600020900160005b600184815481101515610c4257fe5b906000526020600020900160005b5054909190915090600019169055505b5b5b8080600101915050610a8c565b6003600660006101000a81548160ff021916908360ff1602179055506005805480602002602001604051908101604052809291908181526020018280548015610cdb57602002820191906000526020600020905b81546000191681526020019060010190808311610cc3575b50505050509250610ce8565b5b505090565b6000600660009054906101000a900460ff1690505b90565b6000600660009054906101000a900460ff1660ff161415610da7576040604051908101604052806001815260200160001515815250600260008373ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff1681526020019081526020016000206000820151816000015560208201518160010160006101000a81548160ff0219169083151502179055509050505b5b50565b600060009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1681565b600060009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff163373ffffffffffffffffffffffffffffffffffffffff161415610e44576002600660006101000a81548160ff021916908360ff1602179055505b5b565b610e4f610ed6565b6001805480602002602001604051908101604052809291908181526020018280548015610e9f57602002820191906000526020600020905b81546000191681526020019060010190808311610e87575b505050505090505b90565b815481835581811511610ed157818360005260206000209182019101610ed09190610f3d565b5b505050565b602060405190810160405280600081525090565b828054828255906000526020600020908101928215610f2c579160200282015b82811115610f2b578251829060001916905591602001919060010190610f0a565b5b509050610f399190610f3d565b5090565b610f5f91905b80821115610f5b576000816000905550600101610f43565b5090565b905600a165627a7a72305820ff1f3584d009c341f728a176ff8df8a80b976183f7e150e6e13f3100ccbd10d40029', 
@@ -166,6 +191,10 @@ function populateDropdown(){
 				 });
 			}
 			if (mode === "pref"){
+				var e = document.getElementById("dropdown1");
+				var _pref1 = e.options[e.selectedIndex].value;
+				var e2 = document.getElementById("dropdown2");
+				var _pref2 = e.options[e.selectedIndex].value;
 				var ballotContract =  web3.eth.contract([{"constant":true,"inputs":[],"name":"totalVotes","outputs":[{"name":"","type":"uint256"}],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"excludeList","type":"bytes32[]"},{"name":"candidateName","type":"bytes32"}],"name":"notIn","outputs":[{"name":"","type":"bool"}],"payable":false,"type":"function"},{"constant":false,"inputs":[],"name":"startVoting","outputs":[],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"candidate","type":"bytes32"}],"name":"addCandidate","outputs":[],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"candidate","type":"bytes32"}],"name":"totalVotesFor","outputs":[{"name":"","type":"uint8"}],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"candidate","type":"bytes32"}],"name":"validCandidate","outputs":[{"name":"","type":"bool"}],"payable":false,"type":"function"},{"constant":true,"inputs":[{"name":"","type":"address"}],"name":"votersList","outputs":[{"name":"weight","type":"uint256"},{"name":"voted","type":"bool"}],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"candidates","type":"bytes32[]"},{"name":"shouldDelete","type":"bool"}],"name":"addSecondPreferences","outputs":[],"payable":false,"type":"function"},{"constant":false,"inputs":[],"name":"getLastCandidates","outputs":[],"payable":false,"type":"function"},{"constant":true,"inputs":[{"name":"","type":"address"}],"name":"candidateSubmissionNumbers","outputs":[{"name":"","type":"uint8"}],"payable":false,"type":"function"},{"constant":true,"inputs":[{"name":"","type":"bytes32"},{"name":"","type":"uint256"}],"name":"secondPreferences","outputs":[{"name":"","type":"bytes32"}],"payable":false,"type":"function"},{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"candidateList","outputs":[{"name":"","type":"bytes32"}],"payable":false,"type":"function"},{"constant":true,"inputs":[{"name":"","type":"bytes32"}],"name":"votesForCandidates","outputs":[{"name":"","type":"uint8"}],"payable":false,"type":"function"},{"constant":false,"inputs":[],"name":"removeCandidates","outputs":[],"payable":false,"type":"function"},{"constant":false,"inputs":[],"name":"getWinners","outputs":[{"name":"","type":"bytes32[]"}],"payable":false,"type":"function"},{"constant":false,"inputs":[],"name":"calculateWinner","outputs":[{"name":"","type":"bytes32[]"}],"payable":false,"type":"function"},{"constant":false,"inputs":[],"name":"getPhase","outputs":[{"name":"","type":"uint8"}],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"firstPreference","type":"bytes32"},{"name":"secondPreference","type":"bytes32"}],"name":"vote","outputs":[],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"voter","type":"address"}],"name":"addVoter","outputs":[],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"admin","outputs":[{"name":"","type":"address"}],"payable":false,"type":"function"},{"constant":false,"inputs":[],"name":"finishVoting","outputs":[],"payable":false,"type":"function"},{"constant":false,"inputs":[],"name":"getCandidateList","outputs":[{"name":"","type":"bytes32[]"}],"payable":false,"type":"function"},{"inputs":[],"payable":false,"type":"constructor"}]);
 				contractObj = ballotContract.at(addr);
 				var ballot = contractObj.vote(
