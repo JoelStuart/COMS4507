@@ -1,17 +1,14 @@
 <?php
 
 
-
-if(isset($_GET['str'])) {
-    $addr = $_GET['str'];
+session_start();
 
 	include('connectMySQL.php'); //make sure the path is correct.
 	$dbO = new MySQLDatabase(); //create a Database object
 	$dbO->connect();
 	
-    //$sql = "SELECT password FROM signup WHERE username = '".$username."'";
-	echo $addr;
-	$sql = "INSERT INTO var (id, addr) VALUES(0, '$addr') ON DUPLICATE KEY UPDATE id=1, addr='$addr'";
+    $sql = "SELECT addr FROM var WHERE id = 2";
+	//var query = "INSERT INTO var (id, addr) VALUES(0, '".$addr."') ON DUPLICATE KEY UPDATE";
 	$result = mysqli_query($dbO->link, $sql);
 	//	$result = mysqli_query($dbO->link, $sql)->fetch_object()->password;
     //$result = $conn->query($sql);
@@ -19,8 +16,9 @@ if(isset($_GET['str'])) {
 		die('Could not query:' . mysql_error());
 	}
 	
+	$ret = $result->fetch_object()->addr;
+	echo $ret;
     $dbO->disconnect();
 	
-}
 
 ?>

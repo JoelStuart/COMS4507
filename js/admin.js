@@ -6,7 +6,8 @@ var contractObj;
 var res = -1;
 var addr;
 var state;
-var time;
+var regTime;
+var voteTime;
 
 
 window.addEventListener('load', function() {
@@ -229,8 +230,11 @@ function sendAjax(str, mode){
 	  case "addr":
 		xhttp.open("GET", "sendAddr.php?str="+str, true);
 		break;
-	  case "time":
-		xhttp.open("GET", "sendTime.php?str="+str, true);
+	  case "regTime":
+		xhttp.open("GET", "sendRegTime.php?str="+str, true);
+		break;
+	  case "voteTime":
+		xhttp.open("GET", "sendVoteTime.php?str="+str, true);
 		break;
 	  case "state":
 	    xhttp.open("GET", "sendState.php?str="+str, true);
@@ -258,8 +262,12 @@ function sendAddr(str) {
 	sendAjax(str, "addr");
 }
 
-function sendTime(str) {
-	sendAjax(str, "time");
+function sendVoteTime(str) {
+	sendAjax(str, "voteTime");
+}
+
+function sendRegTime(str) {
+	sendAjax(str, "regTime");
 }
 
 function sendState(str) {

@@ -6,7 +6,8 @@
 	var addr;
 	var contractObj;
 	var state;
-	var time;
+	var regTime;
+	var voteTime;
 	var candidates;
 	
 	
@@ -181,17 +182,31 @@ function addVoter(){
 	  xhttp.send();
 	}
 	
-	function getTime() {
+	function getRegTime() {
 	  var xhttp; 
 	  xhttp = new XMLHttpRequest();
 	  xhttp.onreadystatechange = function() {
 		if (this.readyState == 4 && this.status == 200) {
-				time = this.responseText;
+				regTime = this.responseText;
 				////Process time object if needed
 				console.log(time);
 		}
 	  };
-	  xhttp.open("GET", "getTime.php", true);
+	  xhttp.open("GET", "getVoteTime.php", true);
+	  xhttp.send();
+	}
+	
+	function getVoteTime() {
+	  var xhttp; 
+	  xhttp = new XMLHttpRequest();
+	  xhttp.onreadystatechange = function() {
+		if (this.readyState == 4 && this.status == 200) {
+				voteTime = this.responseText;
+				////Process time object if needed
+				console.log(time);
+		}
+	  };
+	  xhttp.open("GET", "getVoteTime.php", true);
 	  xhttp.send();
 	}
 	
