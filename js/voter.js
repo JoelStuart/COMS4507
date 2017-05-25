@@ -22,6 +22,7 @@
 		var accounts_index;
 		getAddr();
 		getState();
+		getMode();
 		displayPreRegistration();
 		
 		//frontStateUpdate();
@@ -77,9 +78,10 @@ function displayRegistration() {
 }
 
 function displayVoting() {
+	getCandidateList();
 	getQuestion();
 	evalDisplayMode();
-	populateDropdown();
+	//populateDropdown();
 	var div = document.getElementById("phase0-div");
 		div.style.display = "none";
 	div = document.getElementById("phase1-div");
@@ -117,7 +119,7 @@ function displayPref(){
 }
 
 function evalDisplayMode(){
-	if (mode === "basic"){
+	if (mode === "Basic"){
 		displayBasic();
 	} else {
 		displayPref();
@@ -127,10 +129,10 @@ function evalDisplayMode(){
 function populateDropdown(){
 
 	var options = "";
-	var dummyData = ['Joel - Cool vibes','Joel - Great hair','Not Joel - Pretty bad bloke','Not Joel - Looks like a squashed mango'];
-	var length = dummyData.length;
+	//var dummyData = ['Joel - Cool vibes','Joel - Great hair','Not Joel - Pretty bad bloke','Not Joel - Looks like a squashed mango'];
+	var length = candidateList.length;
 	for(var i=0; i< length; i++){
-       options += '<option value ="' + dummyData[i] + '">'+dummyData[i]+'</option>';
+       options += '<option value ="' + candidateList[i] + '">'+candidateList[i]+'</option>';
     }
 
 	 $("#dropdownB").append(options);
@@ -169,7 +171,7 @@ function populateDropdown(){
 			}, 100);
 			//Change me to change the vote (numeric value)
 
-			if (mode === "basic"){
+			if (mode === "Basic"){
 				var e = document.getElementById("dropdownB");
 				var _vote = e.options[e.selectedIndex].value;
 				var ballotContract =  web3.eth.contract([{"constant":false,"inputs":[],"name":"startVoting","outputs":[],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"candidate","type":"bytes32"}],"name":"addCandidate","outputs":[],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"candidate","type":"bytes32"}],"name":"totalVotesFor","outputs":[{"name":"","type":"uint8"}],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"candidate","type":"bytes32"}],"name":"validCandidate","outputs":[{"name":"","type":"bool"}],"payable":false,"type":"function"},{"constant":true,"inputs":[{"name":"","type":"address"}],"name":"votersList","outputs":[{"name":"weight","type":"uint256"},{"name":"voted","type":"bool"}],"payable":false,"type":"function"},{"constant":true,"inputs":[{"name":"","type":"address"}],"name":"candidateSubmissionNumbers","outputs":[{"name":"","type":"uint8"}],"payable":false,"type":"function"},{"constant":false,"inputs":[],"name":"getWinner","outputs":[{"name":"","type":"bytes32[]"}],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"candidate","type":"bytes32"}],"name":"vote","outputs":[],"payable":false,"type":"function"},{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"candidateList","outputs":[{"name":"","type":"bytes32"}],"payable":false,"type":"function"},{"constant":true,"inputs":[{"name":"","type":"bytes32"}],"name":"votesForCandidates","outputs":[{"name":"","type":"uint8"}],"payable":false,"type":"function"},{"constant":false,"inputs":[],"name":"calculateWinner","outputs":[{"name":"","type":"bytes32[]"}],"payable":false,"type":"function"},{"constant":false,"inputs":[],"name":"getPhase","outputs":[{"name":"","type":"uint8"}],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"voter","type":"address"}],"name":"addVoter","outputs":[],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"admin","outputs":[{"name":"","type":"address"}],"payable":false,"type":"function"},{"constant":false,"inputs":[],"name":"finishVoting","outputs":[],"payable":false,"type":"function"},{"constant":false,"inputs":[],"name":"getCandidateList","outputs":[{"name":"","type":"bytes32[]"}],"payable":false,"type":"function"},{"inputs":[],"payable":false,"type":"constructor"}]);
@@ -191,7 +193,7 @@ function populateDropdown(){
 					}
 				 });
 			}
-			if (mode === "pref"){
+			if (mode === "Preferential"){
 				var e = document.getElementById("dropdown1");
 				var _pref1 = e.options[e.selectedIndex].value;
 				var e2 = document.getElementById("dropdown2");
@@ -243,7 +245,7 @@ function addCandidate(){
 		  }
 		}, 100);
 		//Change me to change the vote (numeric value)
-			if (mode === "basic"){
+			if (mode === "Basic"){
 				var ballotContract =  web3.eth.contract([{"constant":false,"inputs":[],"name":"startVoting","outputs":[],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"candidate","type":"bytes32"}],"name":"addCandidate","outputs":[],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"candidate","type":"bytes32"}],"name":"totalVotesFor","outputs":[{"name":"","type":"uint8"}],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"candidate","type":"bytes32"}],"name":"validCandidate","outputs":[{"name":"","type":"bool"}],"payable":false,"type":"function"},{"constant":true,"inputs":[{"name":"","type":"address"}],"name":"votersList","outputs":[{"name":"weight","type":"uint256"},{"name":"voted","type":"bool"}],"payable":false,"type":"function"},{"constant":true,"inputs":[{"name":"","type":"address"}],"name":"candidateSubmissionNumbers","outputs":[{"name":"","type":"uint8"}],"payable":false,"type":"function"},{"constant":false,"inputs":[],"name":"getWinner","outputs":[{"name":"","type":"bytes32[]"}],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"candidate","type":"bytes32"}],"name":"vote","outputs":[],"payable":false,"type":"function"},{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"candidateList","outputs":[{"name":"","type":"bytes32"}],"payable":false,"type":"function"},{"constant":true,"inputs":[{"name":"","type":"bytes32"}],"name":"votesForCandidates","outputs":[{"name":"","type":"uint8"}],"payable":false,"type":"function"},{"constant":false,"inputs":[],"name":"calculateWinner","outputs":[{"name":"","type":"bytes32[]"}],"payable":false,"type":"function"},{"constant":false,"inputs":[],"name":"getPhase","outputs":[{"name":"","type":"uint8"}],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"voter","type":"address"}],"name":"addVoter","outputs":[],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"admin","outputs":[{"name":"","type":"address"}],"payable":false,"type":"function"},{"constant":false,"inputs":[],"name":"finishVoting","outputs":[],"payable":false,"type":"function"},{"constant":false,"inputs":[],"name":"getCandidateList","outputs":[{"name":"","type":"bytes32[]"}],"payable":false,"type":"function"},{"inputs":[],"payable":false,"type":"constructor"}]);
 				contractObj = ballotContract.at(addr);
 				var ballot = contractObj.addCandidate(
@@ -262,7 +264,7 @@ function addCandidate(){
 						 _error.value = "Candidate registered.";
 					}
 				 });
-			} if (mode === "pref"){
+			} if (mode === "Preferential"){
 				var ballotContract =  web3.eth.contract([{"constant":true,"inputs":[],"name":"totalVotes","outputs":[{"name":"","type":"uint256"}],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"excludeList","type":"bytes32[]"},{"name":"candidateName","type":"bytes32"}],"name":"notIn","outputs":[{"name":"","type":"bool"}],"payable":false,"type":"function"},{"constant":false,"inputs":[],"name":"startVoting","outputs":[],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"candidate","type":"bytes32"}],"name":"addCandidate","outputs":[],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"candidate","type":"bytes32"}],"name":"totalVotesFor","outputs":[{"name":"","type":"uint8"}],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"candidate","type":"bytes32"}],"name":"validCandidate","outputs":[{"name":"","type":"bool"}],"payable":false,"type":"function"},{"constant":true,"inputs":[{"name":"","type":"address"}],"name":"votersList","outputs":[{"name":"weight","type":"uint256"},{"name":"voted","type":"bool"}],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"candidates","type":"bytes32[]"},{"name":"shouldDelete","type":"bool"}],"name":"addSecondPreferences","outputs":[],"payable":false,"type":"function"},{"constant":false,"inputs":[],"name":"getLastCandidates","outputs":[],"payable":false,"type":"function"},{"constant":true,"inputs":[{"name":"","type":"address"}],"name":"candidateSubmissionNumbers","outputs":[{"name":"","type":"uint8"}],"payable":false,"type":"function"},{"constant":true,"inputs":[{"name":"","type":"bytes32"},{"name":"","type":"uint256"}],"name":"secondPreferences","outputs":[{"name":"","type":"bytes32"}],"payable":false,"type":"function"},{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"candidateList","outputs":[{"name":"","type":"bytes32"}],"payable":false,"type":"function"},{"constant":true,"inputs":[{"name":"","type":"bytes32"}],"name":"votesForCandidates","outputs":[{"name":"","type":"uint8"}],"payable":false,"type":"function"},{"constant":false,"inputs":[],"name":"removeCandidates","outputs":[],"payable":false,"type":"function"},{"constant":false,"inputs":[],"name":"getWinners","outputs":[{"name":"","type":"bytes32[]"}],"payable":false,"type":"function"},{"constant":false,"inputs":[],"name":"calculateWinner","outputs":[{"name":"","type":"bytes32[]"}],"payable":false,"type":"function"},{"constant":false,"inputs":[],"name":"getPhase","outputs":[{"name":"","type":"uint8"}],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"firstPreference","type":"bytes32"},{"name":"secondPreference","type":"bytes32"}],"name":"vote","outputs":[],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"voter","type":"address"}],"name":"addVoter","outputs":[],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"admin","outputs":[{"name":"","type":"address"}],"payable":false,"type":"function"},{"constant":false,"inputs":[],"name":"finishVoting","outputs":[],"payable":false,"type":"function"},{"constant":false,"inputs":[],"name":"getCandidateList","outputs":[{"name":"","type":"bytes32[]"}],"payable":false,"type":"function"},{"inputs":[],"payable":false,"type":"constructor"}]);
 				contractObj = ballotContract.at(addr);
 				var ballot = contractObj.addCandidate(
@@ -306,7 +308,7 @@ function addVoter(){
 		  }
 		}, 100);
 		//Change me to change the vote (numeric value)
-		if (mode ==="basic"){
+		if (mode ==="Basic"){
 			var ballotContract =  web3.eth.contract([{"constant":false,"inputs":[],"name":"startVoting","outputs":[],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"candidate","type":"bytes32"}],"name":"addCandidate","outputs":[],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"candidate","type":"bytes32"}],"name":"totalVotesFor","outputs":[{"name":"","type":"uint8"}],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"candidate","type":"bytes32"}],"name":"validCandidate","outputs":[{"name":"","type":"bool"}],"payable":false,"type":"function"},{"constant":true,"inputs":[{"name":"","type":"address"}],"name":"votersList","outputs":[{"name":"weight","type":"uint256"},{"name":"voted","type":"bool"}],"payable":false,"type":"function"},{"constant":true,"inputs":[{"name":"","type":"address"}],"name":"candidateSubmissionNumbers","outputs":[{"name":"","type":"uint8"}],"payable":false,"type":"function"},{"constant":false,"inputs":[],"name":"getWinner","outputs":[{"name":"","type":"bytes32[]"}],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"candidate","type":"bytes32"}],"name":"vote","outputs":[],"payable":false,"type":"function"},{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"candidateList","outputs":[{"name":"","type":"bytes32"}],"payable":false,"type":"function"},{"constant":true,"inputs":[{"name":"","type":"bytes32"}],"name":"votesForCandidates","outputs":[{"name":"","type":"uint8"}],"payable":false,"type":"function"},{"constant":false,"inputs":[],"name":"calculateWinner","outputs":[{"name":"","type":"bytes32[]"}],"payable":false,"type":"function"},{"constant":false,"inputs":[],"name":"getPhase","outputs":[{"name":"","type":"uint8"}],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"voter","type":"address"}],"name":"addVoter","outputs":[],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"admin","outputs":[{"name":"","type":"address"}],"payable":false,"type":"function"},{"constant":false,"inputs":[],"name":"finishVoting","outputs":[],"payable":false,"type":"function"},{"constant":false,"inputs":[],"name":"getCandidateList","outputs":[{"name":"","type":"bytes32[]"}],"payable":false,"type":"function"},{"inputs":[],"payable":false,"type":"constructor"}]);
 			contractObj = ballotContract.at(addr);
 			var ballot = contractObj.addVoter(
@@ -325,7 +327,7 @@ function addVoter(){
 					 _error.value = "Voter registered.";
 				}
 			 });
-		} if (mode ==="pref"){
+		} if (mode ==="Preferential"){
 			var ballotContract =  web3.eth.contract([{"constant":true,"inputs":[],"name":"totalVotes","outputs":[{"name":"","type":"uint256"}],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"excludeList","type":"bytes32[]"},{"name":"candidateName","type":"bytes32"}],"name":"notIn","outputs":[{"name":"","type":"bool"}],"payable":false,"type":"function"},{"constant":false,"inputs":[],"name":"startVoting","outputs":[],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"candidate","type":"bytes32"}],"name":"addCandidate","outputs":[],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"candidate","type":"bytes32"}],"name":"totalVotesFor","outputs":[{"name":"","type":"uint8"}],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"candidate","type":"bytes32"}],"name":"validCandidate","outputs":[{"name":"","type":"bool"}],"payable":false,"type":"function"},{"constant":true,"inputs":[{"name":"","type":"address"}],"name":"votersList","outputs":[{"name":"weight","type":"uint256"},{"name":"voted","type":"bool"}],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"candidates","type":"bytes32[]"},{"name":"shouldDelete","type":"bool"}],"name":"addSecondPreferences","outputs":[],"payable":false,"type":"function"},{"constant":false,"inputs":[],"name":"getLastCandidates","outputs":[],"payable":false,"type":"function"},{"constant":true,"inputs":[{"name":"","type":"address"}],"name":"candidateSubmissionNumbers","outputs":[{"name":"","type":"uint8"}],"payable":false,"type":"function"},{"constant":true,"inputs":[{"name":"","type":"bytes32"},{"name":"","type":"uint256"}],"name":"secondPreferences","outputs":[{"name":"","type":"bytes32"}],"payable":false,"type":"function"},{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"candidateList","outputs":[{"name":"","type":"bytes32"}],"payable":false,"type":"function"},{"constant":true,"inputs":[{"name":"","type":"bytes32"}],"name":"votesForCandidates","outputs":[{"name":"","type":"uint8"}],"payable":false,"type":"function"},{"constant":false,"inputs":[],"name":"removeCandidates","outputs":[],"payable":false,"type":"function"},{"constant":false,"inputs":[],"name":"getWinners","outputs":[{"name":"","type":"bytes32[]"}],"payable":false,"type":"function"},{"constant":false,"inputs":[],"name":"calculateWinner","outputs":[{"name":"","type":"bytes32[]"}],"payable":false,"type":"function"},{"constant":false,"inputs":[],"name":"getPhase","outputs":[{"name":"","type":"uint8"}],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"firstPreference","type":"bytes32"},{"name":"secondPreference","type":"bytes32"}],"name":"vote","outputs":[],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"voter","type":"address"}],"name":"addVoter","outputs":[],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"admin","outputs":[{"name":"","type":"address"}],"payable":false,"type":"function"},{"constant":false,"inputs":[],"name":"finishVoting","outputs":[],"payable":false,"type":"function"},{"constant":false,"inputs":[],"name":"getCandidateList","outputs":[{"name":"","type":"bytes32[]"}],"payable":false,"type":"function"},{"inputs":[],"payable":false,"type":"constructor"}]);
 			contractObj = ballotContract.at(addr);
 			var ballot = contractObj.addVoter(
@@ -368,7 +370,7 @@ function getCandidateList(){
 		  }
 		}, 100); 
 		 
-		if (mode === "basic"){
+		if (mode === "Basic"){
 			//Our contract ABI
 			var ballotContract = web3.eth.contract([{"constant":false,"inputs":[],"name":"startVoting","outputs":[],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"candidate","type":"bytes32"}],"name":"addCandidate","outputs":[],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"candidate","type":"bytes32"}],"name":"totalVotesFor","outputs":[{"name":"","type":"uint8"}],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"candidate","type":"bytes32"}],"name":"validCandidate","outputs":[{"name":"","type":"bool"}],"payable":false,"type":"function"},{"constant":true,"inputs":[{"name":"","type":"address"}],"name":"votersList","outputs":[{"name":"weight","type":"uint256"},{"name":"voted","type":"bool"}],"payable":false,"type":"function"},{"constant":true,"inputs":[{"name":"","type":"address"}],"name":"candidateSubmissionNumbers","outputs":[{"name":"","type":"uint8"}],"payable":false,"type":"function"},{"constant":false,"inputs":[],"name":"getWinner","outputs":[{"name":"","type":"bytes32[]"}],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"candidate","type":"bytes32"}],"name":"vote","outputs":[],"payable":false,"type":"function"},{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"candidateList","outputs":[{"name":"","type":"bytes32"}],"payable":false,"type":"function"},{"constant":true,"inputs":[{"name":"","type":"bytes32"}],"name":"votesForCandidates","outputs":[{"name":"","type":"uint8"}],"payable":false,"type":"function"},{"constant":false,"inputs":[],"name":"calculateWinner","outputs":[{"name":"","type":"bytes32[]"}],"payable":false,"type":"function"},{"constant":false,"inputs":[],"name":"getPhase","outputs":[{"name":"","type":"uint8"}],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"voter","type":"address"}],"name":"addVoter","outputs":[],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"admin","outputs":[{"name":"","type":"address"}],"payable":false,"type":"function"},{"constant":false,"inputs":[],"name":"finishVoting","outputs":[],"payable":false,"type":"function"},{"constant":false,"inputs":[],"name":"getCandidateList","outputs":[{"name":"","type":"bytes32[]"}],"payable":false,"type":"function"},{"inputs":[],"payable":false,"type":"constructor"}]);
 
@@ -386,7 +388,7 @@ function getCandidateList(){
 						 });
 			
 		}
-		if(mode === "pref"){
+		if(mode === "Preferential"){
 			//Our contract ABI
 			var ballotContract =  web3.eth.contract([{"constant":true,"inputs":[],"name":"totalVotes","outputs":[{"name":"","type":"uint256"}],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"excludeList","type":"bytes32[]"},{"name":"candidateName","type":"bytes32"}],"name":"notIn","outputs":[{"name":"","type":"bool"}],"payable":false,"type":"function"},{"constant":false,"inputs":[],"name":"startVoting","outputs":[],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"candidate","type":"bytes32"}],"name":"addCandidate","outputs":[],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"candidate","type":"bytes32"}],"name":"totalVotesFor","outputs":[{"name":"","type":"uint8"}],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"candidate","type":"bytes32"}],"name":"validCandidate","outputs":[{"name":"","type":"bool"}],"payable":false,"type":"function"},{"constant":true,"inputs":[{"name":"","type":"address"}],"name":"votersList","outputs":[{"name":"weight","type":"uint256"},{"name":"voted","type":"bool"}],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"candidates","type":"bytes32[]"},{"name":"shouldDelete","type":"bool"}],"name":"addSecondPreferences","outputs":[],"payable":false,"type":"function"},{"constant":false,"inputs":[],"name":"getLastCandidates","outputs":[],"payable":false,"type":"function"},{"constant":true,"inputs":[{"name":"","type":"address"}],"name":"candidateSubmissionNumbers","outputs":[{"name":"","type":"uint8"}],"payable":false,"type":"function"},{"constant":true,"inputs":[{"name":"","type":"bytes32"},{"name":"","type":"uint256"}],"name":"secondPreferences","outputs":[{"name":"","type":"bytes32"}],"payable":false,"type":"function"},{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"candidateList","outputs":[{"name":"","type":"bytes32"}],"payable":false,"type":"function"},{"constant":true,"inputs":[{"name":"","type":"bytes32"}],"name":"votesForCandidates","outputs":[{"name":"","type":"uint8"}],"payable":false,"type":"function"},{"constant":false,"inputs":[],"name":"removeCandidates","outputs":[],"payable":false,"type":"function"},{"constant":false,"inputs":[],"name":"getWinners","outputs":[{"name":"","type":"bytes32[]"}],"payable":false,"type":"function"},{"constant":false,"inputs":[],"name":"calculateWinner","outputs":[{"name":"","type":"bytes32[]"}],"payable":false,"type":"function"},{"constant":false,"inputs":[],"name":"getPhase","outputs":[{"name":"","type":"uint8"}],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"firstPreference","type":"bytes32"},{"name":"secondPreference","type":"bytes32"}],"name":"vote","outputs":[],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"voter","type":"address"}],"name":"addVoter","outputs":[],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"admin","outputs":[{"name":"","type":"address"}],"payable":false,"type":"function"},{"constant":false,"inputs":[],"name":"finishVoting","outputs":[],"payable":false,"type":"function"},{"constant":false,"inputs":[],"name":"getCandidateList","outputs":[{"name":"","type":"bytes32[]"}],"payable":false,"type":"function"},{"inputs":[],"payable":false,"type":"constructor"}]);
 
@@ -460,13 +462,9 @@ function getCandidateList(){
 	  xhttp = new XMLHttpRequest();
 	  xhttp.onreadystatechange = function() {
 		if (this.readyState == 4 && this.status == 200) {
-				state = parseInt(this.responseText) || 0;
+				state = this.responseText;
 				//Process state object if needed
-				if (!state){
-					console.log("State not yet set.");
-				} else {
-					console.log(state);
-				}
+				console.log(state);
 				frontStateUpdate();
 		}
 	  };
