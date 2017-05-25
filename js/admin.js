@@ -171,18 +171,16 @@ function sendParamsToServer() {
      state = 1;
      console.log("increased state");
      console.log(state);
-	var regTimeDateTmp = new Date();
-	var voteTimeDateTmp = new Date();
-	regTimeDateTmp.setMinutes(regTimeDateTmp.getMinutes() + regTimeDate);
-	voteTimeDateTmp.setMinutes(voteTimeDateTmp.getMinutes() + regTimeDate + voteTimeDate);
-	//give 10s buffer between registration end and voting start
-	voteTimeDateTmp.setSeconds(voteTimeDateTmp.getSeconds() + 10);
+	var regTimeDateTmp = Date.now();
+	var voteTimeDateTmp = Date.now();
+	regTimeDateTmp = regTimeDateTmp + 60000*regTimeDate);
+	voteTimeDateTmp = voteTimeDateTmp + 60000*(regTimeDate + voteTimeDate) + 10000;
 	
-    regTime = Date.UTC(regTimeDateTmp.getUTCFullYear(), regTimeDateTmp.getUTCMonth(), regTimeDateTmp.getUTCDate(), regTimeDateTmp.getUTCHours(), regTimeDateTmp.getUTCMinutes(), regTimeDateTmp.getUTCSeconds(), regTimeDateTmp.getUTCMilliseconds());
 	
+    regTime = regTimeDateTmp
 	console.log("REG-TIME");
 	console.log(regTime);
-    voteTime = Date.UTC(voteTimeDateTmp.getUTCFullYear(), voteTimeDateTmp.getUTCMonth(), voteTimeDateTmp.getUTCDate(), voteTimeDateTmp.getUTCHours(), voteTimeDateTmp.getUTCMinutes(), voteTimeDateTmp.getUTCSeconds(), voteTimeDateTmp.getUTCMilliseconds());
+    voteTime = voteTimeDateTmp
 
 	//sendQuestion(question);
 	//sendMode(mode);
