@@ -288,7 +288,10 @@ function finishVoting(){
 				else if (typeof contract !== 'undefined') {
 					 //console.log('Contract mined! address: ' + contract.address + ' transactionHash: ' + contract.transactionHash);
 					 _error.value = "Voting finished.";
-						calculateWinner();
+						setTimeout(function () {
+							calculateWinner();
+
+						}, 10000);
 
 						displayPostElection();
 				}
@@ -309,7 +312,10 @@ function finishVoting(){
 				}
 				else if (typeof contract !== 'undefined'){
 					 //console.log('Contract mined! address: ' + contract.address + ' transactionHash: ' + contract.transactionHash);
-						calculateWinner();
+					setTimeout(function () {
+							calculateWinner();
+
+						}, 10000);
 					 _error.value = "Voting finished.";
 					  displayPostElection();
 				}
