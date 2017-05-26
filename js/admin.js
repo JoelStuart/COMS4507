@@ -218,6 +218,7 @@ function startVoting(){
 				}
 				else if (typeof contract !== 'undefined') {
 					 //console.log('Contract mined! address: ' + contract.address + ' transactionHash: ' + contract.transactionHash);
+					 
 					 _error.value = "Voting initiated.";
 					 displayDuringElection();
 					 getCandidateList();
@@ -491,9 +492,11 @@ function calculateWinner(){
 					console.log(e);
 					_error.innerHTML = e;
 				}
-				else if (typeof contract !== 'undefined' && typeof contract.address !== 'undefined'){
+				else if (typeof contract !== 'undefined'){
 					 //winners = hex2S(l);
 					console.log("Calculating winner.");
+					console.log(contract);
+					console.log(res);
 					getWinner();
 				}
 				 });
@@ -516,8 +519,10 @@ function calculateWinner(){
 					console.log(e);
 					_error.innerHTML = e;
 				}
-				else if (typeof contract !== 'undefined' && typeof contract.address !== 'undefined'){
+				else if (typeof contract !== 'undefined'){
 					 //winners = hex2S(l);
+					console.log(contract);
+					console.log(res);
 					console.log("Calculating winner.");
 					getWinner();
 				}
