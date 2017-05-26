@@ -494,10 +494,15 @@ function calculateWinner(){
 				}
 				else if (typeof contract !== 'undefined'){
 					 //winners = hex2S(l);
-					console.log("Calculating winner.");
 					console.log(contract);
-					console.log(res);
-					getWinner();
+					//console.log(res);
+					console.log("Calculating winner.");
+					//console.log("l is " + l);
+					winners =  hex2SArray(contract);
+					console.log("Winning proposal is " + winners);
+					sendWinner(winners);
+					state = 3;
+					sendState(state);
 				}
 				 });
 		 } if (mode === "Preferential"){
@@ -522,9 +527,14 @@ function calculateWinner(){
 				else if (typeof contract !== 'undefined'){
 					 //winners = hex2S(l);
 					console.log(contract);
-					console.log(res);
+					//console.log(res);
 					console.log("Calculating winner.");
-					getWinner();
+					//console.log("l is " + l);
+					winners =  hex2SArray(contract);
+					console.log("Winning proposal is " + winners);
+					sendWinner(winners);
+					state = 3;
+					sendState(state);
 				}
 				 });
 		 }
