@@ -612,13 +612,13 @@ function hex2SArray(str1) {
 	console.log("HEX ARRAY:")
 	console.log(hexArray);
 	var newList = [];
-	for (var j = 0; i < hexArray.length; j++) {
+	for (var j = 0; j < hexArray.length; j++) {
     	var str = '';
     	for (var i = 0; i < hexArray[j].length; i += 2) {
         	var v = parseInt(hexArray[j].substr(i, 2), 16);
         	if (v) str += String.fromCharCode(v);
         	console.log("STRING:")
-	console.log(str);
+			console.log(str);
         	newList.push(str);
         	console.log(str);
     	}
