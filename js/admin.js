@@ -167,13 +167,13 @@ function sendParamsToServer() {
 	var regTimeDateTmp = Date.now();
 	var voteTimeDateTmp = Date.now();
 	regTimeDateTmp = regTimeDateTmp + 60000*regTimeDate;
-	voteTimeDateTmp = voteTimeDateTmp + 60000*(regTimeDate + voteTimeDate) + 10000;
+	voteTimeDateTmp = regTimeDateTmp + 60000*(voteTimeDate) + 10000;
 	
 	
     regTime = regTimeDateTmp
 	console.log("REG-TIME");
 	console.log(regTime);
-    voteTime = voteTimeDateTmp
+    voteTime = voteTimeDateTmp;
 
 	//sendQuestion(question);
 	//sendMode(mode);
