@@ -510,6 +510,7 @@ function calculateWinner(){
 							if (!e){
 								//winners = hex2S(l);
 								console.log("Calculating winner.");
+								getWinner()
 							}
 						 });
 		 }
@@ -554,7 +555,6 @@ function getWinner(){
 								winners = hex2SArray(l);
 								console.log("Winning proposal is " + winners);
 								sendWinner(winners);
-								getWinner();
 							}
 							else {
 								console.log(e);
