@@ -144,7 +144,7 @@ function endPhase2() {
 	state = 3;
 	sendState(state);
 	calculateWinner();
-	sendWinner(winners);
+
 	displayPostElection();
 }
 
@@ -491,8 +491,10 @@ function calculateWinner(){
 			//Call winning proposal
 			res = contractObj.calculateWinner.call({ from: account, gas: 4200000}, function(e,l){
 							if (!e){
-							     winners = hex2S(l);
+							     //winners = hex2S(l);
+								 
 								console.log("Calculating winner.");
+								getWinner();
 							}
 						 });
 		 } if (mode === "Preferential"){
@@ -506,8 +508,8 @@ function calculateWinner(){
 			//Call winning proposal
 			res = contractObj.calculateWinner.call({ from: account, gas: 4200000}, function(e,l){
 							if (!e){
-								winners = hex2S(l);
-								console.log("Winning proposal is " + hex2S(l));
+								//winners = hex2S(l);
+								console.log("Calculating winner.");
 							}
 						 });
 		 }
@@ -552,6 +554,7 @@ function getWinner(){
 								winners = hex2SArray(l);
 								console.log("Winning proposal is " + winners);
 								sendWinner(winners);
+								getWinner();
 							}
 							else {
 								console.log(e);
