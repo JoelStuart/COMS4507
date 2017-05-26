@@ -164,7 +164,7 @@ function storeParams() {
 	var btn = document.getElementById("startelection-button"); 
 	btn.disabled = true;
 	
-	document.getElementById('enterQuestion').value = "";
+	//document.getElementById('enterQuestion').value = "";
 }
 
 function sendParamsToServer() {
@@ -192,15 +192,6 @@ function sendParamsToServer() {
 	//sendState(state);
 }
 
-/**Called from update contract addr button
-*/
-function updateAddr(){
-	var _contractAddress = document.getElementById('contactAddress').value;
-	addr = _contractAddress;
-	var _para = document.getElementById('contractStatusText');
-	_para.innerHTML = "Contract Address Set.";
-	sendAddr(addr);
-}
 
 
 /**Called to start voting
