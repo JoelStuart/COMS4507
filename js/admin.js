@@ -102,7 +102,7 @@ function createBallot(){
 					 console.log("about to set timeout");
 					setTimeout(endPhase1, regTimeDate*60000); 
 				} else {
-					console.log("...help");
+					console.log(e);
 				}
 			
 		 });

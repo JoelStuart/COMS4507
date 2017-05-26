@@ -57,7 +57,7 @@ function frontStateUpdate(){
 			runTimer();
 		} else {
 			getWinner();
-			displayPostElection();
+			
 		}
 }
 
@@ -533,6 +533,7 @@ function getCandidateList(){
 		if (this.readyState == 4 && this.status == 200) {
 				winner = this.responseText;
 				document.getElementById('winner').innerHTML = "The winner is: "+winner;
+				displayPostElection();
 				//Process state object if needed
 				//console.log(winner);
 		}
