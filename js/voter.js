@@ -587,6 +587,7 @@ var now = Date.now();
   if (distance < 0) {
     clearInterval(x);
     document.getElementById("timer-display").innerHTML = "EXPIRED";
+	frontStateUpdate();
   }
 }, 1000);
 
