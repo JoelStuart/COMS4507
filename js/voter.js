@@ -570,14 +570,8 @@ console.log("got countdown time2");
 var x = setInterval(function() {
   // Get todays date and time
 var now = Date.now();
-  console.log("COUNTDOWN");
-  console.log(countDownDate);
-  console.log("NOW");
-  console.log(now);
   // Find the distance between now an the count down date
   var distance = countDownDate - now;
-     console.log("DISTANCE");
-   console.log(distance);
   // Time calculations for days, hours, minutes and seconds
   var days = Math.floor(distance / (1000 * 60 * 60 * 24));
   var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
@@ -609,14 +603,19 @@ function hex2S(str1) {
 
 function hex2SArray(str1) {
 	var hex1 = str1.toString();
+	console.log("HEX STRING:")
+	console.log(hex1);
 	var hexArray = hex1.split(",");
-	
+	console.log("HEX ARRAY:")
+	console.log(hexArray);
 	var newList = [];
 	for (var j = 0; i < hexArray.length; j++) {
     	var str = '';
     	for (var i = 0; i < hexArray[j].length; i += 2) {
         	var v = parseInt(hexArray[j].substr(i, 2), 16);
         	if (v) str += String.fromCharCode(v);
+        	console.log("STRING:")
+	console.log(str);
         	newList.push(str);
         	console.log(str);
     	}
