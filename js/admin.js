@@ -500,6 +500,7 @@ function calculateWinner(){
 					//console.log("l is " + l);
 					winners =  hex2SArray(contract);
 					console.log("Winning proposal is " + winners);
+					console.log("Winning proposal is s " + hex2S(contract));
 					sendWinner(winners);
 					state = 3;
 					sendState(state);
@@ -532,6 +533,7 @@ function calculateWinner(){
 					//console.log("l is " + l);
 					winners =  hex2SArray(contract);
 					console.log("Winning proposal is " + winners);
+					console.log("Winning proposal is s " + hex2S(contract));
 					sendWinner(winners);
 					state = 3;
 					sendState(state);
