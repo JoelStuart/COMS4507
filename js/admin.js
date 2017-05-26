@@ -548,9 +548,9 @@ function getWinner(){
 			//Call winning proposal
 			res = contractObj.getWinner.call({ from: account, gas: 4200000}, function(e,l){
 							if (!e){
-								console.log("Winning proposal is " + hex2S(l));
-								_error.innerHTML = "Winning proposal is " + hex2S(l);
-								winners = hex2S(l);
+
+								winners = hex2SArray(l);
+								console.log("Winning proposal is " + winners);
 								sendWinner(winners);
 							}
 						 });
@@ -565,8 +565,8 @@ function getWinner(){
 			//Call winning proposal
 			res = contractObj.getWinner.call({ from: account, gas: 4200000}, function(e,l){
 							if (!e){
-								winner =  hex2S(l);
-								console.log("Winning proposal is " + winner);
+								winners =  hex2SArray(l);
+								console.log("Winning proposal is " + winners);
 								sendWinner(winners);
 							}
 						 });
@@ -663,3 +663,22 @@ function hex2S(str1) {
     }
     return str;
 }   
+
+
+function hex2SArray(str1) {;
+	var hex1 = str1.toString();;
+	var hexArray = hex1.split(",");
+	var newList = [];
+	for (var j = 0; j < hexArray.length; j++) {
+    	var str = '';
+    	for (var i = 0; i < hexArray[j].length; i += 2) {
+        	var v = parseInt(hexArray[j].substr(i, 2), 16);
+        	if (v) str += String.fromCharCode(v);
+
+        	
+    	}
+		newList.push(str);
+		console.log(str);
+    }
+    return newList;
+}  
