@@ -589,9 +589,7 @@ document.getElementById("timer-display").innerHTML = days + "d " + hours + "h "
     clearInterval(x);
 
     document.getElementById("timer-display").innerHTML = "EXPIRED";
-	setTimeout(function(){
-		console.log("Waiting for state update from admin");
-	}, 15000);
+
 	getState();
   }
 }, 1000);

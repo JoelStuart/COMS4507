@@ -133,19 +133,12 @@ function createBallot(){
 function endPhase1() {
 	displayDuringElection();
 	startVoting();
-	getCandidateList();
-	state = 2;
-	sendState(state);
-	setTimeout(endPhase2, voteTimeDate*60000 + 10000);
+	
 }
 
 function endPhase2() {
 	finishVoting();
-	state = 3;
-	sendState(state);
-	calculateWinner();
 
-	displayPostElection();
 }
 
 function storeParams() {
@@ -227,7 +220,10 @@ function startVoting(){
 					 //console.log('Contract mined! address: ' + contract.address + ' transactionHash: ' + contract.transactionHash);
 					 _error.value = "Voting initiated.";
 					 displayDuringElection();
-					 setTimeout(endPhase2, voteTimeDate*60000); 
+					 getCandidateList();
+					state = 2;
+					sendState(state);
+					setTimeout(endPhase2, voteTimeDate*60000 + 10000);
 				}
 			 });
 		} if (mode === "Preferential"){
@@ -247,7 +243,9 @@ function startVoting(){
 					 //console.log('Contract mined! address: ' + contract.address + ' transactionHash: ' + contract.transactionHash);
 					 _error.value = "Voting initiated.";
 					 displayDuringElection();
-					 setTimeout(endPhase2, voteTimeDate*60000); 
+					 state = 2;
+					 sendState(state);
+					 setTimeout(endPhase2, voteTimeDate*60000 + 10000);
 				}
 			 });
 		}
@@ -286,10 +284,12 @@ function finishVoting(){
 					console.log(e);
 					_error.innerHTML = e;
 				}
-				else if (typeof contract !== 'undefined' && typeof contract.address !== 'undefined') {
+				else if (typeof contract !== 'undefined') {
 					 //console.log('Contract mined! address: ' + contract.address + ' transactionHash: ' + contract.transactionHash);
 					 _error.value = "Voting finished.";
-					 displayPostElection();
+						calculateWinner();
+
+						displayPostElection();
 				}
 			 });
 			
@@ -306,8 +306,9 @@ function finishVoting(){
 					console.log(e);
 					_error.innerHTML = e;
 				}
-				else if (typeof contract !== 'undefined' && typeof contract.address !== 'undefined') {
+				else if (typeof contract !== 'undefined' {
 					 //console.log('Contract mined! address: ' + contract.address + ' transactionHash: ' + contract.transactionHash);
+						calculateWinner();
 					 _error.value = "Voting finished.";
 					  displayPostElection();
 				}
@@ -483,7 +484,8 @@ function calculateWinner(){
 			res = contractObj.calculateWinner.call({ from: account, gas: 4200000}, function(e,l){
 							if (!e){
 							     //winners = hex2S(l);
-								 
+								state = 3;
+								sendState(state);
 								console.log("Calculating winner.");
 								getWinner();
 							}
@@ -500,6 +502,8 @@ function calculateWinner(){
 			res = contractObj.calculateWinner.call({ from: account, gas: 4200000}, function(e,l){
 							if (!e){
 								//winners = hex2S(l);
+								state = 3;
+								sendState(state);
 								console.log("Calculating winner.");
 								getWinner()
 							}
@@ -542,7 +546,7 @@ function getWinner(){
 			//Call winning proposal
 			res = contractObj.getWinner.call({ from: account, gas: 4200000}, function(e,l){
 							if (!e){
-
+								console.log("l is " + l);
 								winners = hex2SArray(l);
 								console.log("Winning proposal is " + winners);
 								sendWinner(winners);
@@ -562,6 +566,7 @@ function getWinner(){
 			//Call winning proposal
 			res = contractObj.getWinner.call({ from: account, gas: 4200000}, function(e,l){
 							if (!e){
+								console.log("l is " + l);
 								winners =  hex2SArray(l);
 								console.log("Winning proposal is " + winners);
 								sendWinner(winners);
