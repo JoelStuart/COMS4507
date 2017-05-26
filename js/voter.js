@@ -589,6 +589,7 @@ document.getElementById("timer-display").innerHTML = days + "d " + hours + "h "
     clearInterval(x);
 
     document.getElementById("timer-display").innerHTML = "EXPIRED";
+	document.getElementById("timer-display2").innerHTML = "EXPIRED";
 
 	getState();
   }
