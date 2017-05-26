@@ -236,6 +236,7 @@ function startVoting(){
 					 //console.log('Contract mined! address: ' + contract.address + ' transactionHash: ' + contract.transactionHash);
 					 _error.value = "Voting initiated.";
 					 displayDuringElection();
+					 setTimeout(endPhase2, voteTimeDate*60000); 
 				}
 			 });
 		} if (mode === "Preferential"){
@@ -255,6 +256,7 @@ function startVoting(){
 					 //console.log('Contract mined! address: ' + contract.address + ' transactionHash: ' + contract.transactionHash);
 					 _error.value = "Voting initiated.";
 					 displayDuringElection();
+					 setTimeout(endPhase2, voteTimeDate*60000); 
 				}
 			 });
 		}
@@ -549,6 +551,7 @@ function getWinner(){
 								console.log("Winning proposal is " + hex2S(l));
 								_error.innerHTML = "Winning proposal is " + hex2S(l);
 								winners = hex2S(l);
+								sendWinner();
 							}
 						 });
 		 } if (mode === "Preferential"){
@@ -564,6 +567,7 @@ function getWinner(){
 							if (!e){
 								winner =  hex2S(l);
 								console.log("Winning proposal is " + winner);
+								sendWinner();
 							}
 						 });
 		 }

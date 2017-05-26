@@ -83,6 +83,7 @@ function displayRegistration() {
 
 function displayVoting() {
 	getCandidateList();
+	countDownDate = voteTime;
 	getQuestion();
 	evalDisplayMode();
 	var div = document.getElementById("phase0-div");
@@ -556,7 +557,7 @@ function getCandidateList(){
 
 
 function runTimer() {
-var countDownDate = "";
+countDownDate = "";
 
 while (countDownDate == "") {
 	if (state == 1) {
