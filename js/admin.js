@@ -503,7 +503,7 @@ function calculateWinner(){
 					 setTimeout(function () {
 							getWinner();
 
-						}, 5000);
+						}, 25000);
 				}
 				 });
 		 } if (mode === "Preferential"){
@@ -530,7 +530,7 @@ function calculateWinner(){
 					    setTimeout(function () {
 							getWinner();
 
-						}, 5000);
+						}, 25000);
 				}
 				 });
 		 }
