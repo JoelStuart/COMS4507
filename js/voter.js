@@ -85,7 +85,6 @@ function displayVoting() {
 	getCandidateList();
 	getQuestion();
 	evalDisplayMode();
-	populateDropdown();
 	var div = document.getElementById("phase0-div");
 		div.style.display = "none";
 	div = document.getElementById("phase1-div");
@@ -388,6 +387,7 @@ function getCandidateList(){
 								candidateList = [];
 								candidateList = hex2SArray(l);
 								console.log("Candidate list is " + candidateList);
+								populateDropdown();
 								//sendState(state);
 							}
 						 });
@@ -407,6 +407,7 @@ function getCandidateList(){
 								candidateList = [];
 								candidateList = hex2SArray(l);
 								console.log("Candidate list is " + candidateList);
+								populateDropdown();
 								//sendState(state);
 							}
 						 });
@@ -617,11 +618,11 @@ function hex2SArray(str1) {
     	for (var i = 0; i < hexArray[j].length; i += 2) {
         	var v = parseInt(hexArray[j].substr(i, 2), 16);
         	if (v) str += String.fromCharCode(v);
-        	console.log("STRING:")
-			console.log(str);
-        	newList.push(str);
-        	console.log(str);
+
+        	
     	}
+		newList.push(str);
+		console.log(str);
     }
     return newList;
 }  
