@@ -551,7 +551,7 @@ function getWinner(){
 								console.log("Winning proposal is " + hex2S(l));
 								_error.innerHTML = "Winning proposal is " + hex2S(l);
 								winners = hex2S(l);
-								sendWinner();
+								sendWinner(winners);
 							}
 						 });
 		 } if (mode === "Preferential"){
@@ -567,7 +567,7 @@ function getWinner(){
 							if (!e){
 								winner =  hex2S(l);
 								console.log("Winning proposal is " + winner);
-								sendWinner();
+								sendWinner(winners);
 							}
 						 });
 		 }
