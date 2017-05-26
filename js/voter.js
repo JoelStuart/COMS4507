@@ -48,8 +48,13 @@ function frontStateUpdate(){
 			displayPreRegistration();
 		} else if (state == 1) {
 			displayRegistration();
+			countDownDate = "";
+			countDownDate = regTime;
+
+}
 			runTimer();
 		} else if (state == 2) {
+			countDownDate = voteTime;
 			displayVoting();
 			runTimer();
 		} else {
@@ -557,18 +562,8 @@ function getCandidateList(){
 
 
 function runTimer() {
-countDownDate = "";
 
-while (countDownDate == "") {
-	if (state == 1) {
-		countDownDate = regTime;
-		console.log("got countdown time");
-	} else if (state == 2) {
-		countDownDate = voteTime;
-	}
-	//setTimeout(function(){}, 500);
-}
-console.log("got countdown time2");
+
 // Update the count down every 1 second
 var x = setInterval(function() {
   // Get todays date and time
