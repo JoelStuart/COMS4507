@@ -306,7 +306,7 @@ function finishVoting(){
 					console.log(e);
 					_error.innerHTML = e;
 				}
-				else if (typeof contract !== 'undefined' {
+				else if (typeof contract !== 'undefined'){
 					 //console.log('Contract mined! address: ' + contract.address + ' transactionHash: ' + contract.transactionHash);
 						calculateWinner();
 					 _error.value = "Voting finished.";
