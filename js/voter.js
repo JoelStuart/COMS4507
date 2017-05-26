@@ -50,8 +50,6 @@ function frontStateUpdate(){
 			displayRegistration();
 			countDownDate = "";
 			countDownDate = regTime;
-
-}
 			runTimer();
 		} else if (state == 2) {
 			countDownDate = voteTime;
