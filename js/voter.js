@@ -24,6 +24,7 @@
 		//getMode();
 		getBatch();
 		displayPreRegistration();
+		candidateList=[];
 		
 		//frontStateUpdate();
 		
@@ -84,7 +85,7 @@ function displayVoting() {
 	getCandidateList();
 	getQuestion();
 	evalDisplayMode();
-	populateDropdown();
+	//populateDropdown();
 	var div = document.getElementById("phase0-div");
 		div.style.display = "none";
 	div = document.getElementById("phase1-div");
