@@ -493,8 +493,6 @@ function calculateWinner(){
 				}
 				else if (typeof contract !== 'undefined' && typeof contract.address !== 'undefined'){
 					 //winners = hex2S(l);
-					state = 3;
-					sendState(state);
 					console.log("Calculating winner.");
 					getWinner();
 				}
@@ -520,8 +518,6 @@ function calculateWinner(){
 				}
 				else if (typeof contract !== 'undefined' && typeof contract.address !== 'undefined'){
 					 //winners = hex2S(l);
-					state = 3;
-					sendState(state);
 					console.log("Calculating winner.");
 					getWinner();
 				}
@@ -568,6 +564,8 @@ function getWinner(){
 								winners = hex2SArray(l);
 								console.log("Winning proposal is " + winners);
 								sendWinner(winners);
+								state = 3;
+								sendState(state);
 							}
 							else {
 								console.log(e);
@@ -588,6 +586,8 @@ function getWinner(){
 								winners =  hex2SArray(l);
 								console.log("Winning proposal is " + winners);
 								sendWinner(winners);
+								state = 3;
+								sendState(state);
 							}
 							else {
 								console.log(e);
