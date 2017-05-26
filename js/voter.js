@@ -587,7 +587,7 @@ var now = Date.now();
   if (distance < 0) {
     clearInterval(x);
     document.getElementById("timer-display").innerHTML = "EXPIRED";
-	frontStateUpdate();
+	getState();
   }
 }, 1000);
 
@@ -604,15 +604,9 @@ function hex2S(str1) {
 } 
 
 
-function hex2SArray(str1) {
-	console.log("RAW STRING:")
-	console.log(str1);
-	var hex1 = str1.toString();
-	console.log("HEX STRING:")
-	console.log(hex1);
+function hex2SArray(str1) {;
+	var hex1 = str1.toString();;
 	var hexArray = hex1.split(",");
-	console.log("HEX ARRAY:")
-	console.log(hexArray);
 	var newList = [];
 	for (var j = 0; j < hexArray.length; j++) {
     	var str = '';

@@ -235,6 +235,7 @@ function startVoting(){
 				else if (typeof contract !== 'undefined' && typeof contract.address !== 'undefined') {
 					 //console.log('Contract mined! address: ' + contract.address + ' transactionHash: ' + contract.transactionHash);
 					 _error.value = "Voting initiated.";
+					 displayDuringElection();
 				}
 			 });
 		} if (mode === "Preferential"){
@@ -253,6 +254,7 @@ function startVoting(){
 				else if (typeof contract !== 'undefined' && typeof contract.address !== 'undefined') {
 					 //console.log('Contract mined! address: ' + contract.address + ' transactionHash: ' + contract.transactionHash);
 					 _error.value = "Voting initiated.";
+					 displayDuringElection();
 				}
 			 });
 		}
@@ -294,6 +296,7 @@ function finishVoting(){
 				else if (typeof contract !== 'undefined' && typeof contract.address !== 'undefined') {
 					 //console.log('Contract mined! address: ' + contract.address + ' transactionHash: ' + contract.transactionHash);
 					 _error.value = "Voting finished.";
+					 displayPostElection();
 				}
 			 });
 			
@@ -313,6 +316,7 @@ function finishVoting(){
 				else if (typeof contract !== 'undefined' && typeof contract.address !== 'undefined') {
 					 //console.log('Contract mined! address: ' + contract.address + ' transactionHash: ' + contract.transactionHash);
 					 _error.value = "Voting finished.";
+					  displayPostElection();
 				}
 			 });
 		}
