@@ -196,7 +196,6 @@ function startVoting(){
 		var _error = document.getElementById('errorText');
 		 _error.value = "";
 
-		console.log("Vote 5");
 		var account = web3.eth.accounts[0];
 		var accountInterval = setInterval(function() {
 		  if (web3.eth.accounts[0] !== account) {
@@ -261,6 +260,7 @@ function startVoting(){
 */
 function finishVoting(){
 	//Ff contract addr set
+	console.log("Finishing VOTING");
 	if (typeof addr !== 'undefined') {
 		//Update front end text
 		var _error = document.getElementById('errorText');
@@ -494,7 +494,10 @@ function calculateWinner(){
 				}
 				else if (typeof contract !== 'undefined'){
 					 //winners = hex2S(l);
-					 getWinner();
+					 setTimeout(function () {
+							getWinner();
+
+						}, 5000);
 				}
 				 });
 		 } if (mode === "Preferential"){
@@ -518,7 +521,10 @@ function calculateWinner(){
 				}
 				else if (typeof contract !== 'undefined'){
 					 //winners = hex2S(l);
-					getWinner();
+					    setTimeout(function () {
+							getWinner();
+
+						}, 5000);
 				}
 				 });
 		 }
