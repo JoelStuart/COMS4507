@@ -603,6 +603,8 @@ function hex2S(str1) {
 
 
 function hex2SArray(str1) {
+	console.log("RAW STRING:")
+	console.log(str1);
 	var hex1 = str1.toString();
 	console.log("HEX STRING:")
 	console.log(hex1);
