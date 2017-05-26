@@ -561,7 +561,8 @@ function getCandidateList(){
 
 function runTimer() {
 
-
+console.log(voteTime);
+console.log(countDownDate);
 // Update the count down every 1 second
 var x = setInterval(function() {
   // Get todays date and time
@@ -575,8 +576,13 @@ var now = Date.now();
   var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
   // Display the result in the element with id="timer-display"
-  document.getElementById("timer-display").innerHTML = days + "d " + hours + "h "
+document.getElementById("timer-display").innerHTML = days + "d " + hours + "h "
   + minutes + "m " + seconds + "s ";
+  if (state == 2){
+	  document.getElementById("timer-display2").innerHTML = days + "d " + hours + "h "
+	  + minutes + "m " + seconds + "s ";
+  }
+
   // If the count down is finished, write some text 
   if (distance < 0) {
     clearInterval(x);

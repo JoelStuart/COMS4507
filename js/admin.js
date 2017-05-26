@@ -553,6 +553,9 @@ function getWinner(){
 								console.log("Winning proposal is " + winners);
 								sendWinner(winners);
 							}
+							else {
+								console.log(e);
+							}
 						 });
 		 } if (mode === "Preferential"){
 			//Our contract ABI
@@ -568,6 +571,9 @@ function getWinner(){
 								winners =  hex2SArray(l);
 								console.log("Winning proposal is " + winners);
 								sendWinner(winners);
+							}
+							else {
+								console.log(e);
 							}
 						 });
 		 }
