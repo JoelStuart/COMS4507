@@ -491,7 +491,7 @@ function calculateWinner(){
 					console.log(e);
 					_error.innerHTML = e;
 				}
-				else if (typeof contract !== 'undefined' && type of contract.address !== 'undefined'){
+				else if (typeof contract !== 'undefined' && typeof contract.address !== 'undefined'){
 					 //winners = hex2S(l);
 					state = 3;
 					sendState(state);
@@ -518,7 +518,7 @@ function calculateWinner(){
 					console.log(e);
 					_error.innerHTML = e;
 				}
-				else if (typeof contract !== 'undefined' && type of contract.address !== 'undefined'){
+				else if (typeof contract !== 'undefined' && typeof contract.address !== 'undefined'){
 					 //winners = hex2S(l);
 					state = 3;
 					sendState(state);
