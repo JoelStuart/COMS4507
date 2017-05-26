@@ -587,7 +587,11 @@ var now = Date.now();
   // If the count down is finished, write some text 
   if (distance < 0) {
     clearInterval(x);
+
     document.getElementById("timer-display").innerHTML = "EXPIRED";
+	setTimeout(function(){
+		console.log("Waiting for state update from admin");
+	}, 15000);
 	getState();
   }
 }, 1000);
