@@ -591,7 +591,7 @@ function getWinner(){
 			
 			
 			//Call winning proposal
-			res = contractObj.getWinner.call({ from: account, gas: 4200000}, function(e,l){
+			res = contractObj.getWinner.call({ from: account, gas: 6000000}, function(e,l){
 							if (!e){
 								console.log("l is " + l);
 								winners =  hex2SArray(l);
